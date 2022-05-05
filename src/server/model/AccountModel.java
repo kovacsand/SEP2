@@ -7,6 +7,6 @@ public interface AccountModel extends Subject
 {
   void login(String username, String password);
   void addAccount(User user);
-  void loginReply(boolean successful, String username);
+  void loginReply(boolean successful, User user);
   void addAccountReply(boolean successful, String username);
 }
