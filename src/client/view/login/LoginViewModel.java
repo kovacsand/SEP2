@@ -14,6 +14,12 @@ public class LoginViewModel implements PropertyChangeListener
     this.model = accountModel;
   }
 
+  public void login()
+  {
+    System.out.println("You're logging in");
+    model.login("Finn", "5678");
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
 
