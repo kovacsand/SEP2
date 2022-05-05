@@ -2,7 +2,10 @@ package shared.networking;
 
 import shared.transferobjects.Product;
 
-public interface WarehouseServer
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface WarehouseServer extends Remote
 {
-  void addProduct(Product product);
+  void addProduct(Product product) throws RemoteException;
 }
