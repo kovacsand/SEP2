@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="TECHhouse Log In">
+         <VBox.margin>
+            <Insets bottom="40.0" />
+         </VBox.margin>
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0">
+         <children>
+            <Label text="UserID">
+               <HBox.margin>
+                  <Insets right="32.0" />
+               </HBox.margin>
+            </Label>
+            <TextField />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="300.0">
+         <children>
+            <Label text="Password">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <TextField />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="ERROR" textFill="#f70707">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="LOG IN" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
