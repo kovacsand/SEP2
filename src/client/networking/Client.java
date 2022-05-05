@@ -2,8 +2,9 @@ package client.networking;
 
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
+import shared.utils.Subject;
 
-public interface Client
+public interface Client extends Subject
 {
   void login(String username, String password);
 
