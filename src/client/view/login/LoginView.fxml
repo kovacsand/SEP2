@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.login.LoginViewController">
    <children>
-      <Label text="TECHhouse Log In">
+      <Label text="TECHhouse Login">
          <VBox.margin>
             <Insets bottom="40.0" />
          </VBox.margin>
@@ -21,12 +20,12 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0">
          <children>
-            <Label text="UserID">
+            <Label text="Username">
                <HBox.margin>
-                  <Insets right="32.0" />
+                  <Insets right="18.0" />
                </HBox.margin>
             </Label>
-            <TextField />
+            <TextField fx:id="us" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="300.0">
@@ -49,7 +48,7 @@
                   <Insets right="50.0" />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" text="LOG IN" />
+            <Button mnemonicParsing="false" onAction="#onLoginButton" text="LOG IN" />
          </children>
          <VBox.margin>
             <Insets />
