@@ -1,8 +1,9 @@
 package client.model;
 
 import shared.transferobjects.User;
+import shared.utils.Subject;
 
-public interface AccountModel
+public interface AccountModel extends Subject
 {
   void login(String username, String password);
 

@@ -1,6 +1,8 @@
 package client.model;
 
-public interface AddProductModel
+import shared.utils.Subject;
+
+public interface AddProductModel extends Subject
 {
   void addProduct(String name, String desc, double price);
 
