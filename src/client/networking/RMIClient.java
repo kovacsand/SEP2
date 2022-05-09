@@ -1,5 +1,6 @@
 package client.networking;
 
+import shared.networking.AccountServer;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.Product;
@@ -17,6 +18,7 @@ public class RMIClient implements Client, ClientCallBack
 {
   private PropertyChangeSupport support;
   private Server server;
+  private AccountServer accountServer;
 
   public RMIClient()
   {
@@ -51,7 +53,7 @@ public class RMIClient implements Client, ClientCallBack
   {
     try
     {
-      server.getAccountServer().addAccount(user);
+      accountServer.addAccount(user);
     }
     catch (RemoteException e)
     {
@@ -67,6 +69,7 @@ public class RMIClient implements Client, ClientCallBack
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (Server) registry.lookup("Server");
       server.registerClient(this);
+      accountServer = server.getAccountServer();
     }
     catch (RemoteException | NotBoundException e)
     {
