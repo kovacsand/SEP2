@@ -57,7 +57,7 @@ public class AddProductViewModel implements PropertyChangeListener
   {
     /**
      * A method that returns name
-     * @param name the name that is returned
+     * @return name the name that is returned
      */
     return name;
   }
@@ -65,7 +65,7 @@ public class AddProductViewModel implements PropertyChangeListener
   {
     /**
      * A method that returns a price
-     * @param price the price that is returned
+     * @return price the price that is returned
      */
     return price;
   }
@@ -73,7 +73,7 @@ public class AddProductViewModel implements PropertyChangeListener
   {
     /**
      * A method that returns a description
-     * @param description the description that is returned
+     * @return description the description that is returned
      */
     return description;
   }
