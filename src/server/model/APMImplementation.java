@@ -15,7 +15,6 @@ public class APMImplementation implements AddProductModel
   }
   @Override public void addProduct(Product product)
   {
-
   }
 
   @Override public void addProductReply(boolean successful, String name)
