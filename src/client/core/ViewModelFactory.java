@@ -1,12 +1,16 @@
 package client.core;
 
+import client.model.AddProductModel;
 import client.view.addaccount.AddAccountViewModel;
 import client.view.login.LoginViewModel;
+import client.view.AddProduct.AddProductViewModel;
 
 public class ViewModelFactory
 {
   private LoginViewModel loginVM;
   private AddAccountViewModel addAccountVM;
+  private AddProductViewModel addProductVM;
+
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -18,9 +22,14 @@ public class ViewModelFactory
   {
     return loginVM;
   }
-
+  
   public AddAccountViewModel getAddAccountVM()
   {
     return addAccountVM;
+  }
+  
+  public AddProductViewModel getAddProductViewModel() 
+  {
+     return addProductVM;
   }
 }
