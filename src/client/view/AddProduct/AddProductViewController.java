@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 /**
  * A class that controls the GUI when adding a new product.
- * @author Filip Bartoszewski
+ * @author S2G2
  * @version 1.0
  */
 public class AddProductViewController implements ViewController

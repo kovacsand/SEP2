@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 
 /**
  * A class that determines the behaviour of the GUI while creating a new product.
- * @author Filip Bartoszewski
+ * @author S2G2
  * @version 1.0
  */
 public class AddProductViewModel implements PropertyChangeListener
