@@ -17,18 +17,32 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of the Server interface
+ * @author S2G2
+ * @version 1.0
+ */
 public class ServerImplementation implements Server
 {
   private AccountServer accountServer;
   private WarehouseServer warehouseServer;
   private Map<ClientCallBack, PropertyChangeListener> clients;
 
+  /**
+   * Zero-argument constructor initializing the Server
+   * @throws RemoteException
+   */
   public ServerImplementation() throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     clients = new HashMap<>();
   }
 
+  /**
+   * Intended to be run before running the client. Creates registry and binds the server to it.
+   * @throws RemoteException
+   * @throws AlreadyBoundException
+   */
   public void startServer() throws RemoteException, AlreadyBoundException
   {
     Registry registry = LocateRegistry.createRegistry(1099);

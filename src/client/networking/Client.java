@@ -4,6 +4,12 @@ import shared.transferobjects.Product;
 import shared.transferobjects.User;
 import shared.utils.Subject;
 
+/**
+ * Interface for Client using RMI and Observer Pattern
+ * @author S2G2
+ * @version 1.0
+ */
+
 public interface Client extends Subject
 {
   /**

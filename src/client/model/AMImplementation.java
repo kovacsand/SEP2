@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 /**
- * Class that implements the AccountModel interface
+ * Class that implements the AccountModel interface on client side.
  * @author S2G2
  * @version 1.0
  */
@@ -31,6 +31,7 @@ public class AMImplementation implements AccountModel
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
+    client.registerClient();
     client.addListener("LoginFailed", this::onLoginReply);
     client.addListener("LoginSuccessful", this::onLoginReply);
   }
@@ -41,10 +42,7 @@ public class AMImplementation implements AccountModel
    */
   public void onLoginReply(PropertyChangeEvent evt)
   {
-    if (evt.getPropertyName().equals("LoginFailed"))
-      loginReply(false, null);
-    else
-      loginReply(true, (User) evt.getNewValue());
+    loginReply(evt.getNewValue() != null, (User) evt.getNewValue());
   }
 
 
