@@ -16,6 +16,7 @@ public class ViewModelFactory
   {
     loginVM = new LoginViewModel(modelFactory.getAccountModel());
     addAccountVM = new AddAccountViewModel(modelFactory.getAccountModel());
+    addProductVM=new AddProductViewModel(modelFactory.addProductModel());
   }
 
   public LoginViewModel getLoginViewModel()
