@@ -25,7 +25,7 @@
                   <Insets right="18.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="us" />
+            <TextField fx:id="usernameField" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="300.0">
@@ -38,12 +38,12 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-            <TextField />
+            <TextField fx:id="passwordField"/>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="ERROR" textFill="#f70707">
+            <Label text="ERROR" textFill="#f70707" fx:id="errorLabel">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>

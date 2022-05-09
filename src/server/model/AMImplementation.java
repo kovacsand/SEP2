@@ -16,7 +16,8 @@ public class AMImplementation implements AccountModel
 
   @Override public void login(String username, String password)
   {
-
+    if (username.equals("admin") && password.equals("password"))
+      support.firePropertyChange("LoginSuccessful", null, null);
   }
 
   @Override public void addAccount(User user)

@@ -3,7 +3,9 @@ package server.model;
 import shared.transferobjects.User;
 import shared.utils.Subject;
 
-public interface AccountModel extends Subject
+import java.io.Serializable;
+
+public interface AccountModel extends Subject, Serializable
 {
   void login(String username, String password);
   void addAccount(User user);
