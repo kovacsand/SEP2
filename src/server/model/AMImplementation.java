@@ -1,23 +1,62 @@
 package server.model;
 
+import server.model.mediator.AccountDAOImplementation;
+import shared.transferobjects.Manager;
 import shared.transferobjects.User;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 public class AMImplementation implements AccountModel
 {
   private PropertyChangeSupport support;
+  private HashMap<String, User> users; //Key: password, Value: User
 
   public AMImplementation()
   {
     support = new PropertyChangeSupport(this);
+    users = new HashMap<>();
+
+    try
+    {
+      users = (HashMap<String, User>) AccountDAOImplementation.getInstance().getAllUsers();
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public void login(String username, String password)
   {
+    //admin access
     if (username.equals("admin") && password.equals("password"))
-      support.firePropertyChange("LoginSuccessful", null, null);
+    {
+      loginReply(true, new Manager("admin", "password"));
+      return;
+    }
+
+    //Password not in database
+    if (!users.containsKey(password))
+    {
+      loginReply(false, null);
+      return;
+    }
+
+    //username connected to password is not matching with provided username
+    if (!users.get(password).getUsername().equals(username))
+    {
+      loginReply(false, null);
+      return;
+    }
+
+    if (users.get(password).getUsername().equals(username))
+    {
+      loginReply(true, new Manager(username, password));
+      return;
+    }
   }
 
   @Override public void addAccount(User user)
