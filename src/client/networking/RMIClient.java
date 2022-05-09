@@ -14,12 +14,20 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * A class for RMIClient to establish connection to a server
+ * @author S2G2
+ * @version 1.0
+ */
 public class RMIClient implements Client, ClientCallBack
 {
   private PropertyChangeSupport support;
   private Server server;
   private AccountServer accountServer;
 
+  /**
+   * No-argument constructor initializing the RMIClient and PropertyChangeSupport object
+   */
   public RMIClient()
   {
     support = new PropertyChangeSupport(this);

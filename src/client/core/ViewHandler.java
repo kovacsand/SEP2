@@ -24,6 +24,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     if (view.equals("Login"))
       loader.setLocation(getClass().getResource("../view/login/LoginView.fxml"));
+    if(view.equals("AddAccount"))
+      loader.setLocation(getClass().getResource("../view/addaccount/AddAccountView.fxml"));
     Parent root = null;
 
     try
