@@ -6,6 +6,11 @@ import client.view.ViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+/**
+ * A class that controls the GUI when adding a new product.
+ * @author Filip Bartoszewski
+ * @version 1.0
+ */
 public class AddProductViewController implements ViewController
 {
   private AddProductViewModel viewModel;
@@ -17,6 +22,9 @@ public class AddProductViewController implements ViewController
 
   @Override public void init (ViewHandler vh, ViewModelFactory vmf)
   {
+    /**
+     * An argument constructor that creates the viewModel, and binds all textFields
+     */
     this.vh=vh;
     viewModel=vmf.getAddProductViewModel();
     viewModel.nameProperty().bindBidirectional(nameField.textProperty());
@@ -25,10 +33,16 @@ public class AddProductViewController implements ViewController
   }
   @FXML private void onAddProductButton ()
   {
+    /**
+     * A method that activates when the confirm button is pressed while creating a new product. It calls a method in AddProductViewModel
+     */
     viewModel.addProduct();
   }
   @FXML private void onCancelButton ()
   {
+    /**
+     * A method that activates when the cancel button is pressed while creating a new product. It calls a method in AddProductViewModel
+     */
     viewModel.cancel();
   }
 }
