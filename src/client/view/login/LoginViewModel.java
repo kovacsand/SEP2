@@ -4,6 +4,7 @@ import client.model.AccountModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -21,6 +22,8 @@ public class LoginViewModel implements PropertyChangeListener
     username = new SimpleStringProperty();
     password = new SimpleStringProperty();
     errorMessage = new SimpleStringProperty();
+    model.addListener("LoginSuccessful", this);
+    model.addListener("LoginFailed", this);
   }
 
   public void login()
@@ -31,7 +34,6 @@ public class LoginViewModel implements PropertyChangeListener
     {
       username.setValue("");
       password.setValue("");
-      errorMessage.setValue("Hopefully sukass");
     });
   }
 
@@ -52,6 +54,19 @@ public class LoginViewModel implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-
+    if (evt.getPropertyName().equals("LoginSuccessful"))
+    {
+      Platform.runLater(() ->
+      {
+        errorMessage.setValue("Welcome, " + ((User) evt.getNewValue()).getUsername());
+      });
+    }
+    else if (evt.getPropertyName().equals("LoginFailed"))
+    {
+      Platform.runLater(() ->
+      {
+        errorMessage.setValue("Incorrect credentials!");
+      });
+    }
   }
 }

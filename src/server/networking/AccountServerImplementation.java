@@ -31,11 +31,6 @@ public class AccountServerImplementation implements AccountServer
     clients = new HashMap<>();
   }
 
-  private void onLoginReply(PropertyChangeEvent propertyChangeEvent)
-  {
-
-  }
-
   @Override public void registerClient(ClientCallBack client)
       throws RemoteException
   {
@@ -45,18 +40,27 @@ public class AccountServerImplementation implements AccountServer
       {
         try
         {
-          if (evt.getPropertyName().equals("LoginSuccessful"))
-            System.out.println("Successful Login");
+          String eventName = evt.getPropertyName();
+          if (eventName.equals("LoginSuccessful"))
+          {
+            client.loginReply(true, (User) evt.getNewValue());
+          }
+          else if(eventName.equals("LoginFailed"))
+          {
+            client.loginReply(false, null);
+          }
         } catch (Exception e)
         {
           e.printStackTrace();
           accountModel.removeListener("LoginSuccessful", this);
+          accountModel.removeListener("LoginFailed", this);
           clients.remove(client);
         }
       }
     };
     clients.put(client, listener);
     accountModel.addListener("LoginSuccessful", listener);
+    accountModel.addListener("LoginFailed", listener);
   }
 
   @Override public void login(String username, String password) throws RemoteException
