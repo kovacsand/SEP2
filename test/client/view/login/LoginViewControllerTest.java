@@ -16,6 +16,7 @@ class LoginViewControllerTest
   private String passwordField;
 
 
+  //login() , loginReply(Boolean,User)
   @Test public void loginSuccess()
   {
     //arrange
@@ -23,7 +24,7 @@ class LoginViewControllerTest
       //passwordField = correct
     //act
       //loginVM.login()
-
+      //loginVM.loginReply(True,"James")
     //assert
       //
     System.out.println(usernameField + " " + passwordField);
@@ -38,12 +39,16 @@ class LoginViewControllerTest
 
     //act
       //loginVM.login()
+      //loginVM.loginReply(false,null)
 
     //Assert
       //assertEquals(errorMessage.getValue().equals("Incorrect username and/or password, or fields can not be empty")
     System.out.println("NoViewChange");
   }
 
+  //---------------------------------
+
+  //login()
   @Test public void usernameEmptyPasswordFilled()
   {
     //arrange
