@@ -16,7 +16,7 @@ public class AccountDAOImplementation implements AccountDAO
 {
   private static final String DATABASE_SCHEMA_NAME = "warehousemanagementsystem";
   private static final String DATABASE_USER_NAME = "postgres";
-  private static final String DATABASE_USER_PASSWORD = "1234";
+  private static final String DATABASE_USER_PASSWORD = "123456789";
   private static AccountDAOImplementation instance;
 
   /**
@@ -112,5 +112,46 @@ public class AccountDAOImplementation implements AccountDAO
       System.out.println(dataBaseName + dataBasePassword);
     }
     return loggedInUser;
+  }
+
+  @Override public User addAccount(User user, String password) throws SQLException
+  {
+    if (user instanceof Accountant)
+    {
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO AccountantAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Accountant(user.getUsername(), password);
+      }
+    }
+    if(user instanceof Salesperson)
+    {
+      try(Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO SalespersonAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Salesperson(user.getUsername(), password);
+      }
+    }
+    if(user instanceof Manager)
+    {
+      try(Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO ManagerAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Manager(user.getUsername(), password);
+      }
+    }
+    return user;
   }
 }

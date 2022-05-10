@@ -60,8 +60,8 @@ public class AccountServerImplementation implements AccountServer
     return accountModel.login(username, password);
   }
 
-  @Override public void addAccount(User user) throws RemoteException
+  @Override public void addAccount(User user, String password) throws RemoteException
   {
-    accountModel.addAccount(user);
+    accountModel.addAccount(user, password);
   }
 }

@@ -29,7 +29,7 @@ public interface Client extends Subject
    * Adding account to the database
    * @param user object that needs to be added
    */
-  void addAccount(User user);
+  void addAccount(User user, String password);
 
   /**
    * Registering the client to the server while connecting
