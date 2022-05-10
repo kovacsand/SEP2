@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.addaccount.AddAccountViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.addaccount.AddAccountViewController">
    <children>
       <VBox prefHeight="300.0" prefWidth="500.0">
          <children>
@@ -79,9 +79,9 @@
                         <Insets left="205.0" top="9.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCancelButton" text="Cancel">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" text="Back">
                      <HBox.margin>
-                        <Insets left="10.0" top="9.0" />
+                        <Insets bottom="10.0" left="10.0" top="9.0" />
                      </HBox.margin>
                   </Button>
                </children>
