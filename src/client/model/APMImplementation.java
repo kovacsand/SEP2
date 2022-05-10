@@ -28,7 +28,7 @@ public class APMImplementation implements AddProductModel
   {
     support=new PropertyChangeSupport(this);
     this.client=client;
-
+    client.registerClient();
   }
 
   @Override public void addProduct(String name, String desc, double price)

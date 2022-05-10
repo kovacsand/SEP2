@@ -31,6 +31,7 @@ public class AMImplementation implements AccountModel
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
+    client.registerClient();
     client.addListener("LoginFailed", this::onLoginReply);
     client.addListener("LoginSuccessful", this::onLoginReply);
   }

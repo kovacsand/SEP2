@@ -4,7 +4,6 @@ import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
-
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
