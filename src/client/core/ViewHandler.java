@@ -31,6 +31,10 @@ public class ViewHandler
     {
       loader.setLocation(getClass().getResource("../view/AddProduct/AddProductView.fxml"));
     }
+    if(view.equals("Temp"))
+    {
+      loader.setLocation(getClass().getResource("../view/temp/temporaryGUI.fxml"));
+    }
     try
     {
       root = loader.load();
