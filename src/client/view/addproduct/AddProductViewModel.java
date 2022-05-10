@@ -29,6 +29,8 @@ public class AddProductViewModel implements PropertyChangeListener
     name=new SimpleStringProperty();
     price=new SimpleStringProperty();
     description=new SimpleStringProperty();
+    model.addListener("ProductAdded", this);
+    model.addListener("ProductExists", this);
   }
 
   /**
@@ -77,6 +79,6 @@ public class AddProductViewModel implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-
+    System.out.println(evt.getNewValue() != null ? "New product added " + evt.getNewValue() : "ERROR - run, product not added");
   }
 }
