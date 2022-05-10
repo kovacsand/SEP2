@@ -1,9 +1,15 @@
 package client.view.login;
 
+import client.core.ClientFactory;
+import client.core.ModelFactory;
+import client.core.ViewHandler;
+import client.core.ViewModelFactory;
 import client.model.AMImplementation;
 import client.model.AccountModel;
+import client.networking.RMIClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginViewControllerTest
 {
-
-  private String usernameField;
-  private String passwordField;
 
 
   //login() , loginReply(Boolean,User)
@@ -27,8 +30,7 @@ class LoginViewControllerTest
       //loginVM.loginReply(True,"James")
     //assert
       //
-    System.out.println(usernameField + " " + passwordField);
-    System.out.println("ViewChange");
+
   }
 
  @Test public void usernamePasswordNoMatch()
