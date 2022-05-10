@@ -6,6 +6,7 @@ import client.view.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -22,7 +23,8 @@ public class AddAccountViewController implements ViewController
 
   /**
    * Initializing ViewHandler, ViewModel and binding bidirectionally text properties with text fields
-   * @param vh to change views accordingly on the button press
+   *
+   * @param vh  to change views accordingly on the button press
    * @param vmf to get viewModel, so that view does not directly talk to the model, but everything goes through view-model (MVVM)
    */
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
@@ -41,7 +43,8 @@ public class AddAccountViewController implements ViewController
    */
   public void comboBox()
   {
-    ObservableList<String> roles = FXCollections.observableArrayList("Salesperson", "Accountant", "Manager");
+    ObservableList<String> roles = FXCollections.observableArrayList(
+        "Salesperson", "Accountant", "Manager");
     roleField.getItems().addAll(roles);
   }
 
@@ -50,7 +53,24 @@ public class AddAccountViewController implements ViewController
    */
   @FXML public void onAddButton()
   {
-    viewModel.addAccount();
+    String username = viewModel.getUsername().getValue();
+    String password = viewModel.getPassword().getValue();
+    String role = viewModel.getRole().getValue();
+    if (role == null || password == null || password == "" || username == null || username == "")
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("An error has been encountered");
+      alert.setContentText("One of the fields is empty");
+      alert.showAndWait();
+      viewModel.getUsername().setValue(null);
+      viewModel.getPassword().setValue(null);
+      viewModel.getRole().setValue(null);
+    }
+    else
+    {
+      viewModel.addAccount();
+    }
   }
 
   /**
