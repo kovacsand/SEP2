@@ -1,4 +1,4 @@
-package client.view.AddProduct;
+package client.view.addproduct;
 
 import client.model.AddProductModel;
 import javafx.application.Platform;

@@ -58,7 +58,7 @@ public class AccountDAOImplementation implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM ManagerAccount WHERE username = ? AND password = ?");
+          "SELECT * FROM ManagerAccount WHERE username = ? AND password = ?);");
       statement.setString(1, username);
       statement.setString(2, password);
       ResultSet resultSet = statement.executeQuery();
