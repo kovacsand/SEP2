@@ -23,7 +23,6 @@ public class RMIClient implements Client, ClientCallBack
 {
   private PropertyChangeSupport support;
   private Server server;
-  private AccountServer accountServer;
 
   /**
    * No-argument constructor initializing the RMIClient and PropertyChangeSupport object
@@ -67,7 +66,7 @@ public class RMIClient implements Client, ClientCallBack
   {
     try
     {
-      accountServer.addAccount(user, password);
+      server.getAccountServer().addAccount(user, password);
     }
     catch (RemoteException e)
     {
@@ -83,7 +82,6 @@ public class RMIClient implements Client, ClientCallBack
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (Server) registry.lookup("Server");
       server.registerClient(this);
-      accountServer = server.getAccountServer();
     }
     catch (RemoteException | NotBoundException e)
     {

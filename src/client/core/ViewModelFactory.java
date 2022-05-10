@@ -1,9 +1,8 @@
 package client.core;
 
-import client.model.AddProductModel;
 import client.view.addaccount.AddAccountViewModel;
+import client.view.addproduct.AddProductViewModel;
 import client.view.login.LoginViewModel;
-import client.view.AddProduct.AddProductViewModel;
 
 public class ViewModelFactory
 {
@@ -29,7 +28,7 @@ public class ViewModelFactory
     return addAccountVM;
   }
   
-  public AddProductViewModel getAddProductViewModel() 
+  public AddProductViewModel getAddProductViewModel()
   {
      return addProductVM;
   }
