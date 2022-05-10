@@ -1,9 +1,11 @@
 package server.model;
 
+import server.model.mediator.ProductDAOImplementation;
 import shared.transferobjects.Product;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
 
 public class APMImplementation implements AddProductModel
 {
@@ -13,8 +15,17 @@ public class APMImplementation implements AddProductModel
   {
     support = new PropertyChangeSupport(this);
   }
+
   @Override public void addProduct(Product product)
   {
+    try
+    {
+      ProductDAOImplementation.getInstance().addProduct(product);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public void addProductReply(boolean successful, String name)

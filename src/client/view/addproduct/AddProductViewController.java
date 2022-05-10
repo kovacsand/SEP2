@@ -1,4 +1,4 @@
-package client.view.AddProduct;
+package client.view.addproduct;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
