@@ -35,14 +35,20 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void login(String username, String password)
   {
+    User loggedInUser = null;
     try
     {
-      server.getAccountServer().login(username, password);
+      loggedInUser = server.getAccountServer().login(username, password);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
+
+    if (loggedInUser == null)
+      loginReply(false, null);
+    else
+      loginReply(true, loggedInUser);
   }
 
   @Override public void addProduct(Product product)

@@ -5,9 +5,12 @@ import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
+ * @author S2G2
+ * @version 1.0
+ */
 public class AccountDAOImplementation implements AccountDAO
 {
   private static final String DATABASE_SCHEMA_NAME = "warehousemanagementsystem";
@@ -15,11 +18,20 @@ public class AccountDAOImplementation implements AccountDAO
   private static final String DATABASE_USER_PASSWORD = "1234";
   private static AccountDAOImplementation instance;
 
+  /**
+   * Private constructor following the Singleton Pattern, registering the SQL driver
+   * @throws SQLException
+   */
   private AccountDAOImplementation() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
+  /**
+   * Getting the single existing instance
+   * @return
+   * @throws SQLException
+   */
   public static synchronized AccountDAOImplementation getInstance() throws SQLException
   {
     if (instance == null)
@@ -27,52 +39,77 @@ public class AccountDAOImplementation implements AccountDAO
     return instance;
   }
 
+  /**
+   * Establishing the connection to the database
+   * @return
+   * @throws SQLException
+   */
   private Connection getConnection() throws SQLException
   {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=" + DATABASE_SCHEMA_NAME, DATABASE_USER_NAME, DATABASE_USER_PASSWORD);
+    return DriverManager.getConnection(
+        "jdbc:postgresql://localhost:5432/postgres?currentSchema=" + DATABASE_SCHEMA_NAME, DATABASE_USER_NAME, DATABASE_USER_PASSWORD);
   }
 
-  @Override public Map<String, User> getAllUsers() throws SQLException
+  @Override public User getLoggedInUser(String username, String password) throws SQLException
   {
+    String dataBaseName = null;
+    String dataBasePassword = null;
+    User loggedInUser = null;
+
+    //If user is manager
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement;
-      ResultSet resultSet;
-      HashMap<String, User> result = new HashMap<>();
-
-      //Getting all the managers
-      statement = connection.prepareStatement("SELECT * FROM ManagerAccount");
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM ManagerAccount WHERE username = ? AND password = ?");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
       {
-        String username = resultSet.getString("username");
-        String password = resultSet.getString("password");
-        Manager manager = new Manager(username, password);
-        result.put(password, manager);
+        dataBaseName = resultSet.getString("username");
+        dataBasePassword = resultSet.getString("password");
+        loggedInUser = new Manager(dataBaseName, dataBasePassword);
       }
-
-      //Getting all the salespeople
-      statement = connection.prepareStatement("SELECT * FROM SalespersonAccount");
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
-      {
-        String username = resultSet.getString("username");
-        String password = resultSet.getString("password");
-        Salesperson salesperson = new Salesperson(username, password);
-        result.put(password, salesperson);
-      }
-
-      //Getting all the accountants
-      statement = connection.prepareStatement("SELECT * FROM AccountantAccount");
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
-      {
-        String username = resultSet.getString("username");
-        String password = resultSet.getString("password");
-        Accountant accountant = new Accountant(username, password);
-        result.put(password, accountant);
-      }
-      return result;
+      System.out.println(dataBaseName + dataBasePassword);
     }
+    if (loggedInUser != null)
+      return loggedInUser;
+
+    //If user is salesperson
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM SalespersonAccount WHERE username = ? AND password = ?");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+      {
+        dataBaseName = resultSet.getString("username");
+        dataBasePassword = resultSet.getString("password");
+        loggedInUser = new Salesperson(dataBaseName, dataBasePassword);
+      }
+      System.out.println(dataBaseName + dataBasePassword);
+    }
+    if (loggedInUser != null)
+      return loggedInUser;
+
+    //If user is accountant
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM AccountantAccount WHERE username = ? AND password = ?");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+      {
+        dataBaseName = resultSet.getString("username");
+        dataBasePassword = resultSet.getString("password");
+        loggedInUser = new Accountant(dataBaseName, dataBasePassword);
+      }
+      System.out.println(dataBaseName + dataBasePassword);
+    }
+    return loggedInUser;
   }
 }

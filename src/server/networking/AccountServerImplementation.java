@@ -17,6 +17,10 @@ public class AccountServerImplementation implements AccountServer
   private final AccountModel accountModel;
   private Map<ClientCallBack, PropertyChangeListener> clients;
 
+  /**
+   * One-argument constructor initializing the AccountServer implementation class.
+   * @param accountModel the model that will be used by the server.
+   */
   public AccountServerImplementation(AccountModel accountModel)
   {
     try
@@ -40,32 +44,20 @@ public class AccountServerImplementation implements AccountServer
       {
         try
         {
-          String eventName = evt.getPropertyName();
-          if (eventName.equals("LoginSuccessful"))
-          {
-            client.loginReply(true, (User) evt.getNewValue());
-          }
-          else if(eventName.equals("LoginFailed"))
-          {
-            client.loginReply(false, null);
-          }
+          //If we want to have Observer, or broadcasting
         } catch (Exception e)
         {
           e.printStackTrace();
-          accountModel.removeListener("LoginSuccessful", this);
-          accountModel.removeListener("LoginFailed", this);
           clients.remove(client);
         }
       }
     };
     clients.put(client, listener);
-    accountModel.addListener("LoginSuccessful", listener);
-    accountModel.addListener("LoginFailed", listener);
   }
 
-  @Override public void login(String username, String password) throws RemoteException
+  @Override public User login(String username, String password) throws RemoteException
   {
-    accountModel.login(username, password);
+    return accountModel.login(username, password);
   }
 
   @Override public void addAccount(User user) throws RemoteException

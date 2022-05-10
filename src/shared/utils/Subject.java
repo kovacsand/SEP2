@@ -3,7 +3,7 @@ package shared.utils;
 import java.beans.PropertyChangeListener;
 
 /**
- * Interface used for adding and removing listeners
+ * Interface used for adding and removing listeners in Observer Pattern
  * @author S2G2
  * @version 1.0
  */

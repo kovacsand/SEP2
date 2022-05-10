@@ -1,19 +1,16 @@
 package client.model;
 
 import client.networking.Client;
-import shared.networking.Server;
 import shared.transferobjects.Product;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.RemoteException;
 
 /**
  * Class that implements the AddProduct interface
  * @author S2G2
  * @version 1.0
  */
-
 public class APMImplementation implements AddProductModel
 {
   private PropertyChangeSupport support;
