@@ -21,3 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+out/production/SEP2/client/view/login/LoginView.fxml
+out/production/SEP2/client/view/addaccount/AddAccountView.fxml
+out/production/SEP2/client/view/AddProduct/AddProductView.fxml
