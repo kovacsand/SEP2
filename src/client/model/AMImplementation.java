@@ -34,10 +34,12 @@ public class AMImplementation implements AccountModel
     client.registerClient();
     client.addListener("LoginFailed", this::onLoginReply);
     client.addListener("LoginSuccessful", this::onLoginReply);
+    client.addListener("AccountAdded", this::onAddAccountReply);
+    client.addListener("AccountExists", this::onAddAccountReply);
   }
 
   /**
-   * Listens to the result of loginReply()
+   * Listens to the result of login()
    * @param evt event that's being listened to
    */
   public void onLoginReply(PropertyChangeEvent evt)
@@ -45,6 +47,10 @@ public class AMImplementation implements AccountModel
     loginReply(evt.getNewValue() != null, (User) evt.getNewValue());
   }
 
+  public void onAddAccountReply(PropertyChangeEvent evt)
+  {
+    addAccountReply(evt.getNewValue() != null, (String) evt.getNewValue());
+  }
 
   @Override public void login(String username, String password)
   {
@@ -93,13 +99,9 @@ public class AMImplementation implements AccountModel
   @Override public void addAccountReply(boolean successful, String username)
   {
     if (successful)
-    {
       support.firePropertyChange("AccountAdded", null, username);
-    }
     else
-    {
       support.firePropertyChange("AccountExists", null, null);
-    }
   }
 
   @Override public void addListener(String propertyName,
