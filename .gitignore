@@ -24,4 +24,4 @@ hs_err_pid*
 
 #Java class containing access codes to PostgreSQL database
 #It should have 3 public static final String fields
-.PostgreSQLAccess
+PostgreSQLAccess.java
