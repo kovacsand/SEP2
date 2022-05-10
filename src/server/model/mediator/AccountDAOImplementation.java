@@ -6,6 +6,7 @@ import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
@@ -108,11 +109,26 @@ public class AccountDAOImplementation implements AccountDAO
       System.out.println(dataBaseName + dataBasePassword);
     }
     return loggedInUser;
-
   }
 
   @Override public User addAccount(User user, String password) throws SQLException
   {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT username FROM ManagerAccount WHERE username = ?"
+              + "UNION SELECT username FROM AccountantAccount WHERE username = ?"
+              + "UNION SELECT username FROM SalespersonAccount WHERE username = ?"
+    );
+      statement.setString(1, user.getUsername());
+      statement.setString(2, user.getUsername());
+      statement.setString(3, user.getUsername());
+      ResultSet resultSet = statement.executeQuery();
+      if(resultSet.next())
+      {
+        throw new SQLException();
+      }
+    }
     if (user instanceof Accountant)
     {
       try (Connection connection = getConnection())
