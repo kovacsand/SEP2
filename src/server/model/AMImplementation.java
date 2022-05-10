@@ -38,26 +38,18 @@ public class AMImplementation implements AccountModel
     return user;
   }
 
-  @Override public void addAccount(User user, String password)
+  @Override public User addAccount(User user, String password)
   {
+    User addedUser = null;
     try
     {
-      AccountDAOImplementation.getInstance().addAccount(user, password);
-      addAccountReply(true, user.getUsername());
+      addedUser = AccountDAOImplementation.getInstance().addAccount(user, password);
     }
     catch (SQLException e)
     {
       e.printStackTrace();
-      addAccountReply(false, user.getUsername());
     }
-  }
-
-  @Override public void addAccountReply(boolean successful, String username)
-  {
-    if(successful)
-      support.firePropertyChange("AccountAdded", null, username);
-    else
-      support.firePropertyChange("AccountExists", null, username);
+    return addedUser;
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
