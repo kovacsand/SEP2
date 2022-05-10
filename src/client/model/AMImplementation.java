@@ -61,15 +61,18 @@ public class AMImplementation implements AccountModel
       {
         case "Accountant":
         {
-          client.addAccount(new Accountant(username, password));
+          client.addAccount(new Accountant(username, password), password);
+          break;
         }
         case "Manager":
         {
-          client.addAccount(new Manager(username, password));
+          client.addAccount(new Manager(username, password), password);
+          break;
         }
         case "Salesperson":
         {
-          client.addAccount(new Salesperson(username, password));
+          client.addAccount(new Salesperson(username, password), password);
+          break;
         }
       }
     }

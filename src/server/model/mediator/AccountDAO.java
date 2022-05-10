@@ -18,4 +18,6 @@ public interface AccountDAO
    * @throws SQLException
    */
   User getLoggedInUser(String username, String password) throws SQLException;
+
+  User addAccount(User user, String password) throws SQLException;
 }

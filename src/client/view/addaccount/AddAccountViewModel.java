@@ -27,7 +27,6 @@ public class AddAccountViewModel
     username = new SimpleStringProperty();
     password = new SimpleStringProperty();
     role = new SimpleStringProperty();
-
   }
 
   /**
@@ -66,8 +65,8 @@ public class AddAccountViewModel
     model.addAccount(username.getValue(), password.getValue(), role.getValue());
     Platform.runLater(() ->
     {
-      username.setValue("");
-      password.setValue("");
+      username.setValue(null);
+      password.setValue(null);
       role.setValue(null);
     });
   }
