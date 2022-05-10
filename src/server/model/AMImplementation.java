@@ -38,9 +38,18 @@ public class AMImplementation implements AccountModel
     return user;
   }
 
-  @Override public void addAccount(User user)
+  @Override public void addAccount(User user, String password)
   {
-
+    try
+    {
+      AccountDAOImplementation.getInstance().addAccount(user, password);
+      addAccountReply(true, user.getUsername());
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+      addAccountReply(false, user.getUsername());
+    }
   }
 
   @Override public void addAccountReply(boolean successful, String username)

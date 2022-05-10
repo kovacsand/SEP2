@@ -62,11 +62,11 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public void addAccount(User user)
+  @Override public void addAccount(User user, String password)
   {
     try
     {
-      server.getAccountServer().addAccount(user);
+      server.getAccountServer().addAccount(user, password);
     }
     catch (RemoteException e)
     {

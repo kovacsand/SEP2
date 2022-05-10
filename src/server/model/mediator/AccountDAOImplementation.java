@@ -15,7 +15,6 @@ import java.sql.*;
 public class AccountDAOImplementation implements AccountDAO
 {
   private static AccountDAOImplementation instance;
-
   /**
    * Private constructor following the Singleton Pattern, registering the SQL driver
    * @throws SQLException
@@ -110,5 +109,46 @@ public class AccountDAOImplementation implements AccountDAO
     }
     return loggedInUser;
 
+  }
+
+  @Override public User addAccount(User user, String password) throws SQLException
+  {
+    if (user instanceof Accountant)
+    {
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO AccountantAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Accountant(user.getUsername(), password);
+      }
+    }
+    if(user instanceof Salesperson)
+    {
+      try(Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO SalespersonAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Salesperson(user.getUsername(), password);
+      }
+    }
+    if(user instanceof Manager)
+    {
+      try(Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO ManagerAccount(username, password) VALUES (?, ?);");
+        statement.setString(1, user.getUsername());
+        statement.setString(2, password);
+        statement.executeUpdate();
+        user = new Manager(user.getUsername(), password);
+      }
+    }
+    return user;
   }
 }
