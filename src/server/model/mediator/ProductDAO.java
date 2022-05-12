@@ -14,8 +14,8 @@ public interface ProductDAO extends DAOInterface
 
   /**
    * Connects to the database and tries to add a new product
-   * @param product The p
-   * @return
+   * @param product The product that the user wants to add
+   * @return the newly added product if it was successful, otherwise null
    * @throws SQLException
    */
   Product addProduct(Product product) throws SQLException;
