@@ -6,6 +6,8 @@ import shared.networking.AccountServer;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.networking.WarehouseServer;
+import shared.transferobjects.Product;
+import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -51,7 +53,7 @@ public class ServerImplementation implements Server
 
   @Override public void registerClient(ClientCallBack client) throws RemoteException
   {
-    getAccountServer().registerClient(client);
+    accountServer.registerClient(client);
     PropertyChangeListener listener = new PropertyChangeListener()
     {
       @Override public void propertyChange(PropertyChangeEvent evt)
@@ -75,17 +77,19 @@ public class ServerImplementation implements Server
     //!!TODO
   }
 
-  @Override public AccountServer getAccountServer() throws RemoteException
+  @Override public User login(String username, String password) throws RemoteException
   {
-    if(accountServer == null)
-      accountServer = new AccountServerImplementation(new AMImplementation());
-    return accountServer;
+    return accountServer.login(username, password);
   }
 
-  @Override public WarehouseServer getWarehouseServer() throws RemoteException
+  @Override public User addAccount(User user, String password) throws RemoteException
   {
-    if(warehouseServer == null)
-      warehouseServer = new WarehouseServerImplementation(new APMImplementation());
-    return warehouseServer;
+    return accountServer.addAccount(user, password);
   }
+
+  @Override public Product addProduct(Product product) throws RemoteException
+  {
+    return warehouseServer.addProduct(product);
+  }
+
 }

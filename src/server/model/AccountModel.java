@@ -18,6 +18,5 @@ public interface AccountModel extends Subject, Serializable
    * @param password client's password
    */
   User login(String username, String password);
-  void addAccount(User user, String password);
-  void addAccountReply(boolean successful, String username);
+  User addAccount(User user, String password);
 }

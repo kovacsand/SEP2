@@ -7,5 +7,5 @@ import java.rmi.RemoteException;
 
 public interface WarehouseServer extends Remote
 {
-  void addProduct(Product product) throws RemoteException;
+  Product addProduct(Product product) throws RemoteException;
 }

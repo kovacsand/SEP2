@@ -18,8 +18,8 @@ public class WarehouseServerImplementation implements WarehouseServer
     this.addProductModel = addProductModel;
   }
 
-  @Override public void addProduct(Product product) throws RemoteException
+  @Override public Product addProduct(Product product) throws RemoteException
   {
-    addProductModel.addProduct(product);
+    return addProductModel.addProduct(product);
   }
 }

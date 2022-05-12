@@ -11,29 +11,26 @@ public class APMImplementation implements AddProductModel
 {
   private PropertyChangeSupport support;
 
+  /**
+   * Zero-argument constructor initializing the AccountModel implementation class
+   */
   public APMImplementation()
   {
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void addProduct(Product product)
+  @Override public Product addProduct(Product product)
   {
+    Product addedProduct = null;
     try
     {
-      ProductDAOImplementation.getInstance().addProduct(product);
+      addedProduct = ProductDAOImplementation.getInstance().addProduct(product);
     }
     catch (SQLException e)
     {
       e.printStackTrace();
     }
-  }
-
-  @Override public void addProductReply(boolean successful, String name)
-  {
-    if(successful)
-      support.firePropertyChange("ProductAdded", null, name);
-    else
-      support.firePropertyChange("ProductExists", null, name);
+    return addedProduct;
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

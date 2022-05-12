@@ -5,6 +5,5 @@ import shared.utils.Subject;
 
 public interface AddProductModel extends Subject
 {
-  void addProduct(Product product);
-  void addProductReply(boolean successful, String name);
+  Product addProduct(Product product);
 }

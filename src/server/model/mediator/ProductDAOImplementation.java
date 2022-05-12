@@ -29,7 +29,7 @@ public class ProductDAOImplementation implements ProductDAO
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=" + PostgreSQLAccess.DATABASE_SCHEMA_NAME, PostgreSQLAccess.DATABASE_USER_NAME, PostgreSQLAccess.DATABASE_USER_PASSWORD);
   }
 
-  @Override public void addProduct(Product product) throws SQLException
+  @Override public Product addProduct(Product product) throws SQLException
   {
     String newProductName = product.getName();
     String newProductDescription = product.getDescription();
@@ -43,5 +43,6 @@ public class ProductDAOImplementation implements ProductDAO
       statement.setDouble(3, newProductPrice);
       statement.executeUpdate();
     }
+    return product;
   }
 }
