@@ -12,12 +12,11 @@ import java.rmi.RemoteException;
  */
 public interface WarehouseServer extends Remote
 {
-
   /**
-   * Adding product in through the model. The server passes the argument to the model.
-   * @param product to be added
-   * @return If adding is successful, return their User Object, if not, return null.
-   * @throws RemoteException
-   */
+ * Adding product in through the model. The server passes the argument to the model.
+ * @param product to be added
+ * @return If adding is successful, return their User Object, if not, return null.
+ * @throws RemoteException
+ */
   Product addProduct(Product product) throws RemoteException;
 }
