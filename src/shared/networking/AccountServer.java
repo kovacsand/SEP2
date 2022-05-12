@@ -12,6 +12,11 @@ import java.rmi.RemoteException;
  */
 public interface AccountServer extends Remote
 {
+  /**
+ * Establishes connections between the server and the client.
+ * @param client
+ * @throws RemoteException
+ */
   void registerClient(ClientCallBack client) throws RemoteException;
 
   /**
@@ -23,7 +28,6 @@ public interface AccountServer extends Remote
    */
   User login(String username, String password) throws RemoteException;
 
-
   /**
    * Adding an account through the model
    * @param user of the new account
@@ -31,6 +35,5 @@ public interface AccountServer extends Remote
    * @return the newly added account, if couldn't add, return null
    * @throws RemoteException
    */
-
   User addAccount(User user, String password) throws RemoteException;
 }

@@ -10,7 +10,7 @@ import java.util.Map;
  * @author S2G2
  * @version 1.0
  */
-public interface AccountDAO
+public interface AccountDAO extends DAOInterface
 {
   /**
    * Connects to the database and tries to log in with the passed credentials.

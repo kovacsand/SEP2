@@ -33,12 +33,6 @@ public class ProductDAOImplementation implements ProductDAO
     return instance;
   }
 
-  private Connection getConnection() throws SQLException
-  {
-    return DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/postgres?currentSchema=" + PostgreSQLAccess.DATABASE_SCHEMA_NAME, PostgreSQLAccess.DATABASE_USER_NAME, PostgreSQLAccess.DATABASE_USER_PASSWORD);
-  }
-
   @Override public Product addProduct(Product product) throws SQLException
   {
     String newProductName = product.getName();
@@ -47,7 +41,7 @@ public class ProductDAOImplementation implements ProductDAO
 
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO Product VALUES (DEFAULT, ?, ?, ?);");
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO Products VALUES (DEFAULT, ?, ?, ?);");
       statement.setString(1, newProductName);
       statement.setString(2, newProductDescription);
       statement.setDouble(3, newProductPrice);

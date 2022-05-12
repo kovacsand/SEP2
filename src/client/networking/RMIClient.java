@@ -37,7 +37,7 @@ public class RMIClient implements Client, ClientCallBack
     User loggedInUser = null;
     try
     {
-      loggedInUser = server.getAccountServer().login(username, password);
+      loggedInUser = server.login(username, password);
     }
     catch (RemoteException e)
     {
@@ -55,7 +55,7 @@ public class RMIClient implements Client, ClientCallBack
     Product newlyAddedProduct = null;
     try
     {
-      newlyAddedProduct = server.getWarehouseServer().addProduct(product);
+      newlyAddedProduct = server.addProduct(product);
     }
     catch (RemoteException e)
     {
@@ -73,7 +73,7 @@ public class RMIClient implements Client, ClientCallBack
     User newlyAddedUser = null;
     try
     {
-      newlyAddedUser = server.getAccountServer().addAccount(user, password);
+      newlyAddedUser = server.addAccount(user, password);
     }
     catch (RemoteException e)
     {
