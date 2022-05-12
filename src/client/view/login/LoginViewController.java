@@ -7,15 +7,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /**
  * ViewController class of the GUI for logging in
  * @author S2G2
  * @version 1.0
  */
-public class LoginViewController implements ViewController
+public class LoginViewController implements ViewController,
+    PropertyChangeListener
 {
   private LoginViewModel viewModel;
   private ViewHandler vh;
+  private String role;
 
   @FXML private TextField usernameField;
   @FXML private TextField passwordField;
@@ -34,6 +39,7 @@ public class LoginViewController implements ViewController
     viewModel.usernameProperty().bindBidirectional(usernameField.textProperty());
     viewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
     viewModel.errorMessageProperty().bindBidirectional(errorLabel.textProperty());
+    viewModel.addListener("LoginSuccess",this::propertyChange);
   }
 
   /**
@@ -41,7 +47,13 @@ public class LoginViewController implements ViewController
    */
   @FXML private void onLoginButton()
   {
-    //viewModel.login();
+    viewModel.login();
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    role = evt.getNewValue().toString();
+    vh.setRole(role);
     vh.openView("Main");
   }
 }

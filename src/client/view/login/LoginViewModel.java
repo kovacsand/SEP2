@@ -8,21 +8,25 @@ import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
+import shared.utils.Subject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  * ViewModel class for logging in
  * @author S2G2
  * @version 1.0
  */
-public class LoginViewModel implements PropertyChangeListener
+public class LoginViewModel implements PropertyChangeListener, Subject
 {
   private AccountModel model;
   private StringProperty username;
   private StringProperty password;
   private StringProperty errorMessage;
+  private PropertyChangeSupport support;
+  private String role;
 
   /**
    * One-argument constructor initializing accountModel object and SimpleStringProperties. Also adding the ViewModel as a listener to the AccountModel.
@@ -34,6 +38,7 @@ public class LoginViewModel implements PropertyChangeListener
     username = new SimpleStringProperty();
     password = new SimpleStringProperty();
     errorMessage = new SimpleStringProperty();
+    support = new PropertyChangeSupport(this);
     model.addListener("LoginSuccessful", this);
     model.addListener("LoginFailed", this);
   }
@@ -90,12 +95,23 @@ public class LoginViewModel implements PropertyChangeListener
     {
       String result = "Welcome, " + ((User) evt.getNewValue()).getUsername();
       if (evt.getNewValue() instanceof Manager)
+      {
         result += ", M";
+        role = "Manager";
+      }
       if (evt.getNewValue() instanceof Salesperson)
+      {
         result += ", S";
+        role = "Salesperson";
+      }
+
       if (evt.getNewValue() instanceof Accountant)
+      {
         result += ", A";
+        role = "Accountant";
+      }
       String finalResult = result;
+      support.firePropertyChange("LoginSuccess",null,role);
       Platform.runLater(() ->
       {
         errorMessage.setValue(finalResult);
@@ -108,5 +124,18 @@ public class LoginViewModel implements PropertyChangeListener
         errorMessage.setValue("Incorrect credentials!");
       });
     }
+  }
+
+
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.addPropertyChangeListener(propertyName,listener);
+  }
+
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.removePropertyChangeListener(propertyName,listener);
   }
 }

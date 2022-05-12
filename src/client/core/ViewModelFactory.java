@@ -14,7 +14,6 @@ public class ViewModelFactory
   private LoginViewModel loginVM;
   private AddAccountViewModel addAccountVM;
   private AddProductViewModel addProductVM;
-
   /**
    * One-argument constructor initializing the ViewModelFactory class
    * @param modelFactory  ModelFactory object that has the necessary get methods for each model
