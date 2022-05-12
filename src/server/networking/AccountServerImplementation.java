@@ -12,6 +12,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of the AccountServer interface
+ * @author S2G2
+ * @version 1.0
+ */
 public class AccountServerImplementation implements AccountServer
 {
   private final AccountModel accountModel;

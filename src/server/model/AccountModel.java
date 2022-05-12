@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Interface used for logging in users and adding new accounts, extends Subject interface
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface AccountModel extends Subject, Serializable
 {
@@ -18,5 +18,12 @@ public interface AccountModel extends Subject, Serializable
    * @param password client's password
    */
   User login(String username, String password);
+  /**
+   * Adding new account to the database
+   * @param user to be added
+   * @param password connected to the user
+   * @return the newly added User object
+   */
+
   User addAccount(User user, String password);
 }

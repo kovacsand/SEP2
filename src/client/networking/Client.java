@@ -9,7 +9,6 @@ import shared.utils.Subject;
  * @author S2G2
  * @version 1.0
  */
-
 public interface Client extends Subject
 {
   /**

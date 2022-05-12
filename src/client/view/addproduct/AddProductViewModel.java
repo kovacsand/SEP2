@@ -20,25 +20,25 @@ public class AddProductViewModel implements PropertyChangeListener
   private StringProperty price;
   private StringProperty description;
 
+  /**
+   * An argument constructor that initializes all fields.
+   */
   public AddProductViewModel (AddProductModel addProductModel)
   {
-    /**
-     * An argument constructor that initializes all fields.
-     */
     model=addProductModel;
     name=new SimpleStringProperty();
     price=new SimpleStringProperty();
     description=new SimpleStringProperty();
+    model.addListener("ProductAdded", this);
+    model.addListener("ProductExists", this);
   }
+
+  /**
+   * A method that determines the behaviour of the GUI after pressing the add button while adding a new product. It prints out the values given,
+   * calls a model method to create the product, and empties all the fields.
+   */
   public void addProduct ()
   {
-    /**
-     * A method that determines the behaviour of the GUI after pressing the confirm button while adding a new product. It prints out the values given,
-     * calls a model method to create the product, and empties all the fields.
-     * @param name a field that is printed then emptied
-     * @param description a field that is printed then emptied
-     * @param price a field that is printed then emptied
-     */
     System.out.println("You are creating a product named "+name.getValue()+" described as "+description.getValue()+" priced at "+price.getValue());
     model.addProduct(name.getValue(), description.getValue(), Double.parseDouble(price.getValue()));
     Platform.runLater(()->
@@ -49,37 +49,36 @@ public class AddProductViewModel implements PropertyChangeListener
         }
     );
   }
-  public void cancel()
-  {
-    //do stuff here
-  }
+
+  /**
+   * A method that returns name
+   * @return name the name that is returned
+   */
   public StringProperty nameProperty ()
   {
-    /**
-     * A method that returns name
-     * @return name the name that is returned
-     */
     return name;
   }
+
+  /**
+   * A method that returns a price
+   * @return price the price that is returned
+   */
   public StringProperty priceProperty()
   {
-    /**
-     * A method that returns a price
-     * @return price the price that is returned
-     */
     return price;
   }
+
+  /**
+   * A method that returns a description
+   * @return description the description that is returned
+   */
   public StringProperty descriptionProperty()
   {
-    /**
-     * A method that returns a description
-     * @return description the description that is returned
-     */
     return description;
   }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-
+    System.out.println(evt.getNewValue() != null ? "New product added " + evt.getNewValue() : "ERROR - run, product not added");
   }
-
 }

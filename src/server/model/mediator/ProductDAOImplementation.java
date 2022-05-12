@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
+ * @author S2G2
+ * @version 1.0
+ */
 public class ProductDAOImplementation implements ProductDAO
 {
   private static ProductDAOImplementation instance;
@@ -16,6 +21,11 @@ public class ProductDAOImplementation implements ProductDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
+  /**
+   * Getting the single existing instance
+   * @return the instance
+   * @throws SQLException
+   */
   public static synchronized ProductDAOImplementation getInstance() throws SQLException
   {
     if (instance == null)

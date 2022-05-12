@@ -7,6 +7,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 
+/**
+ * Class that implements the AddProductModel interface on server side.
+ * @author S2G2
+ * @version 1.0
+ */
 public class APMImplementation implements AddProductModel
 {
   private PropertyChangeSupport support;
