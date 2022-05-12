@@ -2,7 +2,9 @@ package client.model;
 
 import client.networking.Client;
 import shared.transferobjects.Product;
+import shared.transferobjects.User;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -25,25 +27,30 @@ public class APMImplementation implements AddProductModel
   {
     support=new PropertyChangeSupport(this);
     this.client=client;
+    client.addListener("ProductAdded", this::onAddProductReply);
+    client.addListener("ProductExists", this::onAddProductReply);
+  }
 
+  /**
+   * Listens to the result of addProduct()
+   * @param evt event that's being listened to
+   */
+  public void onAddProductReply(PropertyChangeEvent evt)
+  {
+    addProductReply(evt.getNewValue() != null, (String) evt.getNewValue());
   }
 
   @Override public void addProduct(String name, String desc, double price)
   {
       client.addProduct(new Product(name,desc,price));
-
   }
 
   @Override public void addProductReply(boolean successful, String name)
   {
     if(successful)
-    {
       support.firePropertyChange("ProductAdded",null,name);
-    }
     else
-    {
       support.firePropertyChange("ProductExists",null,null);
-    }
   }
 
   @Override public void addListener(String propertyName,

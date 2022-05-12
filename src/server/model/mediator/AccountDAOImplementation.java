@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
+ * Implementation of Data Access Object interface handling products. It is created following the Singleton Pattern
  * @author S2G2
  * @version 1.0
  */
@@ -27,7 +27,7 @@ public class AccountDAOImplementation implements AccountDAO
 
   /**
    * Getting the single existing instance
-   * @return
+   * @return the instance
    * @throws SQLException
    */
   public static synchronized AccountDAOImplementation getInstance() throws SQLException
@@ -55,7 +55,7 @@ public class AccountDAOImplementation implements AccountDAO
     int dataBaseRole = 0;
     User loggedInUser = null;
     
-    try(Connection connection = getConnection())
+    try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM Employees WHERE username = ? AND password = ?;"

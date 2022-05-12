@@ -52,26 +52,38 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void addProduct(Product product)
   {
+    Product newlyAddedProduct = null;
     try
     {
-      server.getWarehouseServer().addProduct(product);
+      newlyAddedProduct = server.getWarehouseServer().addProduct(product);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
+
+    if (newlyAddedProduct == null)
+      addProductReply(false, null);
+    else
+      addProductReply(true, newlyAddedProduct.getName());
   }
 
   @Override public void addAccount(User user, String password)
   {
+    User newlyAddedUser = null;
     try
     {
-      server.getAccountServer().addAccount(user, password);
+      newlyAddedUser = server.getAccountServer().addAccount(user, password);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
+
+    if (newlyAddedUser == null)
+      addAccountReply(false, null);
+    else
+      addAccountReply(true, newlyAddedUser.getUsername());
   }
 
   @Override public void registerClient()

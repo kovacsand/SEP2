@@ -41,7 +41,7 @@ public class LoginViewController implements ViewController
    */
   @FXML private void onLoginButton()
   {
-    System.out.println(usernameField.getText() +  ", " + passwordField.getText());
-    viewModel.login();
+    //viewModel.login();
+    vh.openView("Main");
   }
 }

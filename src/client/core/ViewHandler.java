@@ -29,6 +29,8 @@ public class ViewHandler
     Parent root = null;
     if(view.equals("AddProduct"))
       loader.setLocation(getClass().getResource("../view/addproduct/AddProductView.fxml"));
+    if(view.equals("Main"))
+      loader.setLocation(getClass().getResource("../view/main/MainView.fxml"));
     try
     {
       root = loader.load();

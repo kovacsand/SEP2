@@ -5,12 +5,15 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /**
  * ViewModel class for adding an account
  * @author S2G2
  * @version 1.0
  */
-public class AddAccountViewModel
+public class AddAccountViewModel implements PropertyChangeListener
 {
   private AccountModel model;
   private StringProperty username;
@@ -27,6 +30,8 @@ public class AddAccountViewModel
     username = new SimpleStringProperty();
     password = new SimpleStringProperty();
     role = new SimpleStringProperty();
+    model.addListener("AccountAdded", this);
+    model.addListener("AccountExists", this);
   }
 
   /**
@@ -69,5 +74,10 @@ public class AddAccountViewModel
       password.setValue(null);
       role.setValue(null);
     });
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    System.out.println(evt.getNewValue() != null ? "New account added " + evt.getNewValue() : "Account already exists");
   }
 }
