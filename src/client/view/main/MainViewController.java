@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.io.IOException;
 public class MainViewController implements ViewController
 {
   private ViewHandler vh;
+  @FXML Button addProduct;
+  @FXML Button addAccount;
 
   /**
    * Initializing ViewHandler
@@ -28,6 +32,14 @@ public class MainViewController implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
+    if("Manager".equals(vh.getRole()))
+    {
+      addProduct.setDisable(true);
+    }
+    if ("Salesperson".equals(vh.getRole()))
+    {
+      addAccount.setDisable(true);
+    }
   }
   /**
    * On Add Product button press
@@ -50,6 +62,8 @@ public class MainViewController implements ViewController
    */
   @FXML private void onLogOutButton()
   {
+    addProduct.setDisable(false);
+    addAccount.setDisable(false);
     vh.openView("Login");
   }
 }
