@@ -38,6 +38,8 @@ public class ServerImplementation implements Server
   {
     UnicastRemoteObject.exportObject(this, 0);
     clients = new HashMap<>();
+    accountServer = new AccountServerImplementation(new AMImplementation());
+    warehouseServer = new WarehouseServerImplementation(new APMImplementation());
   }
 
   /**
