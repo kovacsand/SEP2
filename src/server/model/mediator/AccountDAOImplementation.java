@@ -6,7 +6,6 @@ import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * Implementation of Data Access Object interface handling products. It is created following the Singleton Pattern
@@ -35,17 +34,6 @@ public class AccountDAOImplementation implements AccountDAO
     if (instance == null)
       instance = new AccountDAOImplementation();
     return instance;
-  }
-
-  /**
-   * Establishing the connection to the database
-   * @return
-   * @throws SQLException
-   */
-  private Connection getConnection() throws SQLException
-  {
-    return DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/postgres?currentSchema=" + PostgreSQLAccess.DATABASE_SCHEMA_NAME, PostgreSQLAccess.DATABASE_USER_NAME, PostgreSQLAccess.DATABASE_USER_PASSWORD);
   }
 
   @Override public User getLoggedInUser(String username, String password) throws SQLException

@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * @author S2G2
  * @version 1.0
  */
-public interface ProductDAO
+public interface ProductDAO extends DAOInterface
 {
   /**
    * Connects to the database and tries to add a new product

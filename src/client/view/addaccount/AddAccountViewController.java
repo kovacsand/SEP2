@@ -28,7 +28,6 @@ public class AddAccountViewController implements ViewController
    */
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
-
     this.vh = vh;
     viewModel = vmf.getAddAccountVM();
     viewModel.getUsername().bindBidirectional(usernameField.textProperty());
