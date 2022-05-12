@@ -26,11 +26,11 @@ public class ViewHandler
       loader.setLocation(getClass().getResource("../view/login/LoginView.fxml"));
     if(view.equals("AddAccount"))
       loader.setLocation(getClass().getResource("../view/addaccount/AddAccountView.fxml"));
-    Parent root = null;
     if(view.equals("AddProduct"))
       loader.setLocation(getClass().getResource("../view/addproduct/AddProductView.fxml"));
     if(view.equals("Main"))
       loader.setLocation(getClass().getResource("../view/main/MainView.fxml"));
+    Parent root = null;
     try
     {
       root = loader.load();
