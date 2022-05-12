@@ -44,6 +44,6 @@ public class AddProductViewController implements ViewController
     /**
      * A method that activates when the cancel button is pressed while creating a new product. It calls a method in AddProductViewModel
      */
-    viewModel.cancel();
+    vh.openView("Temp");
   }
 }

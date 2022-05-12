@@ -49,10 +49,6 @@ public class AddProductViewModel implements PropertyChangeListener
         }
     );
   }
-  public void cancel()
-  {
-    //do stuff here
-  }
   public StringProperty nameProperty ()
   {
     /**
