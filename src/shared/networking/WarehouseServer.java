@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
  */
 public interface WarehouseServer extends Remote
 {
+
   /**
    * Adding product in through the model. The server passes the argument to the model.
    * @param product to be added

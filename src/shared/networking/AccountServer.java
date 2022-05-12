@@ -23,6 +23,7 @@ public interface AccountServer extends Remote
    */
   User login(String username, String password) throws RemoteException;
 
+
   /**
    * Adding an account through the model
    * @param user of the new account
@@ -30,5 +31,6 @@ public interface AccountServer extends Remote
    * @return the newly added account, if couldn't add, return null
    * @throws RemoteException
    */
+
   User addAccount(User user, String password) throws RemoteException;
 }

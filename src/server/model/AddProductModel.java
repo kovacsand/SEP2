@@ -10,6 +10,7 @@ import shared.utils.Subject;
  */
 public interface AddProductModel extends Subject
 {
+
   /**
    * Adding new product to the database
    * @param product to be added

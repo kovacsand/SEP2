@@ -1,5 +1,8 @@
 package shared.networking;
 
+import shared.transferobjects.Product;
+import shared.transferobjects.User;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -24,17 +27,10 @@ public interface Server extends Remote
    */
   void unregisterClient(ClientCallBack client) throws RemoteException;
 
-  /**
-   * Handles the sub-server handling accounts using lazy instantiation.
-   * @return the Account sub-server
-   * @throws RemoteException
-   */
-  AccountServer getAccountServer() throws RemoteException;
+  User login(String username, String password) throws RemoteException;
 
-  /**
-   * Handles the sub-server handling the products and everything connected to the warehouse using lazy instantiation.
-   * @return the Warehouse sub-server
-   * @throws RemoteException
-   */
-  WarehouseServer getWarehouseServer() throws RemoteException;
+  User addAccount(User user, String password) throws RemoteException;
+
+  Product addProduct(Product product) throws RemoteException;
+
 }

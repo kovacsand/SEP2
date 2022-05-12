@@ -11,6 +11,7 @@ import java.sql.SQLException;
  */
 public interface ProductDAO
 {
+
   /**
    * Connects to the database and tries to add a new product
    * @param product The p

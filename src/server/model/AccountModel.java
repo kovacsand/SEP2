@@ -24,5 +24,6 @@ public interface AccountModel extends Subject, Serializable
    * @param password connected to the user
    * @return the newly added User object
    */
+
   User addAccount(User user, String password);
 }

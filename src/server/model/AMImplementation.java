@@ -62,3 +62,4 @@ public class AMImplementation implements AccountModel
     support.removePropertyChangeListener(propertyName, listener);
   }
 }
+

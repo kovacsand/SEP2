@@ -54,8 +54,7 @@ public class AccountDAOImplementation implements AccountDAO
     String dataBasePassword = null;
     int dataBaseRole = 0;
     User loggedInUser = null;
-    
-    try (Connection connection = getConnection())
+    try(Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM Employees WHERE username = ? AND password = ?;"
