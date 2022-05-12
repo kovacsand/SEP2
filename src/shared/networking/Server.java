@@ -51,5 +51,4 @@ public interface Server extends Remote
    * @throws RemoteException
    */
   Product addProduct(Product product) throws RemoteException;
-
 }

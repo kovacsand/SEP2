@@ -93,37 +93,16 @@ public class LoginViewModel implements PropertyChangeListener, Subject
   {
     if (evt.getPropertyName().equals("LoginSuccessful"))
     {
-      String result = "Welcome, " + ((User) evt.getNewValue()).getUsername();
       if (evt.getNewValue() instanceof Manager)
-      {
-        result += ", M";
         role = "Manager";
-      }
       if (evt.getNewValue() instanceof Salesperson)
-      {
-        result += ", S";
         role = "Salesperson";
-      }
-
       if (evt.getNewValue() instanceof Accountant)
-      {
-        result += ", A";
         role = "Accountant";
-      }
-      String finalResult = result;
       support.firePropertyChange("LoginSuccess",null,role);
-      Platform.runLater(() ->
-      {
-        errorMessage.setValue(finalResult);
-      });
     }
     else if (evt.getPropertyName().equals("LoginFailed"))
-    {
-      Platform.runLater(() ->
-      {
-        errorMessage.setValue("Incorrect credentials!");
-      });
-    }
+      Platform.runLater(() -> errorMessage.setValue("Incorrect credentials!"));
   }
 
 

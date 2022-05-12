@@ -29,20 +29,32 @@ public class AddAccountViewController implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh = vh;
+    initialiseComboBox();
     viewModel = vmf.getAddAccountVM();
     viewModel.getUsername().bindBidirectional(usernameField.textProperty());
     viewModel.getPassword().bindBidirectional(passwordField.textProperty());
-    comboBox();
     viewModel.getRole().bindBidirectional(roleField.valueProperty());
   }
 
   /**
-   * Initializing values for the combo box for accounts role
+   * Initializing values for the combo box for employee roles
    */
-  public void comboBox()
+  private void initialiseComboBox()
   {
     ObservableList<String> roles = FXCollections.observableArrayList("Salesperson", "Accountant", "Manager");
     roleField.getItems().addAll(roles);
+  }
+
+  private void createAlertWindow()
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("One of the fields is empty");
+    alert.showAndWait();
+    viewModel.getUsername().setValue(null);
+    viewModel.getPassword().setValue(null);
+    viewModel.getRole().setValue(null);
   }
 
   /**
@@ -54,20 +66,9 @@ public class AddAccountViewController implements ViewController
     String password = viewModel.getPassword().getValue();
     String role = viewModel.getRole().getValue();
     if (role == null || password == null || password == "" || username == null || username == "")
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("An error has been encountered");
-      alert.setContentText("One of the fields is empty");
-      alert.showAndWait();
-      viewModel.getUsername().setValue(null);
-      viewModel.getPassword().setValue(null);
-      viewModel.getRole().setValue(null);
-    }
+      createAlertWindow();
     else
-    {
       viewModel.addAccount();
-    }
   }
 
   /**

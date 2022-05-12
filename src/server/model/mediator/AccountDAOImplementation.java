@@ -44,9 +44,7 @@ public class AccountDAOImplementation implements AccountDAO
     User loggedInUser = null;
     try(Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM Employees WHERE username = ? AND password = ?;"
-      );
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Employees WHERE username = ? AND password = ?;");
       statement.setString(1, username);
       statement.setString(2, password);
       ResultSet resultSet = statement.executeQuery();
@@ -69,7 +67,7 @@ public class AccountDAOImplementation implements AccountDAO
 
   @Override public User addAccount(User user, String password) throws SQLException
   {
-    String sqlstatement = "INSERT INTO Employees (username, password, role_id) VALUES (?, ?, ?);";
+    String sqlStatement = "INSERT INTO Employees (username, password, role_id) VALUES (?, ?, ?);";
     try(Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("SELECT username FROM Employees WHERE username = ?"
@@ -86,7 +84,7 @@ public class AccountDAOImplementation implements AccountDAO
     {
       try (Connection connection = getConnection())
       {
-        PreparedStatement statement = connection.prepareStatement(sqlstatement);
+        PreparedStatement statement = connection.prepareStatement(sqlStatement);
         statement.setString(1, user.getUsername());
         statement.setString(2, password);
         statement.setInt(3, 3);
@@ -98,7 +96,7 @@ public class AccountDAOImplementation implements AccountDAO
     {
       try(Connection connection = getConnection())
       {
-        PreparedStatement statement = connection.prepareStatement(sqlstatement);
+        PreparedStatement statement = connection.prepareStatement(sqlStatement);
         statement.setString(1, user.getUsername());
         statement.setString(2, password);
         statement.setInt(3, 2);
@@ -110,7 +108,7 @@ public class AccountDAOImplementation implements AccountDAO
     {
       try(Connection connection = getConnection())
       {
-        PreparedStatement statement = connection.prepareStatement(sqlstatement);
+        PreparedStatement statement = connection.prepareStatement(sqlStatement);
         statement.setString(1, user.getUsername());
         statement.setString(2, password);
         statement.setInt(3, 1);
