@@ -16,9 +16,4 @@ public class Manager extends User
   {
     super(username, password);
   }
-
-  public void addUser(String username, String password, String role)
-  {
-
-  }
 }

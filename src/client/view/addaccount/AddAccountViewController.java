@@ -74,8 +74,8 @@ public class AddAccountViewController implements ViewController
   /**
    * On Cancel button press
    */
-  @FXML public void onCancelButton()
+  @FXML public void onBackButton()
   {
-    vh.openView("Temp");
+    vh.openView("Main");
   }
 }
