@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * A class for RMIClient to establish connection to a server
@@ -111,6 +112,24 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
+  }
+
+  @Override public void getAllProducts(char role)
+  {
+    ArrayList<Product> productList = new ArrayList<>();
+    try
+    {
+      productList = server.getAllProducts(role);
+      
+    }
+    catch(RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    if (!(productList.isEmpty()))
+    support.firePropertyChange("GetProducts",null,productList);
+    else
+      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",00));
   }
 
   @Override public void loginReply(boolean successful, User user)
