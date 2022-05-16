@@ -62,10 +62,10 @@ public class ProductDAOImplementation implements ProductDAO
   {
     try(Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET quantity = ? WHERE id = ?");
+      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET quantity = quantity + ? WHERE id = ?");
       statement.setInt(1, quantity);
       statement.setInt(2, id);
-      statement.executeUpdate();  
+      statement.executeUpdate();
     }
   }
 }
