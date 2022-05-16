@@ -1,6 +1,6 @@
 package client.view.addproduct;
 
-import client.model.AddProductModel;
+import client.model.ProductModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
  */
 public class AddProductViewModel implements PropertyChangeListener
 {
-  private AddProductModel model;
+  private ProductModel model;
   private StringProperty name;
   private StringProperty price;
   private StringProperty description;
@@ -23,7 +23,7 @@ public class AddProductViewModel implements PropertyChangeListener
   /**
    * An argument constructor that initializes all fields.
    */
-  public AddProductViewModel (AddProductModel addProductModel)
+  public AddProductViewModel (ProductModel addProductModel)
   {
     model=addProductModel;
     name=new SimpleStringProperty();
