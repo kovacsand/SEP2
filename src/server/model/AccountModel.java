@@ -25,5 +25,11 @@ public interface AccountModel extends Subject, Serializable
    * @return the newly added User object
    */
 
+  /**
+   * Client adding a new account to the system
+   * @param user to be added
+   * @param password of the new user
+   * @return the newly added user if it was successful, otherwise null
+   */
   User addAccount(User user, String password);
 }
