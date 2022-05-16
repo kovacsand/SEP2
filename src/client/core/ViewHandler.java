@@ -43,7 +43,7 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     if (view.equals("Login"))
       role = null;
-    String fxmlPath = "../view/" + view.toLowerCase() + "/" + view + ".fxml" ;
+    String fxmlPath = "../view/" + view.toLowerCase() + "/" + view + "View.fxml" ;
     loader.setLocation(getClass().getResource(fxmlPath));
     Parent root = null;
     try

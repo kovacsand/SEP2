@@ -66,4 +66,8 @@ public class MainViewController implements ViewController
     addAccount.setDisable(false);
     vh.openView("Login");
   }
+  @FXML private void onViewStockButton()
+  {
+    vh.openView("Stock");
+  }
 }

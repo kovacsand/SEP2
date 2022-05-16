@@ -3,6 +3,7 @@ package client.core;
 import client.view.addaccount.AddAccountViewModel;
 import client.view.addproduct.AddProductViewModel;
 import client.view.login.LoginViewModel;
+import client.view.stock.StockViewModel;
 
 /**
  * A class factory for creating view models
