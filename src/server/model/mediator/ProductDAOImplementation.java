@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
@@ -48,5 +49,16 @@ public class ProductDAOImplementation implements ProductDAO
       statement.executeUpdate();
     }
     return product;
+  }
+
+  @Override public ArrayList<Product> getAllProducts(char role)
+      throws SQLException
+  {
+    return null;
+  }
+
+  @Override public void increaseStock(int id, int quantity) throws SQLException
+  {
+
   }
 }

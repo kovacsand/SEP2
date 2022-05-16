@@ -41,12 +41,28 @@ public class PMImplementation implements ProductModel
 
   @Override public ArrayList<Product> getAllProducts(char role)
   {
-    return null;
+    ArrayList<Product> allProducts = new ArrayList<>();
+    try
+    {
+      allProducts = ProductDAOImplementation.getInstance().getAllProducts(role);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return allProducts;
   }
 
   @Override public void increaseStock(int id, int quantity)
   {
-
+    try
+    {
+      ProductDAOImplementation.getInstance().increaseStock(id, quantity);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
