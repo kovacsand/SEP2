@@ -43,4 +43,15 @@ public interface Client extends Subject
    * Unregistering the client from the server when disconnecting
    */
   void unregisterClient();
+
+
+  /**
+   * Gets a list of all products from the Database, then fire event "GetProducts".
+   * Only gets the products based on role: M = manager, S = salesperson
+   */
+  void getAllProducts(char role);
+
+  /**
+   *
+   */
 }
