@@ -1,10 +1,12 @@
 package shared.networking;
 
+import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *Interface for networking part of the application. It is used get messages from the client to the client-side model.
@@ -36,4 +38,11 @@ public interface ClientCallBack extends Remote, Serializable
    * @throws RemoteException
    */
   void addProductReply(boolean successful, String name) throws RemoteException;
+
+  /**
+   * Notifying the listener by sending the product list
+   * @param productList list of the Product objects
+   * @throws RemoteException
+   */
+  void getAllProductsReply(ArrayList<Product> productList) throws RemoteException;
 }

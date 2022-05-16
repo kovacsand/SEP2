@@ -5,6 +5,7 @@ import shared.transferobjects.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Interface for the RMI server. It ensures, that the connection is established between the client(s) and the server.
@@ -51,5 +52,19 @@ public interface Server extends Remote
    * @throws RemoteException
    */
   Product addProduct(Product product) throws RemoteException;
+  /**
+   * Getting all products through the model. The server passes the argument to the model
+   * @param role of the user, to know which products list to return depending on the role
+   * @return
+   * @throws RemoteException
+   */
+  ArrayList<Product> getAllProducts(char role) throws  RemoteException;
 
+  /**
+   * Increasing the stock of the product through the model. The server passes the argument to the model
+   * @param id of the product
+   * @param quantity amount which needs to be increased by
+   * @throws RemoteException
+   */
+  void increaseStock(int id, int quantity) throws RemoteException;
 }

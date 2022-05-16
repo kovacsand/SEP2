@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * A class to handle creating and changing views.
@@ -21,7 +22,7 @@ public class ViewHandler
 
 
   /**
-   * Two-argument cnstructor that takes a stage and viewmodel factory
+   * Two-argument constructor that takes a stage and viewmodel factory
    * and instantiates these.
    * @param stage
    * @param vmf
@@ -35,27 +36,16 @@ public class ViewHandler
   /**
    * Method to find open the fx views.
    * The 'view' string names the view, and points to the fxml file.
-   *
    * @param view
    */
   public void openView(String view)
   {
     FXMLLoader loader = new FXMLLoader();
     if (view.equals("Login"))
-    {
       role = null;
-      loader.setLocation(getClass().getResource("../view/login/LoginView.fxml"));
-    }
-    if(view.equals("AddAccount"))
-      loader.setLocation(getClass().getResource("../view/addaccount/AddAccountView.fxml"));
+    String fxmlPath = "../view/" + view.toLowerCase() + "/" + view + ".fxml" ;
+    loader.setLocation(getClass().getResource(fxmlPath));
     Parent root = null;
-    if(view.equals("AddProduct"))
-      loader.setLocation(getClass().getResource("../view/addproduct/AddProductView.fxml"));
-    if(view.equals("Main"))
-    {
-      role = role;
-      loader.setLocation(getClass().getResource("../view/main/MainView.fxml"));
-    }
     try
     {
       root = loader.load();
@@ -73,11 +63,19 @@ public class ViewHandler
     stage.show();
   }
 
+  /**
+   * Setting the role of the employee who uses the system
+   * @param role of the employee
+   */
   public void setRole(String role)
   {
     this.role = role;
   }
 
+  /**
+   * Getting the role of the employee who uses the system
+   * @return the role of the employee
+   */
   public String getRole()
   {
     return role;

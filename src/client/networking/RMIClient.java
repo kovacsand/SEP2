@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 /**
  * A class for RMIClient to establish connection to a server
+ *
  * @author S2G2
  * @version 1.0
  */
@@ -134,7 +135,7 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void loginReply(boolean successful, User user)
   {
-    if(successful)
+    if (successful)
       support.firePropertyChange("LoginSuccessful", null, user);
     else
       support.firePropertyChange("LoginFailed", null, null);
@@ -142,7 +143,7 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void addAccountReply(boolean successful, String username)
   {
-    if(successful)
+    if (successful)
       support.firePropertyChange("AccountAdded", null, username);
     else
       support.firePropertyChange("AccountExists", null, username);
@@ -150,18 +151,25 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void addProductReply(boolean successful, String name)
   {
-    if(successful)
+    if (successful)
       support.firePropertyChange("ProductAdded", null, name);
     else
       support.firePropertyChange("ProductExists", null, name);
   }
 
-  @Override public void addListener(String propertyName, PropertyChangeListener listener)
+  @Override public void getAllProductsReply(ArrayList<Product> productList) throws RemoteException
+  {
+
+  }
+
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(propertyName, listener);
   }
 
-  @Override public void removeListener(String propertyName, PropertyChangeListener listener)
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(propertyName, listener);
   }

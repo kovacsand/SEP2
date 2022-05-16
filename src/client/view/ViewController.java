@@ -8,7 +8,6 @@ import client.core.ViewModelFactory;
  * @author S2G2
  * @version 1.0
  */
-
 public interface ViewController
 {
   /**

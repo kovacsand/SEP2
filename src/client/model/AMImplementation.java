@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Class that implements the AccountModel interface on client side.
+ *
  * @author S2G2
  * @version 1.0
  */
@@ -24,7 +25,8 @@ public class AMImplementation implements AccountModel
 
   /**
    * One-argument constructor initializing the AccountModel implementation class,
-        also initializes the PropertyChangeSupport object and adds listeners for onLoginReply() method
+   * also initializes the PropertyChangeSupport object and adds listeners for onLoginReply() method
+   *
    * @param client Client object that will pass the necessary information
    */
   public AMImplementation(Client client)
@@ -40,6 +42,7 @@ public class AMImplementation implements AccountModel
 
   /**
    * Listens to the result of login()
+   *
    * @param evt event that's being listened to
    */
   public void onLoginReply(PropertyChangeEvent evt)
@@ -57,34 +60,19 @@ public class AMImplementation implements AccountModel
     client.login(username, password);
   }
 
-
-  @Override public void addAccount(String username, String password,
-      String role)
+  @Override public void addAccount(String username, String password, String role)
   {
-    if (role != null)
+    switch (role)
     {
-      switch (role)
-      {
-        case "Accountant":
-        {
-          client.addAccount(new Accountant(username, password), password);
-          break;
-        }
-        case "Manager":
-        {
-          client.addAccount(new Manager(username, password), password);
-          break;
-        }
-        case "Salesperson":
-        {
-          client.addAccount(new Salesperson(username, password), password);
-          break;
-        }
-      }
-    }
-    else
-    {
-      System.out.println("Please select a valid role.");
+      case "Accountant":
+        client.addAccount(new Accountant(username, password), password);
+        break;
+      case "Manager":
+        client.addAccount(new Manager(username, password), password);
+        break;
+      case "Salesperson":
+        client.addAccount(new Salesperson(username, password), password);
+        break;
     }
   }
 
