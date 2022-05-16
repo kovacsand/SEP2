@@ -39,7 +39,7 @@ public class AddAccountViewController implements ViewController
   /**
    * Initializing values for the combo box for accounts role
    */
-  public void comboBox()
+  private void comboBox()
   {
     ObservableList<String> roles = FXCollections.observableArrayList("Salesperson", "Accountant", "Manager");
     roleField.getItems().addAll(roles);

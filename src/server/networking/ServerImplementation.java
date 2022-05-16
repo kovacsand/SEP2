@@ -31,7 +31,7 @@ public class ServerImplementation implements Server
   private Map<ClientCallBack, PropertyChangeListener> clients;
 
   /**
-   * Zero-argument constructor initializing the Server
+   * Zero-argument constructor initializing the Server and the Sub-Servers
    * @throws RemoteException
    */
   public ServerImplementation() throws RemoteException
