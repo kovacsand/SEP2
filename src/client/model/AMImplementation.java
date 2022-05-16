@@ -58,33 +58,19 @@ public class AMImplementation implements AccountModel
   }
 
 
-  @Override public void addAccount(String username, String password,
-      String role)
+  @Override public void addAccount(String username, String password, String role)
   {
-    if (role != null)
+    switch (role)
     {
-      switch (role)
-      {
-        case "Accountant":
-        {
-          client.addAccount(new Accountant(username, password), password);
-          break;
-        }
-        case "Manager":
-        {
-          client.addAccount(new Manager(username, password), password);
-          break;
-        }
-        case "Salesperson":
-        {
-          client.addAccount(new Salesperson(username, password), password);
-          break;
-        }
-      }
-    }
-    else
-    {
-      System.out.println("Please select a valid role.");
+      case "Accountant":
+        client.addAccount(new Accountant(username, password), password);
+        break;
+      case "Manager":
+        client.addAccount(new Manager(username, password), password);
+        break;
+      case "Salesperson":
+        client.addAccount(new Salesperson(username, password), password);
+        break;
     }
   }
 

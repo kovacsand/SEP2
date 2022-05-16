@@ -2,7 +2,6 @@ package client.model;
 
 import client.networking.Client;
 import shared.transferobjects.Product;
-import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
