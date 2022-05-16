@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.stock.StockViewController">
+   <children>
+      <ScrollBar layoutX="586.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="14.0" />
+      <ButtonBar layoutX="-2.0" layoutY="360.0" prefHeight="40.0" prefWidth="587.0">
+        <buttons>
+          <Button mnemonicParsing="false" text="back" onAction="#onBackButtonPress" />
+        </buttons>
+      </ButtonBar>
+      <TableView prefHeight="361.0" prefWidth="587.0">
+        <columns>
+          <TableColumn id="id" prefWidth="75.0" text="id" />
+          <TableColumn id="name" prefWidth="102.0" text="name" />
+            <TableColumn id="description" prefWidth="271.0" text="description" />
+            <TableColumn id="price" prefWidth="69.0" text="price" />
+            <TableColumn id="stock" prefWidth="69.0" text="stock" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

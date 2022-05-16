@@ -8,5 +8,6 @@
       <Button fx:id="addAccount" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" onAction="#onCreateAccountButton" text="Create an account" />
       <Button fx:id="addProduct" layoutX="332.0" layoutY="124.0" mnemonicParsing="false" onAction="#onAddProductButton" text="Add a product" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogOutButton" text="Log out" />
+      <Button layoutX="204.0" layoutY="175.0" mnemonicParsing="false" onAction="#onViewStockButton" text="View stock" />
    </children>
 </Pane>
