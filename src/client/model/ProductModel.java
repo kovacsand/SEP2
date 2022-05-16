@@ -1,6 +1,9 @@
 package client.model;
 
+import shared.transferobjects.Product;
 import shared.utils.Subject;
+
+import java.util.ArrayList;
 
 /**
  * Interface used for adding new products, extends the Subject interface
@@ -24,4 +27,16 @@ public interface ProductModel extends Subject
    * @param name  name of the new product
    */
   void addProductReply(boolean successful, String name);
+
+  /**
+   * Requesting all products in the database to be displayed
+   * @param role char that determines what products will be returned based on user role
+   */
+  void getAllProducts(char role);
+
+  /**
+   * Sending the arraylist of products to be displayed
+   * @param productList the list of products as an ArrayList
+   */
+  void getAllProductsReply(ArrayList<Product> productList);
 }
