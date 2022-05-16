@@ -117,20 +117,14 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void getAllProducts(char role)
   {
-    ArrayList<Product> productList = new ArrayList<>();
     try
     {
-      productList = server.getAllProducts(role);
-      
+      server.getAllProducts(role);
     }
     catch(RemoteException e)
     {
       e.printStackTrace();
     }
-    if (!(productList.isEmpty()))
-    support.firePropertyChange("GetProducts",null,productList);
-    else
-      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",00));
   }
 
   @Override public void loginReply(boolean successful, User user)
@@ -159,7 +153,10 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void getAllProductsReply(ArrayList<Product> productList) throws RemoteException
   {
-
+    if (!(productList.isEmpty()))
+      support.firePropertyChange("GetProducts",null,productList);
+    else
+      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",00));
   }
 
   @Override public void addListener(String propertyName,
