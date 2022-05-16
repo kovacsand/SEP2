@@ -9,22 +9,49 @@ import java.io.Serializable;
  */
 public class Product implements Serializable
 {
-
+  private int id;
   private String name;
   private String description;
   private double price;
+  private int quantity;
 
   /**
    * Three-argument constructor initializing the Product object
-   * @param name name of the product
-   * @param description description of the product
-   * @param price price of the product
+   * @param name of the product
+   * @param description of the product
+   * @param price of the product
    */
   public Product(String name, String description, double price)
   {
     this.name = name;
     this.description = description;
     this.price = price;
+    quantity = 0;
+  }
+
+  /**
+   * Four-argument constructor initializing the Product object
+   * @param id of the product
+   * @param name of the product
+   * @param description of the product
+   * @param price of the product
+   */
+  public Product(int id, String name, String description, double price)
+  {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    quantity = 0;
+  }
+
+  /**
+   * Get the id of the product
+   * @return
+   */
+  public int getId()
+  {
+    return id;
   }
 
   /**
@@ -52,5 +79,14 @@ public class Product implements Serializable
   public double getPrice()
   {
     return price;
+  }
+
+  /**
+   * Get the quantity of the product
+   * @return
+   */
+  public int getQuantity()
+  {
+    return  quantity;
   }
 }

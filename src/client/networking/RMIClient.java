@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * A class for RMIClient to establish connection to a server
@@ -136,6 +137,11 @@ public class RMIClient implements Client, ClientCallBack
       support.firePropertyChange("ProductAdded", null, name);
     else
       support.firePropertyChange("ProductExists", null, name);
+  }
+
+  @Override public void getAllProductsReply(ArrayList<Product> productList) throws RemoteException
+  {
+
   }
 
   @Override public void addListener(String propertyName,
