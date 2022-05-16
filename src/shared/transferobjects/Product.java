@@ -27,16 +27,28 @@ public class Product implements Serializable
     this.price = price;
   }
 
+  /**
+   * Get the name of the product
+   * @return
+   */
   public String getName()
   {
     return name;
   }
 
+  /**
+   * Get the description of the product
+   * @return
+   */
   public String getDescription()
   {
     return description;
   }
 
+  /**
+   * Get the price of the product
+   * @return
+   */
   public double getPrice()
   {
     return price;
