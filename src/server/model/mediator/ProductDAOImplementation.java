@@ -42,10 +42,11 @@ public class ProductDAOImplementation implements ProductDAO
 
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO Products VALUES (DEFAULT, ?, ?, ?);");
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO Products VALUES (DEFAULT, ?, ?, ?, ?);");
       statement.setString(1, newProductName);
       statement.setString(2, newProductDescription);
       statement.setDouble(3, newProductPrice);
+      statement.setInt(4, 0);
       statement.executeUpdate();
     }
     return product;
@@ -59,6 +60,12 @@ public class ProductDAOImplementation implements ProductDAO
 
   @Override public void increaseStock(int id, int quantity) throws SQLException
   {
-
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET quantity = ? WHERE id = ?");
+      statement.setInt(1, quantity);
+      statement.setInt(2, id);
+      statement.executeUpdate();  
+    }
   }
 }
