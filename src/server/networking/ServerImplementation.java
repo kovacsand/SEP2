@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,6 +93,18 @@ public class ServerImplementation implements Server
   @Override public Product addProduct(Product product) throws RemoteException
   {
     return warehouseServer.addProduct(product);
+  }
+
+  @Override public ArrayList<Product> getAllProducts(char role)
+      throws RemoteException
+  {
+    return null;
+  }
+
+  @Override public void increaseStock(int id, int quantity)
+      throws RemoteException
+  {
+
   }
 
 }

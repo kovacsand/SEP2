@@ -6,6 +6,7 @@ import shared.transferobjects.Product;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * Implementation of the WarehouseServer interface
@@ -30,5 +31,15 @@ public class WarehouseServerImplementation implements WarehouseServer
   @Override public Product addProduct(Product product) throws RemoteException
   {
     return addProductModel.addProduct(product);
+  }
+
+  @Override public ArrayList<Product> getAllProducts(char role) throws RemoteException
+  {
+    return null;
+  }
+
+  @Override public void increaseStock(int id, int quantity) throws RemoteException
+  {
+
   }
 }
