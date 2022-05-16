@@ -6,6 +6,7 @@ import shared.transferobjects.Product;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 /**
  * Class that implements the AddProduct interface
@@ -13,7 +14,7 @@ import java.beans.PropertyChangeSupport;
  * @author S2G2
  * @version 1.0
  */
-public class APMImplementation implements AddProductModel
+public class PMImplementation implements ProductModel
 {
   private PropertyChangeSupport support;
   private Client client;
@@ -24,7 +25,7 @@ public class APMImplementation implements AddProductModel
    *
    * @param client Client object that will pass the necessary information
    */
-  public APMImplementation(Client client)
+  public PMImplementation(Client client)
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
@@ -53,6 +54,16 @@ public class APMImplementation implements AddProductModel
       support.firePropertyChange("ProductAdded", null, name);
     else
       support.firePropertyChange("ProductExists", null, null);
+  }
+
+  @Override public void getAllProducts(char role)
+  {
+    client.getAllProducts(role);
+  }
+
+  @Override public void getAllProductsReply(ArrayList<Product> productList)
+  {
+      support.firePropertyChange("GetProducts",null,productList);
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
