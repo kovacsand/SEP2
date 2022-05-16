@@ -6,20 +6,21 @@ import shared.transferobjects.Product;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Class that implements the AddProductModel interface on server side.
  * @author S2G2
  * @version 1.0
  */
-public class APMImplementation implements AddProductModel
+public class PMImplementation implements ProductModel
 {
   private PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the AccountModel implementation class
    */
-  public APMImplementation()
+  public PMImplementation()
   {
     support = new PropertyChangeSupport(this);
   }
@@ -36,6 +37,16 @@ public class APMImplementation implements AddProductModel
       e.printStackTrace();
     }
     return addedProduct;
+  }
+
+  @Override public ArrayList<Product> getAllProducts(char role)
+  {
+    return null;
+  }
+
+  @Override public void increaseStock(int id, int quantity)
+  {
+
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

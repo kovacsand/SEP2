@@ -1,7 +1,7 @@
 package server.networking;
 
 import server.model.AMImplementation;
-import server.model.APMImplementation;
+import server.model.PMImplementation;
 import shared.networking.AccountServer;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
@@ -40,7 +40,7 @@ public class ServerImplementation implements Server
     UnicastRemoteObject.exportObject(this, 0);
     clients = new HashMap<>();
     accountServer = new AccountServerImplementation(new AMImplementation());
-    warehouseServer = new WarehouseServerImplementation(new APMImplementation());
+    warehouseServer = new WarehouseServerImplementation(new PMImplementation());
   }
 
   /**
@@ -98,13 +98,13 @@ public class ServerImplementation implements Server
   @Override public ArrayList<Product> getAllProducts(char role)
       throws RemoteException
   {
-    return null;
+    return warehouseServer.getAllProducts(role);
   }
 
   @Override public void increaseStock(int id, int quantity)
       throws RemoteException
   {
-
+    warehouseServer.increaseStock(id, quantity);
   }
 
 }

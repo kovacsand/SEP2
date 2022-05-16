@@ -87,6 +87,6 @@ public class Product implements Serializable
    */
   public int getQuantity()
   {
-    return  quantity;
+    return quantity;
   }
 }
