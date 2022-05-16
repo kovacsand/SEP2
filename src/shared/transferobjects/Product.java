@@ -30,24 +30,25 @@ public class Product implements Serializable
   }
 
   /**
-   * Four-argument constructor initializing the Product object
+   * Five-argument constructor initializing the Product object
    * @param id of the product
    * @param name of the product
    * @param description of the product
    * @param price of the product
+   * @param quantity of the product
    */
-  public Product(int id, String name, String description, double price)
+  public Product(int id, String name, String description, double price, int quantity)
   {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
-    quantity = 0;
+    this.quantity = quantity;
   }
 
   /**
    * Get the id of the product
-   * @return
+   * @return id of the product
    */
   public int getId()
   {
@@ -56,7 +57,7 @@ public class Product implements Serializable
 
   /**
    * Get the name of the product
-   * @return
+   * @return name of the product
    */
   public String getName()
   {
@@ -65,7 +66,7 @@ public class Product implements Serializable
 
   /**
    * Get the description of the product
-   * @return
+   * @return description of the product
    */
   public String getDescription()
   {
@@ -74,7 +75,7 @@ public class Product implements Serializable
 
   /**
    * Get the price of the product
-   * @return
+   * @return price of the product
    */
   public double getPrice()
   {
@@ -83,7 +84,7 @@ public class Product implements Serializable
 
   /**
    * Get the quantity of the product
-   * @return
+   * @return quantity of the product
    */
   public int getQuantity()
   {
