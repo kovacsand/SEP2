@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
  * @author S2G2
  * @version 1.0
  */
-public class APMImplementation implements AddProductModel
+public class PMImplementation implements ProductModel
 {
   private PropertyChangeSupport support;
   private Client client;
@@ -24,7 +24,7 @@ public class APMImplementation implements AddProductModel
    *
    * @param client Client object that will pass the necessary information
    */
-  public APMImplementation(Client client)
+  public PMImplementation(Client client)
   {
     support = new PropertyChangeSupport(this);
     this.client = client;

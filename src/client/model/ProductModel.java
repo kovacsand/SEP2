@@ -7,7 +7,7 @@ import shared.utils.Subject;
  * @author S2G2
  * @version 1.0
  */
-public interface AddProductModel extends Subject
+public interface ProductModel extends Subject
 {
   /**
    * Adding new product

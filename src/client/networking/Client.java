@@ -52,7 +52,4 @@ public interface Client extends Subject
    */
   void getAllProducts(char role);
 
-  /**
-   *
-   */
 }
