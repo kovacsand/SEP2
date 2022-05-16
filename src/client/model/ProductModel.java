@@ -6,7 +6,8 @@ import shared.utils.Subject;
 import java.util.ArrayList;
 
 /**
- * Interface used for adding new products, extends the Subject interface
+ * Interface used for adding new products, adding stock, and getting
+ * the list of products, extends the Subject interface
  * @author S2G2
  * @version 1.0
  */
@@ -39,4 +40,11 @@ public interface ProductModel extends Subject
    * @param productList the list of products as an ArrayList
    */
   void getAllProductsReply(ArrayList<Product> productList);
+
+  /**
+   * Sends a request to increase the quantity of a product
+   * @param id the id of the product
+   * @param quantity the amount to increase the product by
+   */
+  void increaseStock(int id, int quantity);
 }

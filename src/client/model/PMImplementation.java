@@ -66,6 +66,11 @@ public class PMImplementation implements ProductModel
       support.firePropertyChange("GetProducts",null,productList);
   }
 
+  @Override public void increaseStock(int id, int quantity)
+  {
+    client.increaseStock(id,quantity);
+  }
+
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(propertyName, listener);
