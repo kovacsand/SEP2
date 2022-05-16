@@ -1,6 +1,6 @@
 package server.networking;
 
-import server.model.AddProductModel;
+import server.model.ProductModel;
 import shared.networking.WarehouseServer;
 import shared.transferobjects.Product;
 
@@ -15,31 +15,31 @@ import java.util.ArrayList;
  */
 public class WarehouseServerImplementation implements WarehouseServer
 {
-  private final AddProductModel addProductModel;
+  private final ProductModel productModel;
 
   /**
    * One-argument constructor initializing the WarehouseServer implementation class.
-   * @param addProductModel the model that will be used by the server.
+   * @param productModel the model that will be used by the server.
    */
-  public WarehouseServerImplementation(AddProductModel addProductModel)
+  public WarehouseServerImplementation(ProductModel productModel)
       throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    this.addProductModel = addProductModel;
+    this.productModel = productModel;
   }
 
   @Override public Product addProduct(Product product) throws RemoteException
   {
-    return addProductModel.addProduct(product);
+    return productModel.addProduct(product);
   }
 
   @Override public ArrayList<Product> getAllProducts(char role) throws RemoteException
   {
-    return null;
+    return productModel.getAllProducts(role);
   }
 
   @Override public void increaseStock(int id, int quantity) throws RemoteException
   {
-
+    productModel.increaseStock(id, quantity);
   }
 }
