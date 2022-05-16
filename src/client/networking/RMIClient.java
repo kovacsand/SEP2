@@ -1,6 +1,5 @@
 package client.networking;
 
-import shared.networking.AccountServer;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.Product;
@@ -127,6 +126,18 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
+  @Override public void increaseStock(int id, int quantity)
+  {
+    try
+    {
+      server.increaseStock(this, id, quantity);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void loginReply(boolean successful, User user)
   {
     if (successful)
@@ -157,6 +168,11 @@ public class RMIClient implements Client, ClientCallBack
       support.firePropertyChange("GetProducts",null,productList);
     else
       support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",00));
+  }
+
+  @Override public void increaseStockReply(boolean successful)
+  {
+    System.out.println(successful ? "stock increased" : "problem has arisen");
   }
 
   @Override public void addListener(String propertyName,

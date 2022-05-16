@@ -2,10 +2,8 @@ package server.networking;
 
 import server.model.AMImplementation;
 import server.model.PMImplementation;
-import shared.networking.AccountServer;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
-import shared.networking.WarehouseServer;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
@@ -56,14 +54,13 @@ public class ServerImplementation implements Server
 
   @Override public void registerClient(ClientCallBack client) throws RemoteException
   {
-    accountServer.registerClient(client);
     PropertyChangeListener listener = new PropertyChangeListener()
     {
       @Override public void propertyChange(PropertyChangeEvent evt)
       {
         try
         {
-          //TODO respond to client
+          //TODO respond to clients if we broadcast
         } catch (Exception e)
         {
           e.printStackTrace();
@@ -72,7 +69,6 @@ public class ServerImplementation implements Server
       }
     };
     clients.put(client, listener);
-
   }
 
   @Override public void unregisterClient(ClientCallBack client) throws RemoteException
@@ -82,11 +78,13 @@ public class ServerImplementation implements Server
 
   @Override public User login(String username, String password) throws RemoteException
   {
-    return accountServer.login(username, password);
+    User user = accountServer.login(username, password);
+    return user;
   }
 
   @Override public User addAccount(User user, String password) throws RemoteException
   {
+    //User returnUser = accountServer.addAccount(user, password);
     return accountServer.addAccount(user, password);
   }
 
@@ -101,10 +99,10 @@ public class ServerImplementation implements Server
     return warehouseServer.getAllProducts(role);
   }
 
-  @Override public void increaseStock(int id, int quantity)
-      throws RemoteException
+  @Override public void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
     warehouseServer.increaseStock(id, quantity);
+    client.increaseStockReply(true);
   }
 
 }

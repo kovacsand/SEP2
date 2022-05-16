@@ -48,6 +48,7 @@ public class AddProductViewModel implements PropertyChangeListener
           price.setValue("");
         }
     );
+    model.increaseStock(1, 1);
   }
 
   /**

@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -35,7 +36,9 @@ public class LoginViewController implements ViewController,
   {
     this.vh = vh;
     this.viewModel = vmf.getLoginViewModel();
-    errorLabel.setText("");
+    usernameField.setText(null);
+    passwordField.setText(null);
+    errorLabel.setText(null);
     viewModel.usernameProperty().bindBidirectional(usernameField.textProperty());
     viewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
     viewModel.errorMessageProperty().bindBidirectional(errorLabel.textProperty());
@@ -47,7 +50,19 @@ public class LoginViewController implements ViewController,
    */
   @FXML private void onLoginButton()
   {
-    viewModel.login();
+    if (viewModel.usernameProperty().getValue() == null || viewModel.passwordProperty().getValue() == null)
+      createAlertWindow();
+    else
+      viewModel.login();
+  }
+
+  private void createAlertWindow()
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("One of the fields is empty");
+    alert.showAndWait();
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

@@ -1,9 +1,7 @@
-package shared.networking;
+package server.networking;
 
 import shared.transferobjects.Product;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -11,29 +9,26 @@ import java.util.ArrayList;
  * @author S2G2
  * @version 1.0
  */
-public interface WarehouseServer extends Remote
+public interface WarehouseServer
 {
   /**
  * Adding product in through the model. The server passes the argument to the model.
  * @param product to be added
  * @return If adding is successful, return their User Object, if not, return null.
- * @throws RemoteException
  */
-  Product addProduct(Product product) throws RemoteException;
+  Product addProduct(Product product);
 
   /**
    * Getting all products through the model. The server passes the argument to the model
    * @param role of the user, to know which products list to return depending on the role
-   * @return
-   * @throws RemoteException
+   * @return the newly added Product object, if the addition failed, null
    */
-  ArrayList<Product> getAllProducts(char role) throws  RemoteException;
+  ArrayList<Product> getAllProducts(char role);
 
   /**
    * Increasing the stock of the product through the model. The server passes the argument to the model
    * @param id of the product
    * @param quantity amount which needs to be increased by
-   * @throws RemoteException
    */
-  void increaseStock(int id, int quantity) throws RemoteException;
+  void increaseStock(int id, int quantity);
 }

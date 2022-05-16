@@ -1,5 +1,6 @@
 package shared.networking;
 
+import client.networking.Client;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
@@ -66,5 +67,5 @@ public interface Server extends Remote
    * @param quantity amount which needs to be increased by
    * @throws RemoteException
    */
-  void increaseStock(int id, int quantity) throws RemoteException;
+  void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException;
 }

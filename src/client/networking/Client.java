@@ -44,7 +44,6 @@ public interface Client extends Subject
    */
   void unregisterClient();
 
-
   /**
    * Requests a list of all products from the Database
    *
@@ -52,4 +51,10 @@ public interface Client extends Subject
    */
   void getAllProducts(char role);
 
+  /**
+   * Calls the method on the server to increase the stock of a product
+   * @param id the id of the product that is to be increased
+   * @param quantity the number that we want the stock to be increased by
+   */
+  void increaseStock(int id, int quantity);
 }

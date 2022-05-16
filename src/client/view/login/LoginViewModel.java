@@ -4,6 +4,7 @@ import client.model.AccountModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
@@ -49,12 +50,11 @@ public class LoginViewModel implements PropertyChangeListener, Subject
    */
   public void login()
   {
-    System.out.println("You're logging in with this:" + username.getValue() + ", " + password.getValue());
     model.login(username.getValue(), password.getValue());
     Platform.runLater(() ->
     {
-      username.setValue("");
-      password.setValue("");
+      username.setValue(null);
+      password.setValue(null);
     });
   }
 
