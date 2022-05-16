@@ -46,8 +46,9 @@ public interface Client extends Subject
 
 
   /**
-   * Gets a list of all products from the Database, then fire event "GetProducts".
-   * Only gets the products based on role: M = manager, S = salesperson
+   * Requests a list of all products from the Database
+   *
+   * @param role gets the products based on role: M = manager, S = salesperson
    */
   void getAllProducts(char role);
 
