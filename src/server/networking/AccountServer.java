@@ -2,6 +2,8 @@ package server.networking;
 
 import shared.transferobjects.User;
 
+import java.rmi.Remote;
+
 /**
  * Interface for server-side to handle everything with the accounts.
  * @author S2G2

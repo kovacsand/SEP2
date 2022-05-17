@@ -116,14 +116,21 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public void getAllProducts(char role)
   {
+    ArrayList<Product> products = new ArrayList<>();
     try
     {
-      server.getAllProducts(role);
+      products = server.getAllProducts(role);
     }
     catch(RemoteException e)
     {
       e.printStackTrace();
     }
+    onGetAllProductsReply(products != null, products);
+  }
+
+  private void onGetAllProductsReply(boolean successful, ArrayList<Product> products)
+  {
+    support.firePropertyChange("GetProducts", null, products);
   }
 
   @Override public void increaseStock(int id, int quantity)

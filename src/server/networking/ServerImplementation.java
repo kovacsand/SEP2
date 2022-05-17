@@ -60,7 +60,7 @@ public class ServerImplementation implements Server
       {
         try
         {
-          //TODO respond to clients if we broadcast
+          //TODO respond to client
         } catch (Exception e)
         {
           e.printStackTrace();
@@ -102,7 +102,7 @@ public class ServerImplementation implements Server
   @Override public void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
     warehouseServer.increaseStock(id, quantity);
-    client.increaseStockReply(true);
+    client.increaseStockReply(false);
   }
 
 }

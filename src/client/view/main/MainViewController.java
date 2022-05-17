@@ -38,7 +38,7 @@ public class MainViewController implements ViewController
     if(vh.getUser() instanceof Manager)
     {
       //SHOW MANAGER THINGS
-      addProduct.setDisable(true);
+      //they're able to do anything
     }
     if (vh.getUser() instanceof Salesperson)
     {
