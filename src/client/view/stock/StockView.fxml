@@ -7,16 +7,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.stock.StockViewController">
    <children>
-      <TableView prefHeight="357.0" prefWidth="600.0" fx:id="productsTable">
+      <TableView fx:id="productsTable" prefHeight="357.0" prefWidth="600.0">
         <columns>
-          <TableColumn id="id" prefWidth="75.0" text="ID" fx:id="productsIdColumn"/>
-          <TableColumn id="name" prefWidth="102.0" text="Name" fx:id="productsNameColumn"/>
-          <TableColumn id="description" prefWidth="271.0" text="Description" fx:id="productsDescriptionColumn"/>
-          <TableColumn id="price" prefWidth="69.0" text="Price" fx:id="productsPriceColumn"/>
-          <TableColumn id="stock" prefWidth="80.66668701171875" text="Stock" fx:id="productsStockColumn"/>
+          <TableColumn id="id" fx:id="productsIdColumn" prefWidth="75.0" text="ID" />
+          <TableColumn id="name" fx:id="productsNameColumn" prefWidth="102.0" text="Name" />
+          <TableColumn id="description" fx:id="productsDescriptionColumn" prefWidth="271.0" text="Description" />
+          <TableColumn id="price" fx:id="productsPriceColumn" prefWidth="69.0" text="Price" />
+          <TableColumn id="stock" fx:id="productsStockColumn" prefWidth="80.66668701171875" text="Stock" />
         </columns>
       </TableView>
     <Button layoutX="439.0" layoutY="364.0" mnemonicParsing="false" onAction="#onBackButtonPress" text="Back" />
-      <Button layoutX="494.0" layoutY="364.0" mnemonicParsing="false" text="Increase Stock" />
+      <Button fx:id="increaseStockButton" layoutX="494.0" layoutY="364.0" mnemonicParsing="false" onAction="#onIncreaseStockButtonPress" text="Increase Stock" />
    </children>
 </AnchorPane>
