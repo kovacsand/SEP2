@@ -29,6 +29,11 @@ public class StockViewModel implements PropertyChangeListener, Subject
     model.getAllProducts(role);
   }
 
+  public void increaseStock(int id,int quantity)
+  {
+    model.increaseStock(id,quantity);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     System.out.println("List of products");

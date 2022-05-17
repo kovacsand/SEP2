@@ -3,9 +3,9 @@ package client.view.stock;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Product;
@@ -14,10 +14,12 @@ import shared.transferobjects.User;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class StockViewController implements ViewController,
     PropertyChangeListener
 {
+  public Button increaseStockButton;
   private ViewHandler vh;
   private StockViewModel viewModel;
   private User user;
@@ -50,12 +52,40 @@ public class StockViewController implements ViewController,
     if (user instanceof Manager)
       viewModel.getAllProducts('m');
     else
+    {
       viewModel.getAllProducts('s');
+      increaseStockButton.setVisible(false);
+    }
+
   }
 
   @FXML private void onBackButtonPress ()
   {
     vh.openView("Main");
+  }
+
+
+
+  public void onIncreaseStockButtonPress()
+  {
+    TextInputDialog quantity=new TextInputDialog();
+    quantity.setTitle("Increase stock");
+    quantity.setHeaderText("Increase stock of: "+productsTable.getSelectionModel().getSelectedItem().getName());
+    quantity.setContentText("Amount");
+
+    Optional<String> amount=quantity.showAndWait();
+    if(amount.isPresent())
+    {
+      viewModel.increaseStock(productsTable.getSelectionModel().getSelectedItem().getId(),Integer.parseInt(amount.toString()));
+    }
+    else
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("An error has been encountered");
+      alert.setContentText("Insert valid amount");
+      alert.showAndWait();
+    }
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
