@@ -45,4 +45,6 @@ public interface ClientCallBack extends Remote, Serializable
    * @throws RemoteException
    */
   void getAllProductsReply(ArrayList<Product> productList) throws RemoteException;
+
+  void increaseStockReply(boolean successful) throws RemoteException;
 }

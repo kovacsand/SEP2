@@ -27,8 +27,8 @@ public class AddAccountViewModel implements PropertyChangeListener
   public AddAccountViewModel(AccountModel accountModel)
   {
     model = accountModel;
-    username = new SimpleStringProperty();
-    password = new SimpleStringProperty();
+    username = new SimpleStringProperty(null);
+    password = new SimpleStringProperty(null);
     role = new SimpleStringProperty();
     model.addListener("AccountAdded", this);
     model.addListener("AccountExists", this);

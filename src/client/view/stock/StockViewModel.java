@@ -1,72 +1,50 @@
 package client.view.stock;
 
+import client.model.ProductModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.Product;
+import shared.transferobjects.User;
+import shared.utils.Subject;
 
-public class StockViewModel
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+
+public class StockViewModel implements PropertyChangeListener, Subject
 {
-  private StringProperty id;
-  private StringProperty name;
-  private StringProperty description;
-  private StringProperty price;
-  private StringProperty stock;
+  private ProductModel model;
+  private PropertyChangeSupport support;
 
-
-  public StockViewModel (String id, String name, String description, String price, String stock)
+  public StockViewModel (ProductModel productModel)
   {
-    setId(id);
-    setName(name);
-    setDescription(description);
-    setPrice(price);
-    setId(id);
+    this.model = productModel;
+    support = new PropertyChangeSupport(this);
+    model.addListener("GetProducts", this);
   }
 
-  public void setId(String id)
+  public void getAllProducts(char role)
   {
-    this.id=new SimpleStringProperty(id);
+    model.getAllProducts(role);
   }
 
-  public void setName(String name)
+  @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    this.name=new SimpleStringProperty(name);
+    System.out.println("List of products");
+    System.out.println(((ArrayList<Product>)evt.getNewValue()).get(0).getName());
+    support.firePropertyChange(evt);
   }
 
-  public void setDescription(String description)
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
   {
-    this.description=new SimpleStringProperty(description);
+    support.addPropertyChangeListener(propertyName,listener);
   }
 
-  public void setPrice(String price)
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
   {
-    this.price=new SimpleStringProperty(price);
-  }
-   public void setStock(String stock)
-   {
-     this.stock=new SimpleStringProperty(stock);
-   }
-
-  public String getStock()
-  {
-    return stock.get();
-  }
-
-  public String getDescription()
-  {
-    return description.get();
-  }
-
-  public String getId()
-  {
-    return id.get();
-  }
-
-  public String getName()
-  {
-    return name.get();
-  }
-
-  public String getPrice()
-  {
-    return price.get();
+    support.removePropertyChangeListener(propertyName,listener);
   }
 }

@@ -15,6 +15,7 @@ public class ViewModelFactory
   private LoginViewModel loginVM;
   private AddAccountViewModel addAccountVM;
   private AddProductViewModel addProductVM;
+  private StockViewModel stockVM;
   /**
    * One-argument constructor initializing the ViewModelFactory class
    * @param modelFactory  ModelFactory object that has the necessary get methods for each model
@@ -24,7 +25,8 @@ public class ViewModelFactory
   {
     loginVM = new LoginViewModel(modelFactory.getAccountModel());
     addAccountVM = new AddAccountViewModel(modelFactory.getAccountModel());
-    addProductVM=new AddProductViewModel(modelFactory.addProductModel());
+    addProductVM = new AddProductViewModel(modelFactory.addProductModel());
+    stockVM = new StockViewModel(modelFactory.addProductModel());
   }
 
   /**
@@ -40,7 +42,7 @@ public class ViewModelFactory
    * Gets the AddAccountViewModel object
    * @return new AddAccountViewModel object
    */
-  public AddAccountViewModel getAddAccountVM()
+  public AddAccountViewModel getAddAccountViewModel()
   {
     return addAccountVM;
   }
@@ -52,5 +54,10 @@ public class ViewModelFactory
   public AddProductViewModel getAddProductViewModel()
   {
      return addProductVM;
+  }
+  
+  public StockViewModel getStockViewModel()
+  {
+    return stockVM;
   }
 }

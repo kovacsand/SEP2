@@ -3,49 +3,54 @@ package client.view.stock;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import shared.transferobjects.Manager;
+import shared.transferobjects.Product;
+import shared.transferobjects.User;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
-public class StockViewController implements ViewController
+public class StockViewController implements ViewController,
+    PropertyChangeListener
 {
   private ViewHandler vh;
-  private ObservableList<StockViewModel> stockViewModels= FXCollections.observableArrayList(
-      new StockViewModel("1", "apple", "green", "3.00", "7"),
-      new StockViewModel("2", "beanz", "brown", "4.00", "6")
-  );
+  private StockViewModel viewModel;
+  private User user;
+  private ArrayList<Product> products;
 
-  @FXML private TableView<StockViewModel> stockData;
-  @FXML public TableColumn<StockViewModel, String> id;
-  @FXML public TableColumn<StockViewModel, String> name;
-  @FXML public TableColumn<StockViewModel, String> description;
-  @FXML public TableColumn<StockViewModel, String> price;
-  @FXML public TableColumn<StockViewModel, String> stock;
+  @FXML private TableView<Product> productsTable;
+  @FXML private TableColumn<Product, String> productsIdColumn;
+  @FXML private TableColumn<Product, String> productsNameColumn;
+  @FXML private TableColumn<Product, String> productsDescriptionColumn;
+  @FXML private TableColumn<Product, String> productsPriceColumn;
+  @FXML private TableColumn<Product, String> productsStockColumn;
 
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
-    stockData=new TableView<>();
-    id=new TableColumn<>();
-    name=new TableColumn<>();
-    description=new TableColumn<>();
-    price=new TableColumn<>();
-    stock=new TableColumn<>();
-    id.setCellFactory(new PropertyValueFactory("Id"));
-    name.setCellFactory(new PropertyValueFactory("Name"));
-    description.setCellFactory(new PropertyValueFactory("Description"));
-    price.setCellFactory(new PropertyValueFactory("Price"));
-    stock.setCellFactory(new PropertyValueFactory("Stock"));
-    stockData.getItems().add(new StockViewModel("3","banana", "blue", "7.00","12"));
+    this.viewModel = vmf.getStockViewModel();
+    this.user = vh.getUser();
+
+    viewModel.addListener("GetProducts", this);
+
+    products = new ArrayList<>();
+
+    productsTable.getItems().clear();
+    productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    productsDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+    productsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    productsStockColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+    if (user instanceof Manager)
+      viewModel.getAllProducts('m');
+    else
+      viewModel.getAllProducts('s');
   }
 
   @FXML private void onBackButtonPress ()
@@ -53,4 +58,10 @@ public class StockViewController implements ViewController
     vh.openView("Main");
   }
 
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    products = (ArrayList<Product>) evt.getNewValue();
+    for (int i = 0; i < products.size(); i++)
+      productsTable.getItems().add(products.get(i));
+  }
 }

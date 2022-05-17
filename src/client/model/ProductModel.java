@@ -3,6 +3,8 @@ package client.model;
 import shared.transferobjects.Product;
 import shared.utils.Subject;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -37,9 +39,9 @@ public interface ProductModel extends Subject
 
   /**
    * Sending the arraylist of products to be displayed
-   * @param productList the list of products as an ArrayList
+   * @param evt the list of products as an ArrayList
    */
-  void getAllProductsReply(ArrayList<Product> productList);
+  void getAllProductsReply(PropertyChangeEvent evt);
 
   /**
    * Sends a request to increase the quantity of a product

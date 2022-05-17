@@ -30,7 +30,7 @@ public class AddAccountViewController implements ViewController
   {
     this.vh = vh;
     initialiseComboBox();
-    viewModel = vmf.getAddAccountVM();
+    viewModel = vmf.getAddAccountViewModel();
     viewModel.getUsername().bindBidirectional(usernameField.textProperty());
     viewModel.getPassword().bindBidirectional(passwordField.textProperty());
     viewModel.getRole().bindBidirectional(roleField.valueProperty());

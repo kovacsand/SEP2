@@ -31,6 +31,7 @@ public class PMImplementation implements ProductModel
     this.client = client;
     client.addListener("ProductAdded", this::onAddProductReply);
     client.addListener("ProductExists", this::onAddProductReply);
+    client.addListener("GetProducts", this::getAllProductsReply);
   }
 
   /**
@@ -61,9 +62,9 @@ public class PMImplementation implements ProductModel
     client.getAllProducts(role);
   }
 
-  @Override public void getAllProductsReply(ArrayList<Product> productList)
+  @Override public void getAllProductsReply(PropertyChangeEvent evt)
   {
-      support.firePropertyChange("GetProducts",null,productList);
+      support.firePropertyChange("GetProducts",null, evt.getNewValue());
   }
 
   @Override public void increaseStock(int id, int quantity)

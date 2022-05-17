@@ -66,7 +66,7 @@ public class ViewHandler
 
   /**
    * Storing the user info of the employee who uses the system
-   * This is used to get their role and username accross all views
+   * This is used to get their role and username across all views
    * @param user of the employee
    */
   public void setUser(User user)
