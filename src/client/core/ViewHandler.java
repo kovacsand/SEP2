@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import shared.transferobjects.User;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -18,7 +19,7 @@ public class ViewHandler
 {
   private Stage stage;
   private ViewModelFactory vmf;
-  private String role;
+  private User user;
 
 
   /**
@@ -42,7 +43,7 @@ public class ViewHandler
   {
     FXMLLoader loader = new FXMLLoader();
     if (view.equals("Login"))
-      role = null;
+      user = null;
     String fxmlPath = "../view/" + view.toLowerCase() + "/" + view + "View.fxml" ;
     loader.setLocation(getClass().getResource(fxmlPath));
     Parent root = null;
@@ -64,20 +65,21 @@ public class ViewHandler
   }
 
   /**
-   * Setting the role of the employee who uses the system
-   * @param role of the employee
+   * Storing the user info of the employee who uses the system
+   * This is used to get their role and username accross all views
+   * @param user of the employee
    */
-  public void setRole(String role)
+  public void setUser(User user)
   {
-    this.role = role;
+    this.user = user;
   }
 
   /**
-   * Getting the role of the employee who uses the system
-   * @return the role of the employee
+   * Getting the user of the system
+   * @return the user info
    */
-  public String getRole()
+  public User getUser()
   {
-    return role;
+    return user;
   }
 }

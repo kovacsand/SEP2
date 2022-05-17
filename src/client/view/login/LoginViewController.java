@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -21,7 +22,7 @@ public class LoginViewController implements ViewController,
 {
   private LoginViewModel viewModel;
   private ViewHandler vh;
-  private String role;
+  private User user;
 
   @FXML private TextField usernameField;
   @FXML private TextField passwordField;
@@ -42,7 +43,7 @@ public class LoginViewController implements ViewController,
     viewModel.usernameProperty().bindBidirectional(usernameField.textProperty());
     viewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
     viewModel.errorMessageProperty().bindBidirectional(errorLabel.textProperty());
-    viewModel.addListener("LoginSuccess",this::propertyChange);
+    viewModel.addListener("LoginSuccess", this::propertyChange);
   }
 
   /**
@@ -67,8 +68,8 @@ public class LoginViewController implements ViewController,
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    role = evt.getNewValue().toString();
-    vh.setRole(role);
+    user = (User) evt.getNewValue();
+    vh.setUser(user);
     vh.openView("Main");
   }
 }
