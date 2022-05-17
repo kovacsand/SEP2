@@ -68,7 +68,7 @@ public class PMImplementation implements ProductModel
 
   @Override public void increaseStock(int id, int quantity)
   {
-    client.increaseStock(id,quantity);
+    //client.increaseStock(id,quantity);
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

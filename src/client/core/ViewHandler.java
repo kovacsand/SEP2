@@ -31,6 +31,7 @@ public class ViewHandler
   public ViewHandler(Stage stage, ViewModelFactory vmf)
   {
     this.stage = stage;
+    stage.setMaximized(true);
     this.vmf = vmf;
   }
 
