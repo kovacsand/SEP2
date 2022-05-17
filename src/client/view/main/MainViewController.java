@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import shared.transferobjects.Accountant;
+import shared.transferobjects.Manager;
+import shared.transferobjects.Salesperson;
 
 import java.io.IOException;
 
@@ -32,13 +35,20 @@ public class MainViewController implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
-    if("Manager".equals(vh.getRole()))
+    if(vh.getUser() instanceof Manager)
     {
+      //SHOW MANAGER THINGS
       addProduct.setDisable(true);
     }
-    if ("Salesperson".equals(vh.getRole()))
+    if (vh.getUser() instanceof Salesperson)
     {
+      //SHOW SALESPERSON THINGS
       addAccount.setDisable(true);
+    }
+    if (vh.getUser() instanceof Accountant)
+    {
+      //SHOW ACCOUNTANT THINGS
+      //Do Accountant things
     }
   }
   /**

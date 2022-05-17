@@ -26,7 +26,7 @@ public class LoginViewModel implements PropertyChangeListener, Subject
   private StringProperty password;
   private StringProperty errorMessage;
   private PropertyChangeSupport support;
-  private String role;
+  private User user;
 
   /**
    * One-argument constructor initializing accountModel object and SimpleStringProperties. Also adding the ViewModel as a listener to the AccountModel.
@@ -94,12 +94,12 @@ public class LoginViewModel implements PropertyChangeListener, Subject
     if (evt.getPropertyName().equals("LoginSuccessful"))
     {
       if (evt.getNewValue() instanceof Manager)
-        role = "Manager";
+        user = (User) evt.getNewValue();
       if (evt.getNewValue() instanceof Salesperson)
-        role = "Salesperson";
+        user = (User) evt.getNewValue();
       if (evt.getNewValue() instanceof Accountant)
-        role = "Accountant";
-      support.firePropertyChange("LoginSuccess",null,role);
+        user = (User) evt.getNewValue();
+      support.firePropertyChange("LoginSuccess",null,user);
     }
     else if (evt.getPropertyName().equals("LoginFailed"))
       Platform.runLater(() -> errorMessage.setValue("Incorrect credentials!"));
