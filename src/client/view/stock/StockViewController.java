@@ -64,29 +64,38 @@ public class StockViewController implements ViewController,
     vh.openView("Main");
   }
 
-
-
   public void onIncreaseStockButtonPress()
   {
-    TextInputDialog quantity=new TextInputDialog();
+    TextInputDialog quantity = new TextInputDialog();
     quantity.setTitle("Increase stock");
-    quantity.setHeaderText("Increase stock of: "+productsTable.getSelectionModel().getSelectedItem().getName());
+    quantity.setHeaderText(
+        "Increase stock of: " + productsTable.getSelectionModel().getSelectedItem().getName());
     quantity.setContentText("Amount");
+    TextField input = quantity.getEditor();
 
-    Optional<String> amount=quantity.showAndWait();
-    if(amount.isPresent())
+    Optional<String> amount = quantity.showAndWait();
+    if (amount.isPresent())
     {
-      viewModel.increaseStock(productsTable.getSelectionModel().getSelectedItem().getId(),Integer.parseInt(amount.toString()));
-    }
-    else
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("An error has been encountered");
-      alert.setContentText("Insert valid amount");
-      alert.showAndWait();
+      try
+      {
+        int inputNumber = Integer.parseInt(input.getText());
+        if(inputNumber>0)
+          viewModel.increaseStock(productsTable.getSelectionModel().getSelectedItem().getId(),inputNumber);
+        else
+          throw new NumberFormatException();
+      }
+      catch (NumberFormatException e)
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("An error has been encountered");
+        alert.setContentText("Insert valid amount");
+        alert.showAndWait();
+      }
     }
   }
+
+
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
