@@ -17,7 +17,7 @@ public class AccountDAOImplementation implements AccountDAO
   private static AccountDAOImplementation instance;
   /**
    * Private constructor following the Singleton Pattern, registering the SQL driver
-   * @throws SQLException
+   * @throws SQLException if something is wrong with the database
    */
   private AccountDAOImplementation() throws SQLException
   {
@@ -27,7 +27,7 @@ public class AccountDAOImplementation implements AccountDAO
   /**
    * Getting the single existing instance
    * @return the instance
-   * @throws SQLException
+   * @throws SQLException if something is wrong with the database
    */
   public static synchronized AccountDAOImplementation getInstance() throws SQLException
   {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class RMIClient implements Client, ClientCallBack
 {
-  private PropertyChangeSupport support;
+  private final PropertyChangeSupport support;
   private Server server;
 
   /**
@@ -174,7 +174,7 @@ public class RMIClient implements Client, ClientCallBack
     if (!(productList.isEmpty()))
       support.firePropertyChange("GetProducts",null,productList);
     else
-      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",00));
+      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",0));
   }
 
   @Override public void increaseStockReply(boolean successful)

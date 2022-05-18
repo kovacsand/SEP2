@@ -3,7 +3,6 @@ package server.model.mediator;
 import shared.transferobjects.User;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * Interface for Database Access Object accessing Accounts
@@ -17,7 +16,7 @@ public interface AccountDAO extends DAOInterface
    * @param username The username provided by the user
    * @param password The password provided by the password
    * @return The logged-in User object, if the login was successful, null, if it failed
-   * @throws SQLException
+   * @throws SQLException if something is wrong with the database
    */
   User getLoggedInUser(String username, String password) throws SQLException;
 
@@ -25,8 +24,8 @@ public interface AccountDAO extends DAOInterface
    * Connects to the database and tries to add a new product.
    * @param user The user to be added
    * @param password The password of the user to be added
-   * @return The newly added Usser object
-   * @throws SQLException
+   * @return The newly added User object
+   * @throws SQLException if something is wrong with the database
    */
   User addAccount(User user, String password) throws SQLException;
 }

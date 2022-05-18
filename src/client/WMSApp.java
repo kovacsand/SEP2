@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class WMSApp extends Application
 {
-  @Override public void start(Stage stage) throws Exception
+  @Override public void start(Stage stage)
   {
     ClientFactory clientFactory = new ClientFactory();
     ModelFactory modelFactory = new ModelFactory(clientFactory);

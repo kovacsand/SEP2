@@ -1,7 +1,6 @@
 package client.model;
 
 import client.networking.Client;
-import shared.networking.Server;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
@@ -10,23 +9,20 @@ import shared.transferobjects.User;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 /**
  * Class that implements the AccountModel interface on client side.
- *
  * @author S2G2
  * @version 1.0
  */
 public class AMImplementation implements AccountModel
 {
-  private PropertyChangeSupport support;
-  private Client client;
+  private final PropertyChangeSupport support;
+  private final Client client;
 
   /**
    * One-argument constructor initializing the AccountModel implementation class,
    * also initializes the PropertyChangeSupport object and adds listeners for onLoginReply() method
-   *
    * @param client Client object that will pass the necessary information
    */
   public AMImplementation(Client client)
@@ -42,7 +38,6 @@ public class AMImplementation implements AccountModel
 
   /**
    * Listens to the result of login()
-   *
    * @param evt event that's being listened to
    */
   public void onLoginReply(PropertyChangeEvent evt)
@@ -50,6 +45,10 @@ public class AMImplementation implements AccountModel
     loginReply(evt.getNewValue() != null, (User) evt.getNewValue());
   }
 
+  /**
+   * Listens to the result of addAccount()
+   * @param evt event that's being listened to
+   */
   public void onAddAccountReply(PropertyChangeEvent evt)
   {
     addAccountReply(evt.getNewValue() != null, (String) evt.getNewValue());

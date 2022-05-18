@@ -65,7 +65,7 @@ public class AddAccountViewController implements ViewController
     String username = viewModel.getUsername().getValue();
     String password = viewModel.getPassword().getValue();
     String role = viewModel.getRole().getValue();
-    if (role == null || password == null || password == "" || username == null || username == "")
+    if (role == null || password == null || username == null)
       createAlertWindow();
     else
       viewModel.addAccount();

@@ -1,6 +1,5 @@
 package shared.networking;
 
-import client.networking.Client;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
@@ -17,15 +16,15 @@ public interface Server extends Remote
 {
   /**
    * Establishes connections between the server and the client.
-   * @param client
-   * @throws RemoteException
+   * @param client the connecting client
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void registerClient(ClientCallBack client) throws RemoteException;
 
   /**
    * Disconnects the client from the server.
-   * @param client
-   * @throws RemoteException
+   * @param client the client that wants to disconnect
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void unregisterClient(ClientCallBack client) throws RemoteException;
   /**
@@ -33,7 +32,7 @@ public interface Server extends Remote
    * @param username of the user
    * @param password of the user
    * @return If the login is successful, return their User Object, if not, return null.
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   User login(String username, String password) throws RemoteException;
 
@@ -41,8 +40,8 @@ public interface Server extends Remote
    * Adding an account through the model
    * @param user of the new account
    * @param password of the new account
-   * @return the newly added account, if couldn't add, return null
-   * @throws RemoteException
+   * @return the newly added account, if the server couldn't add it, return null
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   User addAccount(User user, String password) throws RemoteException;
 
@@ -50,14 +49,14 @@ public interface Server extends Remote
    * Adding product in through the model. The server passes the argument to the model.
    * @param product to be added
    * @return If adding is successful, return their User Object, if not, return null.
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   Product addProduct(Product product) throws RemoteException;
   /**
    * Getting all products through the model. The server passes the argument to the model
    * @param role of the user, to know which products list to return depending on the role
-   * @return
-   * @throws RemoteException
+   * @return an ArrayList<Product> of all the products on the database
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   ArrayList<Product> getAllProducts(char role) throws  RemoteException;
 
@@ -65,7 +64,7 @@ public interface Server extends Remote
    * Increasing the stock of the product through the model. The server passes the argument to the model
    * @param id of the product
    * @param quantity amount which needs to be increased by
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException;
 }

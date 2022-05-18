@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import shared.transferobjects.User;
 
 import java.io.IOException;
-import java.util.Locale;
 
 /**
  * A class to handle creating and changing views.
@@ -25,8 +24,8 @@ public class ViewHandler
   /**
    * Two-argument constructor that takes a stage and viewmodel factory
    * and instantiates these.
-   * @param stage
-   * @param vmf
+   * @param stage the JavaFX container for the GUI
+   * @param vmf the ViewModelFactory used to create ViewModels
    */
   public ViewHandler(Stage stage, ViewModelFactory vmf)
   {
@@ -37,7 +36,7 @@ public class ViewHandler
   /**
    * Method to find open the fx views.
    * The 'view' string names the view, and points to the fxml file.
-   * @param view
+   * @param view the name of the view that we want to open
    */
   public void openView(String view)
   {

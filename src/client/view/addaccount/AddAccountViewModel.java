@@ -15,14 +15,14 @@ import java.beans.PropertyChangeListener;
  */
 public class AddAccountViewModel implements PropertyChangeListener
 {
-  private AccountModel model;
+  private final AccountModel model;
   private StringProperty username;
   private StringProperty password;
   private StringProperty role;
 
   /**
    * One-argument constructor initializing accountModel object and SimpleStringProperties
-   * @param accountModel
+   * @param accountModel the model used by the viewmodel
    */
   public AddAccountViewModel(AccountModel accountModel)
   {

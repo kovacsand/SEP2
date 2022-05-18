@@ -3,7 +3,7 @@ package client.view.stock;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -100,7 +100,7 @@ public class StockViewController implements ViewController,
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     products = (ArrayList<Product>) evt.getNewValue();
-    for (int i = 0; i < products.size(); i++)
-      productsTable.getItems().add(products.get(i));
+    for (Product product : products)
+      productsTable.getItems().add(product);
   }
 }
