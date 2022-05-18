@@ -25,13 +25,13 @@ import java.util.Map;
  */
 public class ServerImplementation implements Server
 {
-  private AccountServer accountServer;
-  private WarehouseServer warehouseServer;
+  private final AccountServer accountServer;
+  private final WarehouseServer warehouseServer;
   private Map<ClientCallBack, PropertyChangeListener> clients;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   public ServerImplementation() throws RemoteException
   {
@@ -43,8 +43,8 @@ public class ServerImplementation implements Server
 
   /**
    * Intended to be run before running the client. Creates registry and binds the server to it.
-   * @throws RemoteException
-   * @throws AlreadyBoundException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   * @throws AlreadyBoundException the server can only be bound to one registry
    */
   public void startServer() throws RemoteException, AlreadyBoundException
   {
@@ -73,18 +73,16 @@ public class ServerImplementation implements Server
 
   @Override public void unregisterClient(ClientCallBack client) throws RemoteException
   {
-    //!!TODO
+    //TODO!!
   }
 
   @Override public User login(String username, String password) throws RemoteException
   {
-    User user = accountServer.login(username, password);
-    return user;
+    return accountServer.login(username, password);
   }
 
   @Override public User addAccount(User user, String password) throws RemoteException
   {
-    //User returnUser = accountServer.addAccount(user, password);
     return accountServer.addAccount(user, password);
   }
 
@@ -93,8 +91,7 @@ public class ServerImplementation implements Server
     return warehouseServer.addProduct(product);
   }
 
-  @Override public ArrayList<Product> getAllProducts(char role)
-      throws RemoteException
+  @Override public ArrayList<Product> getAllProducts(char role) throws RemoteException
   {
     return warehouseServer.getAllProducts(role);
   }
@@ -102,7 +99,6 @@ public class ServerImplementation implements Server
   @Override public void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
     warehouseServer.increaseStock(id, quantity);
-    client.increaseStockReply(false);
   }
 
 }

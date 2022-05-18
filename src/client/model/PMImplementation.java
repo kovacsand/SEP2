@@ -6,23 +6,20 @@ import shared.transferobjects.Product;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 /**
  * Class that implements the AddProduct interface
- *
  * @author S2G2
  * @version 1.0
  */
 public class PMImplementation implements ProductModel
 {
-  private PropertyChangeSupport support;
-  private Client client;
+  private final PropertyChangeSupport support;
+  private final Client client;
 
   /**
    * One-argument constructor initializing the AddProductModel implementation class,
    * also initializes the PropertyChangeSupport object
-   *
    * @param client Client object that will pass the necessary information
    */
   public PMImplementation(Client client)
@@ -36,7 +33,6 @@ public class PMImplementation implements ProductModel
 
   /**
    * Listens to the result of addProduct()
-   *
    * @param evt event that's being listened to
    */
   public void onAddProductReply(PropertyChangeEvent evt)

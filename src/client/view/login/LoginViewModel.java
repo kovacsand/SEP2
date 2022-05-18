@@ -4,7 +4,6 @@ import client.model.AccountModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Alert;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
@@ -22,16 +21,16 @@ import java.beans.PropertyChangeSupport;
  */
 public class LoginViewModel implements PropertyChangeListener, Subject
 {
-  private AccountModel model;
+  private final AccountModel model;
   private StringProperty username;
   private StringProperty password;
   private StringProperty errorMessage;
-  private PropertyChangeSupport support;
+  private final PropertyChangeSupport support;
   private User user;
 
   /**
    * One-argument constructor initializing accountModel object and SimpleStringProperties. Also adding the ViewModel as a listener to the AccountModel.
-   * @param accountModel
+   * @param accountModel the model used by the ViewModel
    */
   public LoginViewModel(AccountModel accountModel)
   {

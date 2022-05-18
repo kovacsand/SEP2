@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class AMImplementation implements AccountModel
 {
-  private PropertyChangeSupport support;
+  private final PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the AccountModel implementation class

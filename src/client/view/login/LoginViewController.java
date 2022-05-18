@@ -43,7 +43,7 @@ public class LoginViewController implements ViewController,
     viewModel.usernameProperty().bindBidirectional(usernameField.textProperty());
     viewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
     viewModel.errorMessageProperty().bindBidirectional(errorLabel.textProperty());
-    viewModel.addListener("LoginSuccess", this::propertyChange);
+    viewModel.addListener("LoginSuccess", this);
   }
 
   /**

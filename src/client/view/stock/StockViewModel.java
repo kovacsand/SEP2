@@ -1,10 +1,7 @@
 package client.view.stock;
 
 import client.model.ProductModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import shared.transferobjects.Product;
-import shared.transferobjects.User;
 import shared.utils.Subject;
 
 import java.beans.PropertyChangeEvent;
@@ -14,8 +11,8 @@ import java.util.ArrayList;
 
 public class StockViewModel implements PropertyChangeListener, Subject
 {
-  private ProductModel model;
-  private PropertyChangeSupport support;
+  private final ProductModel model;
+  private final PropertyChangeSupport support;
 
   public StockViewModel (ProductModel productModel)
   {

@@ -8,14 +8,14 @@ import client.view.stock.StockViewModel;
 /**
  * A class factory for creating view models
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public class ViewModelFactory
 {
-  private LoginViewModel loginVM;
-  private AddAccountViewModel addAccountVM;
-  private AddProductViewModel addProductVM;
-  private StockViewModel stockVM;
+  private final LoginViewModel loginVM;
+  private final AddAccountViewModel addAccountVM;
+  private final AddProductViewModel addProductVM;
+  private final StockViewModel stockVM;
   /**
    * One-argument constructor initializing the ViewModelFactory class
    * @param modelFactory  ModelFactory object that has the necessary get methods for each model
@@ -31,7 +31,7 @@ public class ViewModelFactory
 
   /**
    * Gets the LoginViewModel object
-   * @return new LoginViewModel object
+   * @return LoginViewModel object initialized in the constructor
    */
   public LoginViewModel getLoginViewModel()
   {
@@ -40,7 +40,7 @@ public class ViewModelFactory
 
   /**
    * Gets the AddAccountViewModel object
-   * @return new AddAccountViewModel object
+   * @return AddAccountViewModel object initialized in the constructor
    */
   public AddAccountViewModel getAddAccountViewModel()
   {
@@ -49,13 +49,17 @@ public class ViewModelFactory
 
   /**
    * Gets the AddProductViewModel object
-   * @return new AddProductViewModel object
+   * @return AddProductViewModel object initialized in the constructor
    */
   public AddProductViewModel getAddProductViewModel()
   {
      return addProductVM;
   }
-  
+
+  /**
+   * Gets the StockViewModel object
+   * @return StockViewModel object initialized in the constructor
+   */
   public StockViewModel getStockViewModel()
   {
     return stockVM;

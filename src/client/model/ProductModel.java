@@ -1,11 +1,8 @@
 package client.model;
 
-import shared.transferobjects.Product;
 import shared.utils.Subject;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 /**
  * Interface used for adding new products, adding stock, and getting
@@ -21,7 +18,6 @@ public interface ProductModel extends Subject
    * @param desc description of the new product
    * @param price price of the new product
    */
-
   void addProduct(String name, String desc, double price);
 
   /**

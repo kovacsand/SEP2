@@ -3,13 +3,12 @@ package server.model;
 import shared.transferobjects.Product;
 import shared.utils.Subject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Interface used for adding products to the database and
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface ProductModel extends Subject
 {
@@ -23,7 +22,7 @@ public interface ProductModel extends Subject
   /**
    * Getting all products from the database depending on the role
    * @param role determines which SQL statement database has to make
-   * @return
+   * @return an ArrayList<Product> of all the products the was fetched through the DAO
    */
   ArrayList<Product> getAllProducts(char role);
 

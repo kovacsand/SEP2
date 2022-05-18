@@ -18,12 +18,6 @@ public interface AccountModel extends Subject, Serializable
    * @param password client's password
    */
   User login(String username, String password);
-  /**
-   * Adding new account to the database
-   * @param user to be added
-   * @param password connected to the user
-   * @return the newly added User object
-   */
 
   /**
    * Client adding a new account to the system

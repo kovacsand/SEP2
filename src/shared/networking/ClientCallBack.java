@@ -16,35 +16,40 @@ import java.util.ArrayList;
 public interface ClientCallBack extends Remote, Serializable
 {
   /**
- * Notifying the listeners if the login reply is successful
- * @param successful if the login is successful
- * @param user object that is logging in
-   * @throws RemoteException
- */
+  * Notifying the listeners if the login reply is successful
+  * @param successful if the login is successful
+  * @param user object that is logging in
+  * @throws RemoteException all methods of a class implementing Remote should throw this exception
+  */
   void loginReply(boolean successful, User user) throws RemoteException;
 
   /**
    * Notifying the listeners if adding the account was successful
    * @param successful if the adding is successful
    * @param username of the account that is being added
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void addAccountReply(boolean successful, String username) throws RemoteException;
 
   /**
    * Notifying the listeners if adding the product was successful
-   * @param successful
-   * @param name
-   * @throws RemoteException
+   * @param successful the boolean telling if the data update had been successful or not
+   * @param name of the Account added
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void addProductReply(boolean successful, String name) throws RemoteException;
 
   /**
    * Notifying the listener by sending the product list
    * @param productList list of the Product objects
-   * @throws RemoteException
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void getAllProductsReply(ArrayList<Product> productList) throws RemoteException;
 
+  /**
+   * Notifying in the listener that the stocks had been increased.
+   * @param successful the boolean telling if the data update had been successful or not
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   */
   void increaseStockReply(boolean successful) throws RemoteException;
 }

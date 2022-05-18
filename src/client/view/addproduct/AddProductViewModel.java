@@ -15,13 +15,14 @@ import java.beans.PropertyChangeListener;
  */
 public class AddProductViewModel implements PropertyChangeListener
 {
-  private ProductModel model;
+  private final ProductModel model;
   private StringProperty name;
   private StringProperty price;
   private StringProperty description;
 
   /**
    * An argument constructor that initializes all fields.
+   * @param addProductModel the model to be used by the viewmodel
    */
   public AddProductViewModel (ProductModel addProductModel)
   {

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class PMImplementation implements ProductModel
 {
-  private PropertyChangeSupport support;
+  private final PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the AccountModel implementation class

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 /**
  * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
- *
  * @author S2G2
  * @version 1.0
  */
@@ -15,6 +14,10 @@ public class ProductDAOImplementation implements ProductDAO
 {
   private static ProductDAOImplementation instance;
 
+  /**
+   * Private constructor following the Singleton Pattern, registering the SQL driver
+   * @throws SQLException if something is wrong with the database
+   */
   private ProductDAOImplementation() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
@@ -22,9 +25,8 @@ public class ProductDAOImplementation implements ProductDAO
 
   /**
    * Getting the single existing instance
-   *
    * @return the instance
-   * @throws SQLException
+   * @throws SQLException if something is wrong with the database
    */
   public static synchronized ProductDAOImplementation getInstance()
       throws SQLException
