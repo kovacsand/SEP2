@@ -10,10 +10,9 @@ public class Accountant extends User
   /**
    * Two-argument constructor initializing the Accountant object, extends User class
    * @param username username of the accountant (inherited from User class)
-   * @param password password of the accountant (inherited from User class)
    */
-  public Accountant(String username, String password)
+  public Accountant(String username)
   {
-    super(username, password);
+    super(username);
   }
 }

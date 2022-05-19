@@ -10,17 +10,14 @@ import java.io.Serializable;
 public abstract class User implements Serializable
 {
   private String username;
-  private String password;
 
   /**
    * Two-argument constructor initializing the User object
    * @param username username of the user
-   * @param password password of the user
    */
-  public User(String username, String password)
+  public User(String username)
   {
     this.username = username;
-    this.password = password;
   }
 
   /**

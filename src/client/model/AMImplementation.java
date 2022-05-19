@@ -64,13 +64,13 @@ public class AMImplementation implements AccountModel
     switch (role)
     {
       case "Accountant":
-        client.addAccount(new Accountant(username, password), password);
+        client.addAccount(new Accountant(username), password);
         break;
       case "Manager":
-        client.addAccount(new Manager(username, password), password);
+        client.addAccount(new Manager(username), password);
         break;
       case "Salesperson":
-        client.addAccount(new Salesperson(username, password), password);
+        client.addAccount(new Salesperson(username), password);
         break;
     }
   }
