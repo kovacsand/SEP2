@@ -10,10 +10,9 @@ public class Manager extends User
   /**
    * Two-argument constructor initializing the Manager object
    * @param username username of the manager (inherited from User class)
-   * @param password password of the manager (inherited from User class)
    */
-  public Manager(String username, String password)
+  public Manager(String username)
   {
-    super(username, password);
+    super(username);
   }
 }
