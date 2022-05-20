@@ -55,7 +55,11 @@ public class StockViewController implements ViewController
       products = viewModel.getAllProducts('s');
       increaseStockButton.setVisible(false);
     }
+
     populateTable(products);
+
+
+    productsTable.getSortOrder().add(productsIdColumn);
 
   }
 

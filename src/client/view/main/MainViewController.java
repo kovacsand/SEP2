@@ -5,6 +5,7 @@ import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
@@ -19,6 +20,7 @@ public class MainViewController implements ViewController
   private ViewHandler vh;
   @FXML Button addProduct;
   @FXML Button addAccount;
+  @FXML Label username;
 
   /**
    * Initializing ViewHandler
@@ -37,12 +39,15 @@ public class MainViewController implements ViewController
     {
       //SHOW SALESPERSON THINGS
       addAccount.setDisable(true);
+      addProduct.setDisable(true);
     }
     if (vh.getUser() instanceof Accountant)
     {
       //SHOW ACCOUNTANT THINGS
-      //Do Accountant things
+      addAccount.setDisable(true);
+      addProduct.setDisable(true);
     }
+    username.setText(vh.getUser().getUsername());
   }
   /**
    * On Add Product button press
