@@ -6,8 +6,6 @@ import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
@@ -43,13 +41,13 @@ public class AMImplementation implements AccountModel
     switch (role)
     {
       case "Accountant":
-        addedUser = client.addAccount(new Accountant(username, password), password);
+        addedUser = client.addAccount(new Accountant(username), password);
         break;
       case "Manager":
-        addedUser = client.addAccount(new Manager(username, password), password);
+        addedUser = client.addAccount(new Manager(username), password);
         break;
       case "Salesperson":
-        addedUser = client.addAccount(new Salesperson(username, password), password);
+        addedUser = client.addAccount(new Salesperson(username), password);
         break;
     }
     return addedUser;

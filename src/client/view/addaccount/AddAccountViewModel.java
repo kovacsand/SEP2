@@ -6,15 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.User;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /**
  * ViewModel class for adding an account
  * @author S2G2
  * @version 1.0
  */
-public class AddAccountViewModel implements PropertyChangeListener
+public class AddAccountViewModel
 {
   private final AccountModel model;
   private StringProperty username;
@@ -74,10 +71,5 @@ public class AddAccountViewModel implements PropertyChangeListener
       role.setValue(null);
     });
     return addedUser;
-  }
-
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    System.out.println(evt.getNewValue() != null ? "New account added " + evt.getNewValue() : "Account already exists");
   }
 }

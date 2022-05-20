@@ -49,9 +49,7 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public void unregisterClient(){}
-
-  @Override public Product addProduct(Product product)
+  @Override public void unregisterClient()
   {
     try
     {
@@ -61,9 +59,6 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
-
-    //return newlyAddedProduct;
-    return void;
   }
 
   @Override public User login(String username, String password)
@@ -94,7 +89,7 @@ public class RMIClient implements Client, ClientCallBack
     return newlyAddedUser;
   }
 
-  @Override public void addProduct(Product product)
+  @Override public Product addProduct(Product product)
   {
     Product newlyAddedProduct = null;
     try
@@ -105,11 +100,7 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
-
-    if (newlyAddedProduct == null)
-      addProductReply(false, null);
-    else
-      addProductReply(true, newlyAddedProduct.getName());
+    return newlyAddedProduct;
   }
 
   @Override public ArrayList<Product> getAllProducts(char role)

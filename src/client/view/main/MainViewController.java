@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
+import shared.transferobjects.User;
 
 /**
  * ViewController class of the GUI for the main window
@@ -20,7 +21,7 @@ public class MainViewController implements ViewController
   private ViewHandler vh;
   @FXML Button addProduct;
   @FXML Button addAccount;
-  @FXML Label username;
+  @FXML Label usernameLabel;
 
   /**
    * Initializing ViewHandler
@@ -47,7 +48,16 @@ public class MainViewController implements ViewController
       addAccount.setDisable(true);
       addProduct.setDisable(true);
     }
-    username.setText(vh.getUser().getUsername());
+    User loggedInUser = vh.getUser();
+    String name = loggedInUser.getUsername();
+    String role = null;
+    if (loggedInUser instanceof Manager)
+      role = "Manager";
+    if (loggedInUser instanceof Salesperson)
+      role = "Salesperson";
+    if (loggedInUser instanceof Accountant)
+      role = "Accountant";
+    usernameLabel.setText(String.format("Welcome, %s (%s)", name, role));
   }
   /**
    * On Add Product button press
