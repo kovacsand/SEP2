@@ -41,24 +41,36 @@ public class AddProductViewController implements ViewController
    */
   @FXML private void onAddProductButton ()
   {
-    try
+    String price=priceField.getText();
+    String name=nameField.getText();
+    String description=descriptionField.getText();
+    if (nameField.getText().trim().isEmpty()||descriptionField.getText().trim().isEmpty()||priceField.getText().trim().isEmpty())
     {
-      tempPrice=Double.parseDouble(priceField.getText());
+      createAlertWindowEmptyField();
     }
-    catch (NumberFormatException nfe)
-    {
-      createAlertWindowPriceNotDouble();
-    }
-    if (nameField.getText().length()<100 && descriptionField.getText().length()<280 &&tempPrice<1000000000)
-    {
-      viewModel.addProduct();
-    }
+
     else
     {
-      createAlertWindowInputTooLong();
+      try
+      {
+        tempPrice = Double.parseDouble(priceField.getText());
+      }
+      catch (NumberFormatException nfe)
+      {
+        createAlertWindowPriceNotDouble();
+      }
+
+      if (nameField.getText().length() < 100
+          && descriptionField.getText().length() < 280 && tempPrice < 1000000000)
+      {
+        viewModel.addProduct();
+      }
+      else
+      {
+        createAlertWindowInputTooLong();
+      }
     }
   }
-
   /**
    * A method that activates when the cancel button is pressed while creating a new product. It opens the Main window.
    */
@@ -80,6 +92,13 @@ public class AddProductViewController implements ViewController
     alert.setHeaderText("An error has been encountered");
     alert.setContentText("Input too long");
     tempPrice=0;
+    alert.showAndWait();
+  }
+  private void createAlertWindowEmptyField() {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("Fields can't be empty");
     alert.showAndWait();
   }
 }

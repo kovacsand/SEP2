@@ -81,13 +81,13 @@ public class AddAccountViewController implements ViewController
       String password = viewModel.getPassword().getValue();
       String role = viewModel.getRole().getValue();
       if (role == null || password == null || username == null)
-        createAlertWindowOverLengthLimit();
+        createAlertWindow();
       else
         viewModel.addAccount();
     }
     else
     {
-        createAlertWindow();
+        createAlertWindowOverLengthLimit();
     }
   }
   /**
