@@ -31,6 +31,6 @@ public interface ProductModel extends Subject
    * @param id of the product
    * @param quantity by how much the stock must be increased
    */
-  void increaseStock(int id, int quantity);
+  Product changeStock(int id, int quantity);
 
 }

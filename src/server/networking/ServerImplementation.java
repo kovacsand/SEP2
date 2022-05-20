@@ -97,9 +97,9 @@ public class ServerImplementation implements Server
     return warehouseServer.getAllProducts(role);
   }
 
-  @Override public void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException
+  @Override public Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
-    warehouseServer.increaseStock(id, quantity);
+    return warehouseServer.changeStock(id, quantity);
   }
 
 }

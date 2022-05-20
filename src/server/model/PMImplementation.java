@@ -53,16 +53,18 @@ public class PMImplementation implements ProductModel
     return allProducts;
   }
 
-  @Override public void increaseStock(int id, int quantity)
+  @Override public Product changeStock(int id, int quantity)
   {
+    Product product = null;
     try
     {
-      ProductDAOImplementation.getInstance().increaseStock(id, quantity);
+      product = ProductDAOImplementation.getInstance().changeStock(id, quantity);
     }
     catch (SQLException e)
     {
       e.printStackTrace();
     }
+    return product;
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,6 +20,7 @@ public class AddProductViewController implements ViewController
   @FXML private TextField nameField;
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
+  private double tempPrice;
 
   /**
    * Initializing ViewHandler, ViewModel and binding bidirectionally text properties with text fields
@@ -39,7 +41,22 @@ public class AddProductViewController implements ViewController
    */
   @FXML private void onAddProductButton ()
   {
-    viewModel.addProduct();
+    try
+    {
+      tempPrice=Double.parseDouble(priceField.getText());
+    }
+    catch (NumberFormatException nfe)
+    {
+      createAlertWindowPriceNotDouble();
+    }
+    if (nameField.getText().length()<100 && descriptionField.getText().length()<280 &&tempPrice<1000000000)
+    {
+      viewModel.addProduct();
+    }
+    else
+    {
+      createAlertWindowInputTooLong();
+    }
   }
 
   /**
@@ -48,5 +65,21 @@ public class AddProductViewController implements ViewController
   @FXML private void onBackButton()
   {
     vh.openView("Main");
+  }
+  private void createAlertWindowPriceNotDouble() {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("Price is not a double");
+    tempPrice=0;
+    alert.showAndWait();
+  }
+  private void createAlertWindowInputTooLong() {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("Input too long");
+    tempPrice=0;
+    alert.showAndWait();
   }
 }

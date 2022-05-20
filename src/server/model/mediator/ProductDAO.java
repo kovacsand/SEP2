@@ -34,5 +34,5 @@ public interface ProductDAO extends DAOInterface
    * @param quantity by how much the product stock must be increased
    * @throws SQLException if something is wrong with the database
    */
-  void increaseStock(int id, int quantity) throws SQLException;
+  Product changeStock(int id, int quantity) throws SQLException;
 }

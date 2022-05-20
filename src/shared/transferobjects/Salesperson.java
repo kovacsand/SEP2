@@ -10,10 +10,9 @@ public class Salesperson extends User
   /**
    * Two-argument constructor initializing the Salesperson object
    * @param username username of the salesperson (inherited from User class)
-   * @param password password of the salesperson (inherited from User class)
    */
-  public Salesperson(String username, String password)
+  public Salesperson(String username)
   {
-    super(username, password);
+    super(username);
   }
 }

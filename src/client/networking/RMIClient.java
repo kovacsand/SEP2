@@ -7,6 +7,7 @@ import shared.transferobjects.User;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -48,7 +49,9 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public void unregisterClient()
+  @Override public void unregisterClient(){}
+
+  @Override public Product addProduct(Product product)
   {
     try
     {
@@ -58,6 +61,9 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
+
+    //return newlyAddedProduct;
+    return void;
   }
 
   @Override public User login(String username, String password)
@@ -106,7 +112,7 @@ public class RMIClient implements Client, ClientCallBack
       addProductReply(true, newlyAddedProduct.getName());
   }
 
-  @Override public void getAllProducts(char role)
+  @Override public ArrayList<Product> getAllProducts(char role)
   {
     ArrayList<Product> products = new ArrayList<>();
     try
@@ -117,45 +123,22 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
-    onGetAllProductsReply(products != null, products);
+    return products;
   }
 
-  private void onGetAllProductsReply(boolean successful, ArrayList<Product> products)
-  {
-    support.firePropertyChange("GetProducts", null, products);
-  }
 
-  @Override public void increaseStock(int id, int quantity)
+  @Override public Product changeStock(int id, int quantity)
   {
+    Product product = null;
     try
     {
-      server.increaseStock(this, id, quantity);
+      product = server.changeStock(this, id, quantity);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
-  }
-
-  @Override public void addProductReply(boolean successful, String name)
-  {
-    if (successful)
-      support.firePropertyChange("ProductAdded", null, name);
-    else
-      support.firePropertyChange("ProductExists", null, name);
-  }
-
-  @Override public void getAllProductsReply(ArrayList<Product> productList) throws RemoteException
-  {
-    if (!(productList.isEmpty()))
-      support.firePropertyChange("GetProducts",null,productList);
-    else
-      support.firePropertyChange("GetProducts",null,new Product("No Products","No Descriptions",0));
-  }
-
-  @Override public void increaseStockReply(boolean successful)
-  {
-    System.out.println(successful ? "stock increased" : "problem has arisen");
+    return product;
   }
 
   @Override public void addListener(String propertyName,

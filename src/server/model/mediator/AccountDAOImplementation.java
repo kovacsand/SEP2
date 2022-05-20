@@ -57,11 +57,11 @@ public class AccountDAOImplementation implements AccountDAO
       System.out.println("User logged in as: " + dataBaseName);
     }
     if(dataBaseRole == 1)
-      loggedInUser = new Manager(dataBaseName, dataBasePassword);
+      loggedInUser = new Manager(dataBaseName);
     if(dataBaseRole == 2)
-      loggedInUser = new Salesperson(dataBaseName, dataBasePassword);
+      loggedInUser = new Salesperson(dataBaseName);
     if(dataBaseRole == 3)
-      loggedInUser = new Accountant(dataBaseName, dataBasePassword);
+      loggedInUser = new Accountant(dataBaseName);
     return loggedInUser;
   }
 
@@ -89,7 +89,7 @@ public class AccountDAOImplementation implements AccountDAO
         statement.setString(2, password);
         statement.setInt(3, 3);
         statement.executeUpdate();
-        user = new Accountant(user.getUsername(), password);
+        user = new Accountant(user.getUsername());
       }
     }
     if(user instanceof Salesperson)
@@ -101,7 +101,7 @@ public class AccountDAOImplementation implements AccountDAO
         statement.setString(2, password);
         statement.setInt(3, 2);
         statement.executeUpdate();
-        user = new Salesperson(user.getUsername(), password);
+        user = new Salesperson(user.getUsername());
       }
     }
     if(user instanceof Manager)
@@ -113,7 +113,7 @@ public class AccountDAOImplementation implements AccountDAO
         statement.setString(2, password);
         statement.setInt(3, 1);
         statement.executeUpdate();
-        user = new Manager(user.getUsername(), password);
+        user = new Manager(user.getUsername());
       }
     }
     return user;
