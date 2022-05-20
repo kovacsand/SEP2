@@ -16,8 +16,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class StockViewController implements ViewController,
-    PropertyChangeListener
+public class StockViewController implements ViewController
 {
   public Button increaseStockButton;
   private ViewHandler vh;
@@ -38,7 +37,7 @@ public class StockViewController implements ViewController,
     this.viewModel = vmf.getStockViewModel();
     this.user = vh.getUser();
 
-    viewModel.addListener("GetProducts", this);
+//    viewModel.addListener("GetProducts", this);
 
     products = new ArrayList<>();
 
@@ -50,12 +49,13 @@ public class StockViewController implements ViewController,
     productsStockColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
     if (user instanceof Manager)
-      viewModel.getAllProducts('m');
+     products = viewModel.getAllProducts('m');
     else
     {
-      viewModel.getAllProducts('s');
+      products = viewModel.getAllProducts('s');
       increaseStockButton.setVisible(false);
     }
+    populateTable(products);
     productsTable.getSortOrder().add(productsIdColumn);
   }
 
@@ -80,7 +80,7 @@ public class StockViewController implements ViewController,
       {
         int inputNumber = Integer.parseInt(input.getText());
         if(inputNumber>0)
-          viewModel.increaseStock(productsTable.getSelectionModel().getSelectedItem().getId(),inputNumber);
+          viewModel.changeStock(productsTable.getSelectionModel().getSelectedItem().getId(),inputNumber);
         else
           throw new NumberFormatException();
       }
@@ -94,13 +94,17 @@ public class StockViewController implements ViewController,
       }
     }
   }
-
-
-
-  @Override public void propertyChange(PropertyChangeEvent evt)
+  private void populateTable(ArrayList<Product> products)
   {
-    products = (ArrayList<Product>) evt.getNewValue();
-    for (Product product : products)
+    for(Product product : products)
       productsTable.getItems().add(product);
   }
+
+
+//  @Override public void propertyChange(PropertyChangeEvent evt)
+//  {
+//    products = (ArrayList<Product>) evt.getNewValue();
+//    for (Product product : products)
+//      productsTable.getItems().add(product);
+//  }
 }

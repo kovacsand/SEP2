@@ -4,6 +4,7 @@ import client.model.ProductModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.Product;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -30,26 +31,25 @@ public class AddProductViewModel implements PropertyChangeListener
     name=new SimpleStringProperty();
     price=new SimpleStringProperty();
     description=new SimpleStringProperty();
-    model.addListener("ProductAdded", this);
-    model.addListener("ProductExists", this);
   }
 
   /**
    * A method that determines the behaviour of the GUI after pressing the add button while adding a new product. It prints out the values given,
    * calls a model method to create the product, and empties all the fields.
    */
-  public void addProduct ()
+  public Product addProduct ()
   {
-    System.out.println("You are creating a product named "+name.getValue()+" described as "+description.getValue()+" priced at "+price.getValue());
-    model.addProduct(name.getValue(), description.getValue(), Double.parseDouble(price.getValue()));
+    String productName = name.getValue();
+    String productDescription = description.getValue();
+    String productPrice = price.getValue();
+    System.out.println("You are creating a product named "+productName+" described as "+productDescription+" priced at "+productPrice);
     Platform.runLater(()->
         {
           name.setValue("");
           description.setValue("");
-          price.setValue("");
-        }
+          price.setValue("");       }
     );
-    model.increaseStock(1, 1);
+    return model.addProduct(productName, productDescription, Double.parseDouble(productPrice));
   }
 
   /**

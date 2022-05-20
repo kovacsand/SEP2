@@ -33,8 +33,8 @@ public class WarehouseServerImplementation implements WarehouseServer
     return productModel.getAllProducts(role);
   }
 
-  @Override public void increaseStock(int id, int quantity)
+  @Override public Product changeStock(int id, int quantity)
   {
-    productModel.increaseStock(id, quantity);
+   return productModel.changeStock(id, quantity);
   }
 }

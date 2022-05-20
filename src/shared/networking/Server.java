@@ -66,5 +66,5 @@ public interface Server extends Remote
    * @param quantity amount which needs to be increased by
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
-  void increaseStock(ClientCallBack client, int id, int quantity) throws RemoteException;
+  Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException;
 }

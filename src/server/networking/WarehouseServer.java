@@ -30,5 +30,5 @@ public interface WarehouseServer
    * @param id of the product
    * @param quantity amount which needs to be increased by
    */
-  void increaseStock(int id, int quantity);
+  Product changeStock(int id, int quantity);
 }
