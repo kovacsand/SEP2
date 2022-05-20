@@ -91,8 +91,10 @@ public class ProductDAOImplementation implements ProductDAO
     return allProducts;
   }
 
-  @Override public void increaseStock(int id, int quantity) throws SQLException
+  @Override public Product changeStock(int id, int quantity) throws SQLException
   {
+    Product product = null;
+    ResultSet resultSet = null;
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
@@ -101,5 +103,22 @@ public class ProductDAOImplementation implements ProductDAO
       statement.setInt(2, id);
       statement.executeUpdate();
     }
+
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Products WHERE id = ?");
+      statement.setInt(1, id);
+      resultSet = statement.executeQuery();
+    }
+    while(resultSet != null && resultSet.next())
+    {
+      int productId = resultSet.getInt("id");
+      String name = resultSet.getString("name");
+      String description = resultSet.getString("description");
+      double price = resultSet.getDouble("price");
+      int productQuantity = resultSet.getInt("quantity");
+      product = new Product(productId, name, description, price, productQuantity);
+    }
+    return product;
   }
 }
