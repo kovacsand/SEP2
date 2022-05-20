@@ -36,7 +36,7 @@ public class AccountDAOImplementation implements AccountDAO
     return instance;
   }
 
-  @Override public User getLoggedInUser(String username, String password) throws SQLException
+  @Override public User login(String username, String password) throws SQLException
   {
     String dataBaseName = null;
     String dataBasePassword = null;
@@ -54,7 +54,7 @@ public class AccountDAOImplementation implements AccountDAO
         dataBasePassword = resultSet.getString("password");
         dataBaseRole = resultSet.getInt("role_id");
       }
-      System.out.println(dataBaseName + dataBasePassword);
+      System.out.println("User logged in as: " + dataBaseName);
     }
     if(dataBaseRole == 1)
       loggedInUser = new Manager(dataBaseName, dataBasePassword);

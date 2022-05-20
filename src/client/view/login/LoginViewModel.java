@@ -4,14 +4,8 @@ import client.model.AccountModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Accountant;
-import shared.transferobjects.Manager;
-import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
-import shared.utils.Subject;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
@@ -19,7 +13,7 @@ import java.beans.PropertyChangeSupport;
  * @author S2G2
  * @version 1.0
  */
-public class LoginViewModel implements PropertyChangeListener, Subject
+public class LoginViewModel
 {
   private final AccountModel model;
   private StringProperty username;
@@ -39,22 +33,25 @@ public class LoginViewModel implements PropertyChangeListener, Subject
     password = new SimpleStringProperty();
     errorMessage = new SimpleStringProperty();
     support = new PropertyChangeSupport(this);
-    model.addListener("LoginSuccessful", this);
-    model.addListener("LoginFailed", this);
   }
 
   /**
    * Passing the values from the GUI to the model to log in
    * Clears the values in the GUI so that the user can enter new arguments
    */
-  public void login()
+  public User login()
   {
-    model.login(username.getValue(), password.getValue());
+    user = model.login(username.getValue(), password.getValue());
     Platform.runLater(() ->
     {
       username.setValue(null);
       password.setValue(null);
+      if (user == null)
+        errorMessage.setValue("Incorrect credentials!");
+      else
+        errorMessage.setValue("Hello, " + user.getUsername());
     });
+    return user;
   }
 
   /**
@@ -82,38 +79,5 @@ public class LoginViewModel implements PropertyChangeListener, Subject
   public StringProperty errorMessageProperty()
   {
     return errorMessage;
-  }
-
-  /**
-   * The ViewModel is observing the AccountModel, so it needs to implement this method
-   * @param evt The PropertyChangeEvent fired by the AccountModel
-   */
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    if (evt.getPropertyName().equals("LoginSuccessful"))
-    {
-      if (evt.getNewValue() instanceof Manager)
-        user = (User) evt.getNewValue();
-      if (evt.getNewValue() instanceof Salesperson)
-        user = (User) evt.getNewValue();
-      if (evt.getNewValue() instanceof Accountant)
-        user = (User) evt.getNewValue();
-      support.firePropertyChange("LoginSuccess",null,user);
-    }
-    else if (evt.getPropertyName().equals("LoginFailed"))
-      Platform.runLater(() -> errorMessage.setValue("Incorrect credentials!"));
-  }
-
-
-  @Override public void addListener(String propertyName,
-      PropertyChangeListener listener)
-  {
-    support.addPropertyChangeListener(propertyName,listener);
-  }
-
-  @Override public void removeListener(String propertyName,
-      PropertyChangeListener listener)
-  {
-    support.removePropertyChangeListener(propertyName,listener);
   }
 }

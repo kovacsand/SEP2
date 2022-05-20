@@ -3,8 +3,6 @@ package server.model;
 import server.model.mediator.AccountDAOImplementation;
 import shared.transferobjects.User;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 
 /**
@@ -14,14 +12,11 @@ import java.sql.SQLException;
  */
 public class AMImplementation implements AccountModel
 {
-  private final PropertyChangeSupport support;
-
   /**
    * Zero-argument constructor initializing the AccountModel implementation class
    */
   public AMImplementation()
   {
-    support = new PropertyChangeSupport(this);
   }
 
   @Override public User login(String username, String password)
@@ -29,7 +24,7 @@ public class AMImplementation implements AccountModel
     User user = null;
     try
     {
-      user = AccountDAOImplementation.getInstance().getLoggedInUser(username, password);
+      user = AccountDAOImplementation.getInstance().login(username, password);
     }
     catch (SQLException e)
     {
@@ -50,16 +45,6 @@ public class AMImplementation implements AccountModel
       e.printStackTrace();
     }
     return addedUser;
-  }
-
-  @Override public void addListener(String propertyName, PropertyChangeListener listener)
-  {
-    support.addPropertyChangeListener(propertyName, listener);
-  }
-
-  @Override public void removeListener(String propertyName, PropertyChangeListener listener)
-  {
-    support.removePropertyChangeListener(propertyName, listener);
   }
 }
 

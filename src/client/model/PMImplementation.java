@@ -26,9 +26,9 @@ public class PMImplementation implements ProductModel
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
-    client.addListener("ProductAdded", this::onAddProductReply);
-    client.addListener("ProductExists", this::onAddProductReply);
-    client.addListener("GetProducts", this::getAllProductsReply);
+//    client.addListener("ProductAdded", this::onAddProductReply);
+//    client.addListener("ProductExists", this::onAddProductReply);
+//    client.addListener("GetProducts", this::getAllProductsReply);
   }
 
   /**
