@@ -56,7 +56,7 @@ public class StockViewController implements ViewController,
       viewModel.getAllProducts('s');
       increaseStockButton.setVisible(false);
     }
-
+    productsTable.getSortOrder().add(productsIdColumn);
   }
 
   @FXML private void onBackButtonPress ()
