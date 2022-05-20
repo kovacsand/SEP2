@@ -57,20 +57,39 @@ public class AddAccountViewController implements ViewController
     viewModel.getRole().setValue(null);
   }
 
+  private void createAlertWindowOverLengthLimit()
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("An error has been encountered");
+    alert.setContentText("Username or password too long");
+    alert.showAndWait();
+    viewModel.getUsername().setValue(null);
+    viewModel.getPassword().setValue(null);
+    viewModel.getRole().setValue(null);
+  }
+
   /**
    * On Add button press
    */
   @FXML public void onAddButton()
   {
-    String username = viewModel.getUsername().getValue();
-    String password = viewModel.getPassword().getValue();
-    String role = viewModel.getRole().getValue();
-    if (role == null || password == null || username == null)
-      createAlertWindow();
+    if (usernameField.getText().length() < 60
+        && passwordField.getText().length() < 80)
+    {
+      String username = viewModel.getUsername().getValue();
+      String password = viewModel.getPassword().getValue();
+      String role = viewModel.getRole().getValue();
+      if (role == null || password == null || username == null)
+        createAlertWindowOverLengthLimit();
+      else
+        viewModel.addAccount();
+    }
     else
-      viewModel.addAccount();
+    {
+        createAlertWindow();
+    }
   }
-
   /**
    * On Cancel button press
    */
