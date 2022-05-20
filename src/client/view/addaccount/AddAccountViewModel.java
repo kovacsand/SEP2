@@ -4,6 +4,7 @@ import client.model.AccountModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -30,8 +31,6 @@ public class AddAccountViewModel implements PropertyChangeListener
     username = new SimpleStringProperty(null);
     password = new SimpleStringProperty(null);
     role = new SimpleStringProperty();
-    model.addListener("AccountAdded", this);
-    model.addListener("AccountExists", this);
   }
 
   /**
@@ -65,15 +64,16 @@ public class AddAccountViewModel implements PropertyChangeListener
    * Passing the values of the GUI to the model, to add the account to the database later
    * Clears the values afterwards for the next addition
    */
-  public void addAccount()
+  public User addAccount()
   {
-    model.addAccount(username.getValue(), password.getValue(), role.getValue());
+    User addedUser = model.addAccount(username.getValue(), password.getValue(), role.getValue());
     Platform.runLater(() ->
     {
       username.setValue(null);
       password.setValue(null);
       role.setValue(null);
     });
+    return addedUser;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

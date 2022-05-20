@@ -18,7 +18,7 @@ public interface AccountDAO extends DAOInterface
    * @return The logged-in User object, if the login was successful, null, if it failed
    * @throws SQLException if something is wrong with the database
    */
-  User getLoggedInUser(String username, String password) throws SQLException;
+  User login(String username, String password) throws SQLException;
 
   /**
    * Connects to the database and tries to add a new product.

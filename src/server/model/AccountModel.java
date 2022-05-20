@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author S2G2
  * @version 1.1
  */
-public interface AccountModel extends Subject, Serializable
+public interface AccountModel
 {
   /**
    * Client logging into their account

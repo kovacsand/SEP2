@@ -17,8 +17,7 @@ import java.beans.PropertyChangeListener;
  * @author S2G2
  * @version 1.0
  */
-public class LoginViewController implements ViewController,
-    PropertyChangeListener
+public class LoginViewController implements ViewController, PropertyChangeListener
 {
   private LoginViewModel viewModel;
   private ViewHandler vh;
@@ -43,7 +42,6 @@ public class LoginViewController implements ViewController,
     viewModel.usernameProperty().bindBidirectional(usernameField.textProperty());
     viewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
     viewModel.errorMessageProperty().bindBidirectional(errorLabel.textProperty());
-    viewModel.addListener("LoginSuccess", this);
   }
 
   /**
@@ -54,7 +52,14 @@ public class LoginViewController implements ViewController,
     if (viewModel.usernameProperty().getValue() == null || viewModel.passwordProperty().getValue() == null)
       createAlertWindow();
     else
-      viewModel.login();
+    {
+      User loggedInUser = viewModel.login();
+      if (loggedInUser != null)
+      {
+        vh.setUser(loggedInUser);
+        vh.openView("Main");
+      }
+    }
   }
 
   private void createAlertWindow()

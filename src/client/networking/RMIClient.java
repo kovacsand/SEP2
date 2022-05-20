@@ -34,58 +34,7 @@ public class RMIClient implements Client, ClientCallBack
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void login(String username, String password)
-  {
-    User loggedInUser = null;
-    try
-    {
-      loggedInUser = server.login(username, password);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-
-    if (loggedInUser == null)
-      loginReply(false, null);
-    else
-      loginReply(true, loggedInUser);
-  }
-
-  @Override public Product addProduct(Product product)
-  {
-    Product newlyAddedProduct = null;
-    try
-    {
-      newlyAddedProduct = server.addProduct(product);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-
-    return newlyAddedProduct;
-  }
-
-  @Override public void addAccount(User user, String password)
-  {
-    User newlyAddedUser = null;
-    try
-    {
-      newlyAddedUser = server.addAccount(user, password);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-
-    if (newlyAddedUser == null)
-      addAccountReply(false, null);
-    else
-      addAccountReply(true, newlyAddedUser.getUsername());
-  }
-
-  @Override public void registerClient()
+  @Override public void startClient()
   {
     try
     {
@@ -100,7 +49,9 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public void unregisterClient()
+  @Override public void unregisterClient(){}
+
+  @Override public Product addProduct(Product product)
   {
     try
     {
@@ -110,6 +61,55 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
+
+    //return newlyAddedProduct;
+    return void;
+  }
+
+  @Override public User login(String username, String password)
+  {
+    User loggedInUser = null;
+    try
+    {
+      loggedInUser = server.login(username, password);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return loggedInUser;
+  }
+
+  @Override public User addAccount(User user, String password)
+  {
+    User newlyAddedUser = null;
+    try
+    {
+      newlyAddedUser = server.addAccount(user, password);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return newlyAddedUser;
+  }
+
+  @Override public void addProduct(Product product)
+  {
+    Product newlyAddedProduct = null;
+    try
+    {
+      newlyAddedProduct = server.addProduct(product);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+
+    if (newlyAddedProduct == null)
+      addProductReply(false, null);
+    else
+      addProductReply(true, newlyAddedProduct.getName());
   }
 
   @Override public ArrayList<Product> getAllProducts(char role)
@@ -139,22 +139,6 @@ public class RMIClient implements Client, ClientCallBack
       e.printStackTrace();
     }
     return product;
-  }
-
-  @Override public void loginReply(boolean successful, User user)
-  {
-    if (successful)
-      support.firePropertyChange("LoginSuccessful", null, user);
-    else
-      support.firePropertyChange("LoginFailed", null, null);
-  }
-
-  @Override public void addAccountReply(boolean successful, String username)
-  {
-    if (successful)
-      support.firePropertyChange("AccountAdded", null, username);
-    else
-      support.firePropertyChange("AccountExists", null, username);
   }
 
   @Override public void addListener(String propertyName,
