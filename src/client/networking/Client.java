@@ -35,25 +35,17 @@ public interface Client extends Subject
   User login(String username, String password);
 
   /**
-   * Adding a product to the database
-   *
-   * @param product object that needs to be added
-   */
-  Product addProduct(Product product);
-
-  /**
    * Adding an account to the database
    *
    * @param user object that needs to be added
    */
   User addAccount(User user, String password);
 
-
   /**
    * Adding a product to the database
    * @param product object that needs to be added
    */
-  void addProduct(Product product);
+  Product addProduct(Product product);
 
   /**
    * Requests a list of all products from the Database

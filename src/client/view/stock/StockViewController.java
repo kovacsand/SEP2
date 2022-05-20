@@ -57,8 +57,6 @@ public class StockViewController implements ViewController
     }
 
     populateTable(products);
-
-
     productsTable.getSortOrder().add(productsIdColumn);
 
   }
