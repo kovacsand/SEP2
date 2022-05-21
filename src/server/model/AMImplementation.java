@@ -30,6 +30,10 @@ public class AMImplementation implements AccountModel
     {
       e.printStackTrace();
     }
+    if (user == null)
+      System.out.println("Incorrect credentials");
+    else
+      System.out.println("User logged in as: " + user.getUsername());
     return user;
   }
 
@@ -44,6 +48,10 @@ public class AMImplementation implements AccountModel
     {
       e.printStackTrace();
     }
+    if (addedUser == null)
+      System.out.println("User already exists");
+    else
+      System.out.println("New user " + addedUser.getUsername() + " created");
     return addedUser;
   }
 }

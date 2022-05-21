@@ -50,7 +50,7 @@ public class ServerImplementation implements Server
   {
     Registry registry = LocateRegistry.createRegistry(1099);
     registry.bind("Server", this);
-    System.out.println("Server started");
+    System.out.println("The server is running");
   }
 
   @Override public void registerClient(ClientCallBack client) throws RemoteException

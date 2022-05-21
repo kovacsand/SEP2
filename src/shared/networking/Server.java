@@ -27,6 +27,7 @@ public interface Server extends Remote
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void unregisterClient(ClientCallBack client) throws RemoteException;
+
   /**
    * Logging in through the model. The server passes the arguments to the model.
    * @param username of the user

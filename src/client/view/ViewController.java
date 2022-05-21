@@ -2,6 +2,7 @@ package client.view;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import javafx.scene.control.Alert;
 
 /**
  * Interface for ViewController to make sure each ViewController implements this method.
@@ -16,4 +17,13 @@ public interface ViewController
    * @param vmf The ViewModelFactory creating the ViewModels for each view.
    */
   void init(ViewHandler vh, ViewModelFactory vmf);
+
+  default void showErrorWindow(String headerText, String contentText)
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText(headerText);
+    alert.setContentText(contentText);
+    alert.showAndWait();
+  }
 }
