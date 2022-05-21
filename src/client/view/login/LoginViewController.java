@@ -4,25 +4,20 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import shared.transferobjects.User;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * ViewController class of the GUI for logging in
  * @author S2G2
  * @version 1.0
  */
-public class LoginViewController implements ViewController, PropertyChangeListener
+public class LoginViewController implements ViewController
 {
   private LoginViewModel viewModel;
   private ViewHandler vh;
-  private User user;
 
   @FXML private TextField usernameField;
   @FXML private PasswordField passwordField;
@@ -50,32 +45,19 @@ public class LoginViewController implements ViewController, PropertyChangeListen
    */
   @FXML private void onLoginButton()
   {
-    if (viewModel.usernameProperty().getValue() == null || viewModel.passwordProperty().getValue() == null)
-      createAlertWindow();
+    if (viewModel.usernameProperty().getValue() == null || viewModel.passwordProperty().getValue() == null
+    || viewModel.usernameProperty().getValue().equals("") || viewModel.passwordProperty().getValue().equals(""))
+      showErrorWindow("Insufficient input", "One or several fields are empty");
     else
     {
       User loggedInUser = viewModel.login();
-      if (loggedInUser != null)
+      if (loggedInUser == null)
+        showErrorWindow("Incorrect credentials", "Your username or password is incorrect");
+      else
       {
         vh.setUser(loggedInUser);
         vh.openView("Main");
       }
     }
-  }
-
-  private void createAlertWindow()
-  {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("One of the fields is empty");
-    alert.showAndWait();
-  }
-
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    user = (User) evt.getNewValue();
-    vh.setUser(user);
-    vh.openView("Main");
   }
 }

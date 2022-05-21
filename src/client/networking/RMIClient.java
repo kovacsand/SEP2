@@ -7,7 +7,6 @@ import shared.transferobjects.User;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -42,6 +41,7 @@ public class RMIClient implements Client, ClientCallBack
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (Server) registry.lookup("Server");
       server.registerClient(this);
+      System.out.println("The client is running");
     }
     catch (RemoteException | NotBoundException e)
     {

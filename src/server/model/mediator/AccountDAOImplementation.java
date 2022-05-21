@@ -38,83 +38,57 @@ public class AccountDAOImplementation implements AccountDAO
 
   @Override public User login(String username, String password) throws SQLException
   {
-    String dataBaseName = null;
-    String dataBasePassword = null;
-    int dataBaseRole = 0;
     User loggedInUser = null;
+    ResultSet resultSet;
     try(Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("SELECT * FROM Employees WHERE username = ? AND password = ?;");
       statement.setString(1, username);
       statement.setString(2, password);
-      ResultSet resultSet = statement.executeQuery();
-      if(resultSet.next())
-      {
-        dataBaseName = resultSet.getString("username");
-        dataBasePassword = resultSet.getString("password");
-        dataBaseRole = resultSet.getInt("role_id");
-      }
-      System.out.println("User logged in as: " + dataBaseName);
+      resultSet = statement.executeQuery();
     }
-    if(dataBaseRole == 1)
-      loggedInUser = new Manager(dataBaseName);
-    if(dataBaseRole == 2)
-      loggedInUser = new Salesperson(dataBaseName);
-    if(dataBaseRole == 3)
-      loggedInUser = new Accountant(dataBaseName);
+    if(resultSet.next())
+    {
+      String dataBaseName = resultSet.getString("username");
+      int dataBaseRole = resultSet.getInt("role_id");
+      if(dataBaseRole == 1)
+        loggedInUser = new Manager(dataBaseName);
+      if(dataBaseRole == 2)
+        loggedInUser = new Salesperson(dataBaseName);
+      if(dataBaseRole == 3)
+        loggedInUser = new Accountant(dataBaseName);
+    }
     return loggedInUser;
   }
 
   @Override public User addAccount(User user, String password) throws SQLException
   {
-    String sqlStatement = "INSERT INTO Employees (username, password, role_id) VALUES (?, ?, ?);";
     try(Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT username FROM Employees WHERE username = ?"
-    );
+      PreparedStatement statement = connection.prepareStatement("SELECT username FROM Employees WHERE username = ?");
       statement.setString(1, user.getUsername());
       ResultSet resultSet = statement.executeQuery();
       if(resultSet.next())
       {
-        throw new SQLException();
+        return null;
       }
     }
-
+    String sqlStatement = "INSERT INTO Employees (username, password, role_id) VALUES (?, ?, ?);";
+    int databaseRole = -1;
+    if (user instanceof Manager)
+      databaseRole = 1;
+    if (user instanceof Salesperson)
+      databaseRole = 2;
     if (user instanceof Accountant)
+      databaseRole = 3;
+
+    try (Connection connection = getConnection())
     {
-      try (Connection connection = getConnection())
-      {
-        PreparedStatement statement = connection.prepareStatement(sqlStatement);
-        statement.setString(1, user.getUsername());
-        statement.setString(2, password);
-        statement.setInt(3, 3);
-        statement.executeUpdate();
-        user = new Accountant(user.getUsername());
-      }
-    }
-    if(user instanceof Salesperson)
-    {
-      try(Connection connection = getConnection())
-      {
-        PreparedStatement statement = connection.prepareStatement(sqlStatement);
-        statement.setString(1, user.getUsername());
-        statement.setString(2, password);
-        statement.setInt(3, 2);
-        statement.executeUpdate();
-        user = new Salesperson(user.getUsername());
-      }
-    }
-    if(user instanceof Manager)
-    {
-      try(Connection connection = getConnection())
-      {
-        PreparedStatement statement = connection.prepareStatement(sqlStatement);
-        statement.setString(1, user.getUsername());
-        statement.setString(2, password);
-        statement.setInt(3, 1);
-        statement.executeUpdate();
-        user = new Manager(user.getUsername());
-      }
+      PreparedStatement statement = connection.prepareStatement(sqlStatement);
+      statement.setString(1, user.getUsername());
+      statement.setString(2, password);
+      statement.setInt(3, databaseRole);
+      statement.executeUpdate();
     }
     return user;
   }
