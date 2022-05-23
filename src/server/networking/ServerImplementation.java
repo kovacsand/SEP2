@@ -1,5 +1,6 @@
 package server.networking;
 
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import server.model.AMImplementation;
 import server.model.PMImplementation;
 import shared.networking.ClientCallBack;
@@ -9,6 +10,8 @@ import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.net.http.WebSocket;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -16,6 +19,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +32,7 @@ public class ServerImplementation implements Server
   private final AccountServer accountServer;
   private final WarehouseServer warehouseServer;
   private Map<ClientCallBack, PropertyChangeListener> clients;
+  private PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
@@ -39,6 +44,7 @@ public class ServerImplementation implements Server
     clients = new HashMap<>();
     accountServer = new AccountServerImplementation(new AMImplementation());
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
+    support = new PropertyChangeSupport(this);
   }
 
   /**
@@ -53,7 +59,53 @@ public class ServerImplementation implements Server
     System.out.println("The server is running");
   }
 
-  @Override public void registerClient(ClientCallBack client) throws RemoteException
+
+  @Override public User login(String username, String password) throws RemoteException
+  {
+    return accountServer.login(username, password);
+  }
+
+  @Override public User addAccount(User user, String password) throws RemoteException
+  {
+    return accountServer.addAccount(user, password);
+  }
+
+  @Override public Product addProduct(Product product) throws RemoteException
+  {
+
+    Product newProduct= warehouseServer.addProduct(product);
+    if(newProduct!=null)
+      onProductChange();
+    return newProduct;
+  }
+
+  @Override public ArrayList<Product> getAllProducts(char role) throws RemoteException
+  {
+    return warehouseServer.getAllProducts(role);
+  }
+
+  @Override public Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException
+  {
+    onProductChange();
+    return warehouseServer.changeStock(id, quantity);
+  }
+
+  private void onProductChange()
+  {
+    for (Map.Entry<ClientCallBack, PropertyChangeListener> set: clients.entrySet())
+    {
+      try
+      {
+        set.getKey().onProductDataChange();
+      }
+      catch (RemoteException e)
+      {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  @Override public void registerStockViewer(ClientCallBack client)
   {
     PropertyChangeListener listener = new PropertyChangeListener()
     {
@@ -69,37 +121,14 @@ public class ServerImplementation implements Server
         }
       }
     };
-    clients.put(client, listener);
+    System.out.println("Client Added: " + client.toString());
+    clients.put(client,listener);
   }
 
-  @Override public void unregisterClient(ClientCallBack client) throws RemoteException
+  @Override public void deregisterStockViewer(ClientCallBack client)
   {
-    //TODO!!
-  }
-
-  @Override public User login(String username, String password) throws RemoteException
-  {
-    return accountServer.login(username, password);
-  }
-
-  @Override public User addAccount(User user, String password) throws RemoteException
-  {
-    return accountServer.addAccount(user, password);
-  }
-
-  @Override public Product addProduct(Product product) throws RemoteException
-  {
-    return warehouseServer.addProduct(product);
-  }
-
-  @Override public ArrayList<Product> getAllProducts(char role) throws RemoteException
-  {
-    return warehouseServer.getAllProducts(role);
-  }
-
-  @Override public Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException
-  {
-    return warehouseServer.changeStock(id, quantity);
+    System.out.println("Client Removed: " + client.toString() );
+    clients.remove(client);
   }
 
 }

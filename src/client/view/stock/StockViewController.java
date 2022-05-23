@@ -4,11 +4,13 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Product;
+import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 
 import java.beans.PropertyChangeEvent;
@@ -16,7 +18,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class StockViewController implements ViewController
+public class StockViewController implements ViewController, PropertyChangeListener
 {
   public Button increaseStockButton;
   private ViewHandler vh;
@@ -37,7 +39,11 @@ public class StockViewController implements ViewController
     this.viewModel = vmf.getStockViewModel();
     this.user = vh.getUser();
 
-//    viewModel.addListener("GetProducts", this);
+    increaseStockButton.setVisible(false);
+    if (user instanceof Manager){increaseStockButton.setVisible(true);}
+
+    viewModel.registerStockViewer();
+    viewModel.addListener("ProductDataChanged", this);
 
     products = new ArrayList<>();
 
@@ -48,21 +54,26 @@ public class StockViewController implements ViewController
     productsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     productsStockColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+    fillProductsTable();
+
+  }
+
+  private void fillProductsTable()
+  {
+    productsTable.getItems().clear();
+
     if (user instanceof Manager)
      products = viewModel.getAllProducts('m');
-    else
-    {
+    if (user instanceof Salesperson)
       products = viewModel.getAllProducts('s');
-      increaseStockButton.setVisible(false);
-    }
 
     populateTable(products);
     productsTable.getSortOrder().add(productsIdColumn);
-
   }
 
   @FXML private void onBackButtonPress ()
   {
+    viewModel.deregisterStockViewer();
     vh.openView("Main");
   }
 
@@ -103,10 +114,8 @@ public class StockViewController implements ViewController
   }
 
 
-//  @Override public void propertyChange(PropertyChangeEvent evt)
-//  {
-//    products = (ArrayList<Product>) evt.getNewValue();
-//    for (Product product : products)
-//      productsTable.getItems().add(product);
-//  }
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(()-> fillProductsTable());
+  }
 }

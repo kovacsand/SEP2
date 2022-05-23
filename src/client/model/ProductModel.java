@@ -15,6 +15,13 @@ import java.util.ArrayList;
 public interface ProductModel extends Subject
 {
   /**
+   * Fires a change when Product Data changes
+   * @param evt ProductData is changing
+   */
+  void onProductDataChange(PropertyChangeEvent evt);
+
+
+  /**
    * Adding new product
    * @param name name of the new product
    * @param desc description of the new product
@@ -34,4 +41,10 @@ public interface ProductModel extends Subject
    * @param quantity the amount to increase the product by
    */
   Product changeStock(int id, int quantity);
+
+
+  void registerStockViewer();
+
+
+  void deregisterStockViewer();
 }
