@@ -1,6 +1,5 @@
 package shared.networking;
 
-import client.networking.RMIClient;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
@@ -15,7 +14,6 @@ import java.util.ArrayList;
  */
 public interface Server extends Remote
 {
-
   /**
    * Logging in through the model. The server passes the arguments to the model.
    * @param username of the user
@@ -57,7 +55,7 @@ public interface Server extends Remote
    */
   Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException;
 
-
+  //TODO javadocs for these two cutie bunnies
   void registerStockViewer(ClientCallBack client) throws RemoteException;
   void deregisterStockViewer(ClientCallBack client) throws RemoteException;
 }

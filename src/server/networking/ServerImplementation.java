@@ -1,6 +1,5 @@
 package server.networking;
 
-import com.sun.javafx.property.adapter.PropertyDescriptor;
 import server.model.AMImplementation;
 import server.model.PMImplementation;
 import shared.networking.ClientCallBack;
@@ -8,19 +7,13 @@ import shared.networking.Server;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.http.WebSocket;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Implementation of the Server interface
@@ -31,7 +24,7 @@ public class ServerImplementation implements Server
 {
   private final AccountServer accountServer;
   private final WarehouseServer warehouseServer;
-  private Map<ClientCallBack, PropertyChangeListener> clients;
+  private Set<ClientCallBack> clients;
   private PropertyChangeSupport support;
 
   /**
@@ -41,7 +34,7 @@ public class ServerImplementation implements Server
   public ServerImplementation() throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    clients = new HashMap<>();
+    clients = new HashSet<>();
     accountServer = new AccountServerImplementation(new AMImplementation());
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
     support = new PropertyChangeSupport(this);
@@ -72,7 +65,6 @@ public class ServerImplementation implements Server
 
   @Override public Product addProduct(Product product) throws RemoteException
   {
-
     Product newProduct= warehouseServer.addProduct(product);
     if(newProduct!=null)
       onProductChange();
@@ -86,17 +78,21 @@ public class ServerImplementation implements Server
 
   @Override public Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
-    onProductChange();
-    return warehouseServer.changeStock(id, quantity);
+    Product changedProduct = warehouseServer.changeStock(id, quantity);
+    if (changedProduct != null)
+      onProductChange();
+    return changedProduct;
   }
 
+  //TODO javadocs if you feel like it
   private void onProductChange()
   {
-    for (Map.Entry<ClientCallBack, PropertyChangeListener> set: clients.entrySet())
+    System.out.println(clients.size() + " clients listening to product changes");
+    for (ClientCallBack client: clients)
     {
       try
       {
-        set.getKey().onProductDataChange();
+        client.onProductDataChange();
       }
       catch (RemoteException e)
       {
@@ -107,22 +103,8 @@ public class ServerImplementation implements Server
 
   @Override public void registerStockViewer(ClientCallBack client)
   {
-    PropertyChangeListener listener = new PropertyChangeListener()
-    {
-      @Override public void propertyChange(PropertyChangeEvent evt)
-      {
-        try
-        {
-          //TODO respond to client
-        } catch (Exception e)
-        {
-          e.printStackTrace();
-          clients.remove(client);
-        }
-      }
-    };
     System.out.println("Client Added: " + client.toString());
-    clients.put(client,listener);
+    clients.add(client);
   }
 
   @Override public void deregisterStockViewer(ClientCallBack client)
@@ -130,5 +112,4 @@ public class ServerImplementation implements Server
     System.out.println("Client Removed: " + client.toString() );
     clients.remove(client);
   }
-
 }

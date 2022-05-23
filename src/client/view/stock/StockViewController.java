@@ -39,15 +39,15 @@ public class StockViewController implements ViewController, PropertyChangeListen
     this.viewModel = vmf.getStockViewModel();
     this.user = vh.getUser();
 
-    increaseStockButton.setVisible(false);
-    if (user instanceof Manager){increaseStockButton.setVisible(true);}
+    products = new ArrayList<>();
 
     viewModel.registerStockViewer();
     viewModel.addListener("ProductDataChanged", this);
 
-    products = new ArrayList<>();
+    increaseStockButton.setVisible(false);
+    if (user instanceof Manager)
+      increaseStockButton.setVisible(true);
 
-    productsTable.getItems().clear();
     productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     productsDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -55,7 +55,6 @@ public class StockViewController implements ViewController, PropertyChangeListen
     productsStockColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
     fillProductsTable();
-
   }
 
   private void fillProductsTable()

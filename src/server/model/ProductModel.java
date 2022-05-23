@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public interface ProductModel extends Subject
 {
-
   /**
    * Adding new product to the database
    * @param product to be added
@@ -32,5 +31,4 @@ public interface ProductModel extends Subject
    * @param quantity by how much the stock must be increased
    */
   Product changeStock(int id, int quantity);
-
 }
