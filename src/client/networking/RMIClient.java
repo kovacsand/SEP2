@@ -5,6 +5,7 @@ import shared.networking.Server;
 import shared.transferobjects.Product;
 import shared.transferobjects.User;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -31,6 +32,7 @@ public class RMIClient implements Client, ClientCallBack
   public RMIClient()
   {
     support = new PropertyChangeSupport(this);
+
   }
 
   @Override public void startClient()
@@ -40,7 +42,6 @@ public class RMIClient implements Client, ClientCallBack
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (Server) registry.lookup("Server");
-      server.registerClient(this);
       System.out.println("The client is running");
     }
     catch (RemoteException | NotBoundException e)
@@ -49,17 +50,17 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public void unregisterClient()
+  /*@Override public void unregisterClient()
   {
     try
     {
-      server.unregisterClient(this);
+      //server.unregisterClient(this);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
-  }
+  }*/
 
   @Override public User login(String username, String password)
   {
@@ -132,6 +133,36 @@ public class RMIClient implements Client, ClientCallBack
     return product;
   }
 
+  @Override public void registerStockViewer()
+  {
+    try
+    {
+      server.registerStockViewer(this);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void deregisterStockViewer()
+  {
+    try
+    {
+      server.deregisterStockViewer(this);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void onProductDataChange()
+  {
+    support.firePropertyChange("ProductDataChanged", 0,1);
+  }
+
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -143,4 +174,6 @@ public class RMIClient implements Client, ClientCallBack
   {
     support.removePropertyChangeListener(propertyName, listener);
   }
+
+
 }

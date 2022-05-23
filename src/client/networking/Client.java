@@ -4,6 +4,7 @@ import shared.transferobjects.Product;
 import shared.transferobjects.User;
 import shared.utils.Subject;
 
+import java.beans.PropertyChangeEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public interface Client extends Subject
   /**
    * Unregistering the client from the server when disconnecting
    */
-  void unregisterClient();
+ // void unregisterClient();
 
   /**
    * User logging into the account
@@ -61,4 +62,7 @@ public interface Client extends Subject
    * @param quantity the number that we want the stock to be increased by
    */
   Product changeStock(int id, int quantity);
+
+  void registerStockViewer();
+  void deregisterStockViewer();
 }

@@ -18,7 +18,8 @@ public class StockViewModel implements PropertyChangeListener, Subject
   {
     this.model = productModel;
     support = new PropertyChangeSupport(this);
-    model.addListener("GetProducts", this);
+    model.addListener("ProductDataChanged",this);
+
   }
 
   public ArrayList<Product> getAllProducts(char role)
@@ -33,8 +34,6 @@ public class StockViewModel implements PropertyChangeListener, Subject
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    System.out.println("List of products");
-    System.out.println(((ArrayList<Product>)evt.getNewValue()).get(0).getName());
     support.firePropertyChange(evt);
   }
 
@@ -48,5 +47,15 @@ public class StockViewModel implements PropertyChangeListener, Subject
       PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(propertyName,listener);
+  }
+
+  public void registerStockViewer()
+  {
+    model.registerStockViewer();
+  }
+
+  public void deregisterStockViewer()
+  {
+    model.deregisterStockViewer();
   }
 }

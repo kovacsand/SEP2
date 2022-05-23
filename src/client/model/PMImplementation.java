@@ -29,6 +29,12 @@ public class PMImplementation implements ProductModel
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
+    client.addListener("ProductDataChanged",this::onProductDataChange);
+  }
+
+  @Override public void onProductDataChange(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 
   @Override public Product addProduct(String name, String desc, double price)
@@ -44,6 +50,16 @@ public class PMImplementation implements ProductModel
   @Override public Product changeStock(int id, int quantity)
   {
     return client.changeStock(id, quantity);
+  }
+
+  @Override public void registerStockViewer()
+  {
+    client.registerStockViewer();
+  }
+
+  @Override public void deregisterStockViewer()
+  {
+    client.deregisterStockViewer();
   }
 
   @Override public void addListener(String propertyName,
