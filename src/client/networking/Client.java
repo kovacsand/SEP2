@@ -63,6 +63,7 @@ public interface Client extends Subject
    */
   Product changeStock(int id, int quantity);
 
+  //TODO javadocs for these two stud muffins
   void registerStockViewer();
   void deregisterStockViewer();
 }

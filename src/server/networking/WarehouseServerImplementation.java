@@ -2,10 +2,7 @@ package server.networking;
 
 import server.model.ProductModel;
 import shared.transferobjects.Product;
-import shared.utils.Subject;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
@@ -44,5 +41,4 @@ public class WarehouseServerImplementation implements WarehouseServer
   {
     return productModel.changeStock(id, quantity);
   }
-
 }
