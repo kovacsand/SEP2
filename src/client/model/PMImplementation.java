@@ -52,6 +52,11 @@ public class PMImplementation implements ProductModel
     return client.changeStock(id, quantity);
   }
 
+  @Override public Product removeProduct(Product product)
+  {
+    return client.removeProduct(product);
+  }
+
   @Override public void registerStockViewer()
   {
     client.registerStockViewer();
