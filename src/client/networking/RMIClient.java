@@ -170,10 +170,40 @@ public class RMIClient implements Client, ClientCallBack
     return receipt;
   }
 
+  @Override public Product addProductToBasket(Product product, int quantity)
+  {
+    Product soldProduct = null;
+    try
+    {
+      soldProduct = server.addProductToBasket(product, quantity);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return soldProduct;
+  }
+
+  @Override public Product removeProductFromBasket(Product product)
+  {
+    Product returnedProduct = null;
+    try
+    {
+      returnedProduct = server.removeProductFromBasket(product);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return returnedProduct;
+  }
+
   @Override public void onProductDataChange()
   {
     support.firePropertyChange("ProductDataChanged", 0,1);
   }
+
+
 
 
   @Override public void addListener(String propertyName,
