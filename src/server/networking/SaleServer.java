@@ -1,13 +1,12 @@
-package server.model;
+package server.networking;
 
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 import shared.transferobjects.Sale;
 import shared.transferobjects.Salesperson;
 
-public interface SaleModel
+public interface SaleServer
 {
-  //TODO whoever takes model write javadocs
   Receipt finaliseSale(Sale sale, Salesperson salesperson);
   Product addProductToBasket(Product product, int quantity);
   Product removeProductFromBasket(Product product);
