@@ -84,10 +84,12 @@ public class ServerImplementation implements Server
     return changedProduct;
   }
 
-  //TODO javadocs if you feel like it
+  /**
+   * Method that calls on all the clients who are looking at the stock view (clients)
+   * and calls their onProductDataChange methods.
+   */
   private void onProductChange()
   {
-    System.out.println(clients.size() + " clients listening to product changes");
     for (ClientCallBack client: clients)
     {
       try
@@ -103,13 +105,11 @@ public class ServerImplementation implements Server
 
   @Override public void registerStockViewer(ClientCallBack client)
   {
-    System.out.println("Client Added: " + client.toString());
     clients.add(client);
   }
 
   @Override public void deregisterStockViewer(ClientCallBack client)
   {
-    System.out.println("Client Removed: " + client.toString() );
     clients.remove(client);
   }
 }
