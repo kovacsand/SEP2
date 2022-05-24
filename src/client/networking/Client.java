@@ -1,7 +1,6 @@
 package client.networking;
 
-import shared.transferobjects.Product;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 import shared.utils.Subject;
 
 import java.beans.PropertyChangeEvent;
@@ -63,7 +62,10 @@ public interface Client extends Subject
    */
   Product changeStock(int id, int quantity);
 
-  //TODO javadocs for these two stud muffins
+  //TODO javadocs for these five stud muffins
   void registerStockViewer();
   void deregisterStockViewer();
+  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+  Product addProductToBasket(Product product, int quantity);
+  Product removeProductFromBasket(Product product);
 }
