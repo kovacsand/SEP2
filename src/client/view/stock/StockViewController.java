@@ -21,6 +21,7 @@ import java.util.Optional;
 public class StockViewController implements ViewController, PropertyChangeListener
 {
   public Button increaseStockButton;
+  public Button removeProductButton;
   private ViewHandler vh;
   private StockViewModel viewModel;
   private User user;
@@ -45,8 +46,14 @@ public class StockViewController implements ViewController, PropertyChangeListen
     viewModel.addListener("ProductDataChanged", this);
 
     increaseStockButton.setVisible(false);
+    removeProductButton.setVisible(false);
+
     if (user instanceof Manager)
+    {
       increaseStockButton.setVisible(true);
+      removeProductButton.setVisible(true);
+    }
+
 
     productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -106,6 +113,13 @@ public class StockViewController implements ViewController, PropertyChangeListen
       }
     }
   }
+
+  public void onRemoveProductButtonPress()
+  {
+    if (productsTable.getSelectionModel().getSelectedItem() != null)
+    viewModel.removeProduct(productsTable.getSelectionModel().getSelectedItem());
+  }
+
   private void populateTable(ArrayList<Product> products)
   {
     for(Product product : products)

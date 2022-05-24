@@ -27,6 +27,11 @@ public class StockViewModel implements PropertyChangeListener, Subject
     return model.getAllProducts(role);
   }
 
+  public Product removeProduct(Product product)
+  {
+    return model.removeProduct(product);
+  }
+
   public Product changeStock(int id,int quantity)
   {
    return model.changeStock(id,quantity);

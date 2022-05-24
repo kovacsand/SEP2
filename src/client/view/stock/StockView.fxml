@@ -16,7 +16,8 @@
           <TableColumn id="stock" fx:id="productsStockColumn" prefWidth="80.66668701171875" text="Stock" />
         </columns>
       </TableView>
-    <Button layoutX="439.0" layoutY="364.0" mnemonicParsing="false" onAction="#onBackButtonPress" text="Back" />
-      <Button fx:id="increaseStockButton" layoutX="494.0" layoutY="364.0" mnemonicParsing="false" onAction="#onIncreaseStockButtonPress" text="Increase Stock" />
+    <Button layoutX="14.0" layoutY="364.0" mnemonicParsing="false" onAction="#onBackButtonPress" text="Back" />
+      <Button fx:id="increaseStockButton" layoutX="494.0" layoutY="363.0" mnemonicParsing="false" onAction="#onIncreaseStockButtonPress" text="Increase Stock" />
+      <Button fx:id="removeProductButton" layoutX="376.0" layoutY="363.0" mnemonicParsing="false" onAction="#onRemoveProductButtonPress" prefHeight="26.0" prefWidth="105.0" text="Remove Product" />
    </children>
 </AnchorPane>
