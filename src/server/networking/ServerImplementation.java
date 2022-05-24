@@ -4,8 +4,7 @@ import server.model.AMImplementation;
 import server.model.PMImplementation;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
-import shared.transferobjects.Product;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;

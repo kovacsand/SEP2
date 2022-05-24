@@ -91,6 +91,11 @@ public class Product implements Serializable
     return quantity;
   }
 
+  /**
+   * Equals method to check if the Products are the same
+   * @param obj that needs to be checked
+   * @return true or false, depending on if the objects are the same
+   */
   public boolean equals(Object obj)
   {
     if(!(obj instanceof Product))

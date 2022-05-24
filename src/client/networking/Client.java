@@ -73,6 +73,9 @@ public interface Client extends Subject
    * be removed as looking at the stock view
    */
   void deregisterStockViewer();
+  Product addProductToBasket(Product product, int quantity);
+  Product removeProductFromBasket(Product product);
+
 
   /**
    * Calls the method on the server to insert the sale and the receipt
@@ -98,5 +101,4 @@ public interface Client extends Subject
    * the stock
    */
   Product removeProductFromBasket(Product product);
-
 }
