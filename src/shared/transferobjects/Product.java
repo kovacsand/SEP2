@@ -90,4 +90,13 @@ public class Product implements Serializable
   {
     return quantity;
   }
+
+  public boolean equals(Object obj)
+  {
+    if(!(obj instanceof Product))
+      return false;
+
+    Product other = (Product) obj;
+    return id == other.id && name.equals(other.name) && description.equals(other.description) && price == other.price && quantity == other.quantity;
+  }
 }
