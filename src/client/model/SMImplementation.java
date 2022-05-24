@@ -3,10 +3,8 @@ package client.model;
 import client.networking.Client;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
-import shared.transferobjects.Sale;
+import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
-
-import java.beans.PropertyChangeSupport;
 
 public class SMImplementation implements SaleModel
 {
@@ -27,9 +25,9 @@ public class SMImplementation implements SaleModel
     this.client = client;
     client.startClient();
   }
-  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+  @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
-    return client.finaliseSale(sale, salesperson);
+    return client.finaliseSale(basket, salesperson);
   }
 
   @Override public Product addProductToBasket(Product product, int quantity)

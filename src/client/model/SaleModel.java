@@ -2,18 +2,18 @@ package client.model;
 
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
-import shared.transferobjects.Sale;
+import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
 public interface SaleModel
 {
   /**
    * Finalising a sale, when a salesperson is making a sale which will call Client's method of finalising sale to contact the server and later database
-   * @param sale object that is created while doing the sale in GUI
+   * @param basket object that is created while doing the sale in GUI
    * @param salesperson object of the person who is making the sale
    * @return receipt of the sale that is auto-generated when sale is successfully created
    */
-  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+  Receipt finaliseSale(Basket basket, Salesperson salesperson);
 
   /**
    * Adding a product to the basket to 'reserve it', so others can not sell it

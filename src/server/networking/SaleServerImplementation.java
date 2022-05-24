@@ -3,7 +3,7 @@ package server.networking;
 import server.model.SaleModel;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
-import shared.transferobjects.Sale;
+import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
 public class SaleServerImplementation implements SaleServer
@@ -15,9 +15,9 @@ public class SaleServerImplementation implements SaleServer
     this.saleModel = saleModel;
   }
 
-  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+  @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
-    return saleModel.finaliseSale(sale, salesperson);
+    return saleModel.finaliseSale(basket, salesperson);
   }
 
   @Override public Product addProductToBasket(Product product, int quantity)
