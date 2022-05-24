@@ -1,7 +1,6 @@
 package shared.networking;
 
-import shared.transferobjects.Product;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -54,6 +53,32 @@ public interface Server extends Remote
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException;
+
+  /**
+   * Finalising a sale of one or several products. The server has the sale as the argument and the salesperson making the sale.
+   * @param sale the sale
+   * @param salesperson the person making the sale
+   * @return the newly generated Receipt
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   */
+  Receipt finaliseSale(Sale sale, Salesperson salesperson) throws RemoteException;
+
+  /**
+   * Adding a product to a basket, which changes the stock of the product
+   * @param product to be changed
+   * @param quantity to be added to the basket
+   * @return the Product with the new quantity
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   */
+  Product addProductToBasket(Product product, int quantity) throws RemoteException;
+
+  /**
+   * Adding a product to a basket, which changes the stock of the product
+   * @param product to be changed
+   * @return the Product with the new quantity
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   */
+  Product removeProductFromBasket(Product product) throws RemoteException;
 
   //TODO javadocs for these two cutie bunnies
   void registerStockViewer(ClientCallBack client) throws RemoteException;
