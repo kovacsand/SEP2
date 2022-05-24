@@ -2,8 +2,7 @@ package client.networking;
 
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
-import shared.transferobjects.Product;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -155,6 +154,20 @@ public class RMIClient implements Client, ClientCallBack
     {
       e.printStackTrace();
     }
+  }
+
+  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+  {
+    Receipt receipt = null;
+    try
+    {
+      receipt = server.finaliseSale(sale, salesperson);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return receipt;
   }
 
   @Override public void onProductDataChange()
