@@ -158,7 +158,9 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
   {
-   Receipt receipt = null;
+
+    Receipt receipt = null;
+
     try
     {
       receipt = server.finaliseSale(sale, salesperson);
