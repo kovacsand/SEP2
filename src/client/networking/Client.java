@@ -62,8 +62,16 @@ public interface Client extends Subject
    */
   Product changeStock(int id, int quantity);
 
-  //TODO javadocs for these four stud muffins
+  /**
+   * Call the method on the server, passing itself as a ClientCallBack object to
+   * be added as looking at the stock view
+   */
   void registerStockViewer();
+
+  /**
+   * Calls the method on the server,passing itself as a ClientCallBack object to
+   * be removed as looking at the stock view
+   */
   void deregisterStockViewer();
   Product addProductToBasket(Product product, int quantity);
   Product removeProductFromBasket(Product product);
@@ -77,4 +85,20 @@ public interface Client extends Subject
    */
   Receipt finaliseSale(Sale sale, Salesperson salesperson);
 
+  /**
+   * Calls the method in the server to reduce the available stock of a product
+   * and add it to a sale
+   * @param product the selected product to edit
+   * @param quantity the amount to reduce the quantity by
+   * @return the product with the quantity to be added to the sale
+   */
+  Product addProductToBasket(Product product, int quantity);
+
+  /**
+   * Calls the method in the server to remove the product from the basket
+   * @param product the product to be removed from the basket
+   * @return the product that has been removed from the basket and returned to
+   * the stock
+   */
+  Product removeProductFromBasket(Product product);
 }
