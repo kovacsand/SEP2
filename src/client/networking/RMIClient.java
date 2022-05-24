@@ -4,7 +4,6 @@ import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.*;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -156,14 +155,14 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+  @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
 
     Receipt receipt = null;
 
     try
     {
-      receipt = server.finaliseSale(sale, salesperson);
+      receipt = server.finaliseSale(basket, salesperson);
     }
     catch (RemoteException e)
     {

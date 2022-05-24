@@ -4,7 +4,7 @@ import server.model.mediator.ProductDAOImplementation;
 import server.model.mediator.SaleDAOImplementation;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
-import shared.transferobjects.Sale;
+import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
 import java.sql.SQLException;
@@ -16,12 +16,12 @@ public class SMImplementation implements SaleModel
 
   }
 
-  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+  @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
     Receipt newReceipt = null;
     try
     {
-      newReceipt = SaleDAOImplementation.getInstance().addSale(sale, salesperson);
+      newReceipt = SaleDAOImplementation.getInstance().addSale(basket, salesperson);
     }
     catch (SQLException e)
     {

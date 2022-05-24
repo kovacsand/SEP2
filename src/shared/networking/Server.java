@@ -56,12 +56,12 @@ public interface Server extends Remote
 
   /**
    * Finalising a sale of one or several products. The server has the sale as the argument and the salesperson making the sale.
-   * @param sale the sale
+   * @param basket the sale
    * @param salesperson the person making the sale
    * @return the newly generated Receipt
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
-  Receipt finaliseSale(Sale sale, Salesperson salesperson) throws RemoteException;
+  Receipt finaliseSale(Basket basket, Salesperson salesperson) throws RemoteException;
 
   /**
    * Adding a product to a basket, which changes the stock of the product

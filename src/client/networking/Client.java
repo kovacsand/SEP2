@@ -3,8 +3,6 @@ package client.networking;
 import shared.transferobjects.*;
 import shared.utils.Subject;
 
-import java.beans.PropertyChangeEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -73,17 +71,14 @@ public interface Client extends Subject
    * be removed as looking at the stock view
    */
   void deregisterStockViewer();
-  Product addProductToBasket(Product product, int quantity);
-  Product removeProductFromBasket(Product product);
-
 
   /**
    * Calls the method on the server to insert the sale and the receipt
-   * @param sale the Sale transferObject with products, quantities,
+   * @param basket the Sale transferObject with products, quantities,
    * @param salesperson the Salesperson who is making this sale
    * @return Receipt object containing the sale
    */
-  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+  Receipt finaliseSale(Basket basket, Salesperson salesperson);
 
   /**
    * Calls the method in the server to reduce the available stock of a product
