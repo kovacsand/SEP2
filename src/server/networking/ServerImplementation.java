@@ -4,7 +4,8 @@ import server.model.AMImplementation;
 import server.model.PMImplementation;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
-import shared.transferobjects.*;
+import shared.transferobjects.Product;
+import shared.transferobjects.User;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;
@@ -83,28 +84,12 @@ public class ServerImplementation implements Server
     return changedProduct;
   }
 
-  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
-      throws RemoteException
-  {
-    return null;
-  }
-
-  @Override public Product addProductToBasket(Product product, int quantity)
-      throws RemoteException
-  {
-    return null;
-  }
-
-  @Override public Product removeProductFromBasket(Product product)
-      throws RemoteException
-  {
-    return null;
-  }
-
-  //TODO javadocs if you feel like it
+  /**
+   * Method that calls on all the clients who are looking at the stock view (clients)
+   * and calls their onProductDataChange methods.
+   */
   private void onProductChange()
   {
-    System.out.println(clients.size() + " clients listening to product changes");
     for (ClientCallBack client: clients)
     {
       try
@@ -120,13 +105,11 @@ public class ServerImplementation implements Server
 
   @Override public void registerStockViewer(ClientCallBack client)
   {
-    System.out.println("Client Added: " + client.toString());
     clients.add(client);
   }
 
   @Override public void deregisterStockViewer(ClientCallBack client)
   {
-    System.out.println("Client Removed: " + client.toString() );
     clients.remove(client);
   }
 }
