@@ -12,7 +12,6 @@ public class Basket
    * @version 1.0
    */
   private Map<Product, Integer> products;
-  private int id;
   private double totalPrice;
 
   /**
@@ -25,29 +24,10 @@ public class Basket
   }
 
   /**
-   * One-argument constructor initializing the Sale object, initializing products HashMap, and sets totalPrice to 0
-   * @param id of the sale
-   */
-  public Basket(int id)
-  {
-    this.id = id;
-    products = new HashMap<>();
-    totalPrice = 0;
-  }
-
-  /**
    * Get method for getting ID of the Sale
    * @return id of the Sale
    */
-  public int getId()
-  {
-    return id;
-  }
 
-  /**
-   * Get method for getting the HashMap of the Products that are in the sale
-   * @return hashmap of the Products that are in the sale
-   */
   public HashMap<Product, Integer> getProducts()
   {
     return (HashMap<Product, Integer>) products;
