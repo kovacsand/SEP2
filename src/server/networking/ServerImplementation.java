@@ -4,8 +4,7 @@ import server.model.AMImplementation;
 import server.model.PMImplementation;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
-import shared.transferobjects.Product;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;
@@ -82,6 +81,24 @@ public class ServerImplementation implements Server
     if (changedProduct != null)
       onProductChange();
     return changedProduct;
+  }
+
+  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
+      throws RemoteException
+  {
+    return null;
+  }
+
+  @Override public Product addProductToBasket(Product product, int quantity)
+      throws RemoteException
+  {
+    return null;
+  }
+
+  @Override public Product removeProductFromBasket(Product product)
+      throws RemoteException
+  {
+    return null;
   }
 
   //TODO javadocs if you feel like it
