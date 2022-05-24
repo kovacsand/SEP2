@@ -158,7 +158,16 @@ public class RMIClient implements Client, ClientCallBack
 
   @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson)
   {
-    return null;
+   Receipt receipt = null;
+    try
+    {
+      receipt = server.finaliseSale(sale, salesperson);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return receipt;
   }
 
   @Override public Product addProductToBasket(Product product, int quantity)
@@ -169,6 +178,7 @@ public class RMIClient implements Client, ClientCallBack
   @Override public Product removeProductFromBasket(Product product)
   {
     return null;
+
   }
 
   @Override public void onProductDataChange()
