@@ -41,4 +41,9 @@ public class WarehouseServerImplementation implements WarehouseServer
   {
     return productModel.changeStock(id, quantity);
   }
+
+  @Override public Product removeProduct(Product product)
+  {
+    return productModel.removeProduct(product);
+  }
 }

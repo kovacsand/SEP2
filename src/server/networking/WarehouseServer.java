@@ -31,4 +31,12 @@ public interface WarehouseServer
    * @param quantity amount which needs to be increased by
    */
   Product changeStock(int id, int quantity);
+
+  /**
+   *
+   * Removing the product from the database. This server passes to the model
+   * @param product the product to be removed
+   * @return the removed product object if successful, null if unsuccessful
+   */
+  Product removeProduct(Product product);
 }

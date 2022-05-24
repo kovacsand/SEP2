@@ -135,4 +135,12 @@ public class ServerImplementation implements Server
   {
     clients.remove(client);
   }
+
+  @Override public Product removeProduct(Product product) throws RemoteException
+  {
+    Product removedProduct = warehouseServer.removeProduct(product);
+    if (removedProduct != null)
+      onProductChange();
+    return removedProduct;
+  }
 }
