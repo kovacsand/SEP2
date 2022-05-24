@@ -1,6 +1,7 @@
 package server.model;
 
 import server.model.mediator.ProductDAOImplementation;
+import server.model.mediator.SaleDAOImplementation;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 import shared.transferobjects.Sale;
