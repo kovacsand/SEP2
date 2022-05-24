@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Interface for Client using RMI and Observer Pattern
  *
  * @author S2G2
- * @version 1.1
+ * @version 1.2
  */
 public interface Client extends Subject
 {

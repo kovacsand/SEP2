@@ -2,6 +2,7 @@ package server.networking;
 
 import server.model.AMImplementation;
 import server.model.PMImplementation;
+import server.model.SMImplementation;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.*;
@@ -17,12 +18,13 @@ import java.util.*;
 /**
  * Implementation of the Server interface
  * @author S2G2
- * @version 1.0
+ * @version 1.2
  */
 public class ServerImplementation implements Server
 {
   private final AccountServer accountServer;
   private final WarehouseServer warehouseServer;
+  private final SaleServer saleServer;
   private Set<ClientCallBack> clients;
   private PropertyChangeSupport support;
 
@@ -36,6 +38,7 @@ public class ServerImplementation implements Server
     clients = new HashSet<>();
     accountServer = new AccountServerImplementation(new AMImplementation());
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
+    saleServer = new SaleServerImplementation(new SMImplementation());
     support = new PropertyChangeSupport(this);
   }
 
@@ -78,6 +81,27 @@ public class ServerImplementation implements Server
   @Override public Product changeStock(ClientCallBack client, int id, int quantity) throws RemoteException
   {
     Product changedProduct = warehouseServer.changeStock(id, quantity);
+    if (changedProduct != null)
+      onProductChange();
+    return changedProduct;
+  }
+
+  @Override public Receipt finaliseSale(Sale sale, Salesperson salesperson) throws RemoteException
+  {
+    return saleServer.finaliseSale(sale, salesperson);
+  }
+
+  @Override public Product addProductToBasket(Product product, int quantity) throws RemoteException
+  {
+    Product changedProduct = saleServer.addProductToBasket(product, quantity);
+    if (changedProduct != null)
+      onProductChange();
+    return changedProduct;
+  }
+
+  @Override public Product removeProductFromBasket(Product product) throws RemoteException
+  {
+    Product changedProduct = saleServer.removeProductFromBasket(product);
     if (changedProduct != null)
       onProductChange();
     return changedProduct;

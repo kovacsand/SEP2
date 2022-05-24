@@ -1,12 +1,9 @@
 package server.model;
 
 import shared.transferobjects.User;
-import shared.utils.Subject;
-
-import java.io.Serializable;
 
 /**
- * Interface used for logging in users and adding new accounts, extends Subject interface
+ * Interface used for logging in users and adding new accounts
  * @author S2G2
  * @version 1.1
  */
