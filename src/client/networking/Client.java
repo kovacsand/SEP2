@@ -65,7 +65,16 @@ public interface Client extends Subject
   //TODO javadocs for these five stud muffins
   void registerStockViewer();
   void deregisterStockViewer();
-  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+
   Product addProductToBasket(Product product, int quantity);
   Product removeProductFromBasket(Product product);
+
+  /**
+   * Calls the method on the server to insert the sale and the receipt
+   * @param sale the Sale transferObject with products, quantities,
+   * @param salesperson the Salesperson who is making this sale
+   * @return Receipt object containing the sale
+   */
+  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+
 }
