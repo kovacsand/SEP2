@@ -109,13 +109,12 @@ public class RMIClient implements Client, ClientCallBack
     {
       products = server.getAllProducts(role);
     }
-    catch(RemoteException e)
+    catch (RemoteException e)
     {
       e.printStackTrace();
     }
     return products;
   }
-
 
   @Override public Product changeStock(int id, int quantity)
   {
@@ -200,13 +199,24 @@ public class RMIClient implements Client, ClientCallBack
     return returnedProduct;
   }
 
-  @Override public void onProductDataChange()
+  @Override public Product removeProduct(Product product)
   {
-    support.firePropertyChange("ProductDataChanged", 0,1);
+    Product removedProduct = null;
+    try
+    {
+      removedProduct = server.removeProduct(product);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return removedProduct;
   }
 
-
-
+  @Override public void onProductDataChange()
+  {
+    support.firePropertyChange("ProductDataChanged", 0, 1);
+  }
 
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
@@ -219,6 +229,5 @@ public class RMIClient implements Client, ClientCallBack
   {
     support.removePropertyChangeListener(propertyName, listener);
   }
-
 
 }

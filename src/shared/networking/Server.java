@@ -80,7 +80,20 @@ public interface Server extends Remote
    */
   Product removeProductFromBasket(Product product) throws RemoteException;
 
-  //TODO javadocs for these two cutie bunnies
+  /**
+   * Call the method on the SaleServer, passing itself as a ClientCallBack object to
+   * be added as looking at the stock view
+   */
   void registerStockViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Calls the method on the SaleServer,passing itself as a ClientCallBack object to
+   * be removed as looking at the stock view
+   */
   void deregisterStockViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Calls the method in Warehouse Server to remove a product from the database
+   */
+  Product removeProduct(Product product) throws RemoteException;
 }

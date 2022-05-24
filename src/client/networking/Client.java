@@ -96,4 +96,11 @@ public interface Client extends Subject
    * the stock
    */
   Product removeProductFromBasket(Product product);
+
+  /**
+   * Calls the method in the server to remove a product from the database
+   * @param product the product to be removed
+   * @return the removed product if successful, null if unsuccessful
+   */
+  Product removeProduct(Product product);
 }
