@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Interface for the RMI server. It ensures, that the connection is established between the client(s) and the server.
  * @author S2G2
- * @version 1.0
+ * @version 1.2
  */
 public interface Server extends Remote
 {
