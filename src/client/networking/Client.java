@@ -62,12 +62,12 @@ public interface Client extends Subject
    */
   Product changeStock(int id, int quantity);
 
-  //TODO javadocs for these five stud muffins
+  //TODO javadocs for these four stud muffins
   void registerStockViewer();
   void deregisterStockViewer();
-
   Product addProductToBasket(Product product, int quantity);
   Product removeProductFromBasket(Product product);
+
 
   /**
    * Calls the method on the server to insert the sale and the receipt
