@@ -2,7 +2,7 @@ package server.model;
 
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
-import shared.transferobjects.Sale;
+import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
 /**
@@ -14,11 +14,11 @@ public interface SaleModel
 {
   /**
    * Finalising a sale of one or several products. Calls method on DAO.
-   * @param sale the sale
+   * @param basket the sale
    * @param salesperson the person making the sale
    * @return the newly generated Receipt
    */
-  Receipt finaliseSale(Sale sale, Salesperson salesperson);
+  Receipt finaliseSale(Basket basket, Salesperson salesperson);
 
   /**
    * Adding a product to a basket, which changes the stock of the product. Calls method on DAO.

@@ -11,18 +11,18 @@ public class Receipt
    * @version 1.0
    */
   private int id;
-  private Sale sale;
+  private Basket basket;
   private LocalDateTime dateTime;
   private Salesperson salesperson;
 
   /**
    * Two-argument constructor initializing the Receipt object, also sets dateTime to LocalDateTime.now()
    * @param salesperson User that made the sale
-   * @param sale object that Receipt corresponds to
+   * @param basket object that Receipt corresponds to
    */
-  public Receipt(Salesperson salesperson, Sale sale)
+  public Receipt(Salesperson salesperson, Basket basket)
   {
-    this.sale = sale;
+    this.basket = basket;
     this.salesperson = salesperson;
     dateTime = LocalDateTime.now();
   }
@@ -31,14 +31,14 @@ public class Receipt
    * Four-argument constructor initializing the Receipt object
    * @param id of the Receipt
    * @param salesperson User that made the sale
-   * @param sale object that Receipt corresponds to
+   * @param basket object that Receipt corresponds to
    * @param dateTime date and time of the moment when the Sale was made
    */
-  public Receipt(int id, Salesperson salesperson, Sale sale, LocalDateTime dateTime)
+  public Receipt(int id, Salesperson salesperson, Basket basket, LocalDateTime dateTime)
   {
     this.id = id;
     this.salesperson = salesperson;
-    this.sale = sale;
+    this.basket = basket;
     this.dateTime = dateTime;
   }
 
@@ -55,9 +55,9 @@ public class Receipt
    * Get method to get the Sale object of the Receipt
    * @return Sale object of the Receipt
    */
-  public Sale getSale()
+  public Basket getSale()
   {
-    return sale;
+    return basket;
   }
 
   /**

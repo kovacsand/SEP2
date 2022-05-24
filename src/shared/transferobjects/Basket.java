@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Sale
+public class Basket
 {
   /**
    * Class that is responsible for Sale object
@@ -18,7 +18,7 @@ public class Sale
   /**
    * No-argument constructor initializing the Sale object, initializes products HashMap, and sets totalPrice to 0
    */
-  public Sale()
+  public Basket()
   {
     products = new HashMap<>();
     totalPrice = 0;
@@ -28,7 +28,7 @@ public class Sale
    * One-argument constructor initializing the Sale object, initializing products HashMap, and sets totalPrice to 0
    * @param id of the sale
    */
-  public Sale(int id)
+  public Basket(int id)
   {
     this.id = id;
     products = new HashMap<>();
