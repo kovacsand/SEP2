@@ -6,14 +6,14 @@ import shared.transferobjects.Receipt;
 import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
+/**
+ * Class that implements the SaleModel interface
+ *
+ * @author S2G2
+ * @version 1.0
+ */
 public class SMImplementation implements SaleModel
 {
-  /**
-   * Class that implements the SaleModel interface
-   *
-   * @author S2G2
-   * @version 1.0
-   */
   private Client client;
 
   /**
@@ -30,9 +30,9 @@ public class SMImplementation implements SaleModel
     return client.finaliseSale(basket, salesperson);
   }
 
-  @Override public Product addProductToBasket(Product product, int quantity)
+  @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket)
   {
-    return client.addProductToBasket(product, quantity);
+    return client.addProductToBasket(product, quantity, alreadyInBasket);
   }
 
   @Override public Product removeProductFromBasket(Product product)

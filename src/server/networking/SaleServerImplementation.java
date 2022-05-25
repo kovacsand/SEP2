@@ -20,9 +20,9 @@ public class SaleServerImplementation implements SaleServer
     return saleModel.finaliseSale(basket, salesperson);
   }
 
-  @Override public Product addProductToBasket(Product product, int quantity)
+  @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket)
   {
-    return saleModel.addProductToBasket(product, quantity);
+    return saleModel.addProductToBasket(product, quantity, alreadyInBasket);
   }
 
   @Override public Product removeProductFromBasket(Product product)

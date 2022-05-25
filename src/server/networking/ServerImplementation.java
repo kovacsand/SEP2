@@ -91,9 +91,9 @@ public class ServerImplementation implements Server
     return saleServer.finaliseSale(basket, salesperson);
   }
 
-  @Override public Product addProductToBasket(Product product, int quantity) throws RemoteException
+  @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket) throws RemoteException
   {
-    Product changedProduct = saleServer.addProductToBasket(product, quantity);
+    Product changedProduct = saleServer.addProductToBasket(product, quantity, alreadyInBasket);
     if (changedProduct != null)
       onProductChange();
     return changedProduct;

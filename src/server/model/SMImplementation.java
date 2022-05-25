@@ -30,31 +30,56 @@ public class SMImplementation implements SaleModel
     return newReceipt;
   }
 
-  @Override public Product addProductToBasket(Product product, int quantity)
+  @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket)
   {
-    Product changedProduct = null;
+    Product changedProductBasket = null;
+    if (!alreadyInBasket)
+    {
+      try
+      {
+        changedProductBasket = ProductDAOImplementation.getInstance().increaseInBaskets(product);
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+
+    Product changedProductQuantity = null;
     try
     {
-      changedProduct = ProductDAOImplementation.getInstance().changeStock(product.getId(), -quantity);
+      changedProductQuantity = ProductDAOImplementation.getInstance().changeStock(product.getId(), -quantity);
     }
     catch (SQLException e)
     {
       e.printStackTrace();
     }
-    return changedProduct;
+    return ( (changedProductBasket != null && changedProductQuantity != null) ? changedProductQuantity : null);
   }
 
   @Override public Product removeProductFromBasket(Product product)
   {
-    Product changedProduct = null;
+    Product changedProductBasket = null;
     try
     {
-      changedProduct = ProductDAOImplementation.getInstance().changeStock(product.getId(), product.getQuantity());
+      changedProductBasket = ProductDAOImplementation.getInstance().decreaseInBaskets(product);
     }
     catch (SQLException e)
     {
       e.printStackTrace();
     }
-    return changedProduct;
+
+    Product changedProductQuantity = null;
+    try
+    {
+      System.out.println(product.getQuantity());
+      changedProductQuantity = ProductDAOImplementation.getInstance().changeStock(product.getId(), product.getQuantity());
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+    return ( (changedProductBasket != null && changedProductQuantity != null) ? changedProductQuantity : null);
   }
 }

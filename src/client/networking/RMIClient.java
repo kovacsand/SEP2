@@ -170,12 +170,12 @@ public class RMIClient implements Client, ClientCallBack
     return receipt;
   }
 
-  @Override public Product addProductToBasket(Product product, int quantity)
+  @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket)
   {
     Product soldProduct = null;
     try
     {
-      soldProduct = server.addProductToBasket(product, quantity);
+      soldProduct = server.addProductToBasket(product, quantity, alreadyInBasket);
     }
     catch (RemoteException e)
     {
