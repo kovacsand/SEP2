@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author S2G2
  * @version 1.1
  */
-public interface ProductModel extends Subject
+public interface ProductModel
 {
   /**
    * Adding new product to the database

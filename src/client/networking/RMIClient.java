@@ -213,6 +213,34 @@ public class RMIClient implements Client, ClientCallBack
     return removedProduct;
   }
 
+  @Override public ArrayList<Receipt> getAllReceipts()
+  {
+    ArrayList<Receipt> allReceipts = null;
+    try
+    {
+      return server.getAllReceipts();
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return allReceipts;
+  }
+
+  @Override public Receipt getReceiptDetails(int receiptID)
+  {
+    Receipt requestedReceipt = null;
+    try
+    {
+      return server.getReceiptDetails(receiptID);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return requestedReceipt;
+  }
+
   @Override public void onProductDataChange()
   {
     support.firePropertyChange("ProductDataChanged", 0, 1);
