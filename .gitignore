@@ -32,3 +32,4 @@ PostgreSQLAccess.java
 
 /out/production/SEP2/client/view/main/MainView.fxml
 /out/production/SEP2/client/view/stock/StockView.fxml
+/out/production/SEP2/client/view/sale/SaleView.fxml

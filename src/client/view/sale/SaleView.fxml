@@ -43,11 +43,11 @@
             </HBox>
             <HBox prefHeight="300.0" prefWidth="1100.0">
                <children>
-                  <TableView fx:id="stockTable" prefHeight="300.0" prefWidth="504.0">
+                  <TableView fx:id="stockTable" prefHeight="300.0" prefWidth="482.0">
                     <columns>
                       <TableColumn fx:id="productsIdColumn" editable="false" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="productsNameColumn" editable="false" prefWidth="136.80004119873047" text="Name" />
-                        <TableColumn fx:id="productsDescColumn" editable="false" prefWidth="607.1999816894531" text="Description" />
+                        <TableColumn fx:id="productsDescColumn" editable="false" prefWidth="100.0" text="Description" />
                         <TableColumn fx:id="productsPriceColumn" editable="false" minWidth="0.0" prefWidth="60.8001708984375" text="Price" />
                         <TableColumn fx:id="productsQuantityColumn" editable="false" prefWidth="93.60002441406255" text="Quantity" />
                     </columns>
@@ -70,12 +70,12 @@
             </HBox>
             <HBox prefHeight="103.0" prefWidth="1153.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackButton" prefHeight="75.0" prefWidth="137.0" text="Back">
+                  <Button mnemonicParsing="false" onAction="#onBackButton" prefWidth="183.0" text="Back">
                      <font>
                         <Font size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onAddButton" prefHeight="60.0" prefWidth="100.0" text="Add">
@@ -83,7 +83,7 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="750.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onRemoveButton" prefHeight="60.0" prefWidth="100.0" text="Remove">
@@ -91,12 +91,12 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="100.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                   <Label fx:id="totalPrice" prefHeight="60.0" prefWidth="462.0" text="Total Price: ">
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets />
                      </HBox.margin>
                      <font>
                         <Font size="38.0" />
@@ -115,7 +115,7 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                </children>

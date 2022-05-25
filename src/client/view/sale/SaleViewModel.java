@@ -29,9 +29,9 @@ public class SaleViewModel
     return saleModel.finaliseSale(basket,salesperson);
   }
 
-  public Product addProductToBasket(Product product,int quantity)
+  public Product addProductToBasket(Product product,int quantity, boolean alreadyInBasket)
   {
-    return saleModel.addProductToBasket(product,quantity, false);
+    return saleModel.addProductToBasket(product,quantity, alreadyInBasket);
   }
 
   public Product removeProductFromBasket(Product product)
