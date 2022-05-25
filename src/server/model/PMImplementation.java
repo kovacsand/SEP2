@@ -10,20 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Class that implements the AddProductModel interface on server side.
+ * Class that implements the ProductModel interface on server side.
  * @author S2G2
  * @version 1.0
  */
 public class PMImplementation implements ProductModel
 {
-  private final PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the AccountModel implementation class
    */
   public PMImplementation()
   {
-    support = new PropertyChangeSupport(this);
   }
 
   @Override public Product addProduct(Product product)
@@ -82,13 +80,4 @@ public class PMImplementation implements ProductModel
     return removedProduct;
   }
 
-  @Override public void addListener(String propertyName, PropertyChangeListener listener)
-  {
-    support.addPropertyChangeListener(propertyName, listener);
-  }
-
-  @Override public void removeListener(String propertyName, PropertyChangeListener listener)
-  {
-    support.removePropertyChangeListener(propertyName, listener);
-  }
 }

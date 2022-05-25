@@ -83,17 +83,38 @@ public interface Server extends Remote
   /**
    * Call the method on the SaleServer, passing itself as a ClientCallBack object to
    * be added as looking at the stock view
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
    */
   void registerStockViewer(ClientCallBack client) throws RemoteException;
 
   /**
    * Calls the method on the SaleServer,passing itself as a ClientCallBack object to
    * be removed as looking at the stock view
+   * @param client the user as a client object
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
    */
   void deregisterStockViewer(ClientCallBack client) throws RemoteException;
 
   /**
    * Calls the method in Warehouse Server to remove a product from the database
-   */
+   * @param product the product object that should be removed
+   * @returns the removed product, null if unsuccessful
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   * */
   Product removeProduct(Product product) throws RemoteException;
+
+  /**
+   * Calls the method in the ReceiptServer to return all the receipts as an ArrayList of Receipt objects
+   * @return ArrayList<Receipt>
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   */
+  ArrayList<Receipt> getAllReceipts() throws RemoteException;
+
+  /**
+   * Calls the method in the ReceiptSever to return a requested receipt as a receipt object
+   * @param receiptID the receipt to display details of
+   * @return the requested receipt as a receipt object
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   */
+  Receipt getReceiptDetails(int receiptID) throws RemoteException;
 }

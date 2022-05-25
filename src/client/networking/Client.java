@@ -103,4 +103,17 @@ public interface Client extends Subject
    * @return the removed product if successful, null if unsuccessful
    */
   Product removeProduct(Product product);
+
+  /**
+   * Calls the method to get an arraylist of all the receipt as receipt objects
+   * @return all receipts as an ArrayList<Receipt>
+   */
+  ArrayList<Receipt> getAllReceipts();
+
+  /**
+   * Calls the method on the server to get the details of one receipt
+   * @param receiptID the id of the request receipt
+   * @return the requested receipt object, null if unsuccessful
+   */
+  Receipt getReceiptDetails(int receiptID);
 }
