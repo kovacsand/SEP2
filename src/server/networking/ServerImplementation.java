@@ -2,6 +2,7 @@ package server.networking;
 
 import server.model.AMImplementation;
 import server.model.PMImplementation;
+import server.model.RMImplementation;
 import server.model.SMImplementation;
 import shared.networking.ClientCallBack;
 import shared.networking.Server;
@@ -25,6 +26,7 @@ public class ServerImplementation implements Server
   private final AccountServer accountServer;
   private final WarehouseServer warehouseServer;
   private final SaleServer saleServer;
+  private final ReceiptServer receiptServer;
   private Set<ClientCallBack> clients;
   private PropertyChangeSupport support;
 
@@ -39,6 +41,7 @@ public class ServerImplementation implements Server
     accountServer = new AccountServerImplementation(new AMImplementation());
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
     saleServer = new SaleServerImplementation(new SMImplementation());
+    receiptServer = new ReceiptSeverImplementation(new RMImplementation());
     support = new PropertyChangeSupport(this);
   }
 
@@ -142,5 +145,16 @@ public class ServerImplementation implements Server
     if (removedProduct != null)
       onProductChange();
     return removedProduct;
+  }
+
+  @Override public ArrayList<Receipt> getAllReceipts() throws RemoteException
+  {
+    return receiptServer.getAllReceipts();
+  }
+
+  @Override public Receipt getReceiptDetails(int receiptID)
+      throws RemoteException
+  {
+    return receiptServer.getReceiptDetails(receiptID);
   }
 }
