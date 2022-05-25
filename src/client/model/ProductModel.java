@@ -49,8 +49,8 @@ public interface ProductModel extends Subject
    */
   Product removeProduct(Product product);
 
-  void registerStockViewer();
 
+  void registerStockViewer();
 
   void deregisterStockViewer();
 }

@@ -19,9 +19,10 @@ public interface SaleModel
    * Adding a product to the basket to 'reserve it', so others can not sell it
    * @param product object that is being added to the basket
    * @param quantity amount of the product that is being added to the basket
+   * @param alreadyInBasket boolean to determine if the product had already been in the local basket
    * @return the product object that has been added
    */
-  Product addProductToBasket(Product product, int quantity);
+  Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket);
   /**
    * Removing a reserved product from the basket
    * @param product object that is being removed from the basket

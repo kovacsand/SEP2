@@ -40,6 +40,20 @@ public class PMImplementation implements ProductModel
     return addedProduct;
   }
 
+  @Override public Product removeProduct(Product product)
+  {
+    Product productToBeDeleted = null;
+    try
+    {
+      productToBeDeleted = ProductDAOImplementation.getInstance().removeProduct(product);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return  productToBeDeleted;
+  }
+
   @Override public ArrayList<Product> getAllProducts(char role)
   {
     ArrayList<Product> allProducts = new ArrayList<>();
@@ -66,20 +80,6 @@ public class PMImplementation implements ProductModel
       e.printStackTrace();
     }
     return product;
-  }
-
-  @Override public Product removeProduct(Product product)
-  {
-    Product removedProduct = null;
-    try
-    {
-     removedProduct = ProductDAOImplementation.getInstance().removeProduct(product);
-    }
-    catch(SQLException e)
-    {
-      e.printStackTrace();
-    }
-    return removedProduct;
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)

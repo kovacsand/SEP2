@@ -24,9 +24,10 @@ public interface SaleModel
    * Adding a product to a basket, which changes the stock of the product. Calls method on DAO.
    * @param product to be changed
    * @param quantity to be added to the basket
+   * @param alreadyInBasket boolean to determine if the product had already been in the local basket
    * @return the Product with the new quantity
    */
-  Product addProductToBasket(Product product, int quantity);
+  Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket);
 
   /**
    * Adding a product to a basket, which changes the stock of the product. Calls method on DAO.

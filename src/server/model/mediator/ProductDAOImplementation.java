@@ -55,6 +55,20 @@ public class ProductDAOImplementation implements ProductDAO
     return product;
   }
 
+  @Override public Product removeProduct(Product product) throws SQLException
+  {
+    int rowsDeleted;
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET discontinued = TRUE WHERE id = ? AND inBaskets = 0;");
+      statement.setInt(1, product.getId());
+      rowsDeleted = statement.executeUpdate();
+    }
+    if (rowsDeleted == 1)
+      return product;
+    return null;
+  }
+
   @Override public ArrayList<Product> getAllProducts(char role)
       throws SQLException
   {
@@ -65,7 +79,7 @@ public class ProductDAOImplementation implements ProductDAO
       try (Connection connection = getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
-            "SELECT * FROM Products;");
+            "SELECT * FROM Products WHERE NOT discontinued;");
         resultSet = statement.executeQuery();
       }
     }
@@ -74,7 +88,7 @@ public class ProductDAOImplementation implements ProductDAO
       try (Connection connection = getConnection())
       {
         PreparedStatement statement = connection.prepareStatement(
-            "SELECT * FROM Products WHERE quantity > 0;");
+            "SELECT * FROM Products WHERE NOT discontinued AND quantity > 0;");
         resultSet = statement.executeQuery();
       }
     }
@@ -106,7 +120,7 @@ public class ProductDAOImplementation implements ProductDAO
 
     try(Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Products WHERE id = ?");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Products WHERE id = ?;");
       statement.setInt(1, id);
       resultSet = statement.executeQuery();
     }
@@ -120,5 +134,29 @@ public class ProductDAOImplementation implements ProductDAO
       product = new Product(productId, name, description, price, productQuantity);
     }
     return product;
+  }
+
+  @Override public Product increaseInBaskets(Product product) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET inBaskets = inBaskets + 1 WHERE id = ?;");
+      statement.setInt(1, product.getId());
+      if (statement.executeUpdate() == 1)
+        return product;
+    }
+    return null;
+  }
+
+  @Override public Product decreaseInBaskets(Product product) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Products SET inBaskets = inBaskets - 1 WHERE id = ?;");
+      statement.setInt(1, product.getId());
+      if (statement.executeUpdate() == 1)
+        return product;
+    }
+    return null;
   }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Interface for Database Access Object accessing Products
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface ProductDAO extends DAOInterface
 {
@@ -20,6 +20,8 @@ public interface ProductDAO extends DAOInterface
    * @throws SQLException if something is wrong with the database
    */
   Product addProduct(Product product) throws SQLException;
+
+  Product removeProduct(Product product) throws SQLException;
 
   /**
    * Fetching all products from the database, depending on the role of the user.
@@ -35,4 +37,20 @@ public interface ProductDAO extends DAOInterface
    * @throws SQLException if something is wrong with the database
    */
   Product changeStock(int id, int quantity) throws SQLException;
+
+  /**
+   * Increasing the inBaskets attribute of the Product in the database
+   * @param product
+   * @return the changed product if the process was successful, otherwise null
+   * @throws SQLException if something is wrong with the database
+   */
+  Product increaseInBaskets(Product product) throws SQLException;
+
+  /**
+   * Decreasing the inBaskets attribute of the Product in the database
+   * @param product
+   * @return the changed product if the process was successful, otherwise null
+   * @throws SQLException if something is wrong with the database
+   */
+  Product decreaseInBaskets(Product product) throws SQLException;
 }

@@ -67,10 +67,11 @@ public interface Server extends Remote
    * Adding a product to a basket, which changes the stock of the product
    * @param product to be changed
    * @param quantity to be added to the basket
+   * @param alreadyInBasket boolean to determine if the product had already been in the local basket
    * @return the Product with the new quantity
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
-  Product addProductToBasket(Product product, int quantity) throws RemoteException;
+  Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket) throws RemoteException;
 
   /**
    * Adding a product to a basket, which changes the stock of the product

@@ -85,9 +85,10 @@ public interface Client extends Subject
    * and add it to a sale
    * @param product the selected product to edit
    * @param quantity the amount to reduce the quantity by
+   * @param alreadyInBasket boolean to determine if the product had already been in the local basket
    * @return the product with the quantity to be added to the sale
    */
-  Product addProductToBasket(Product product, int quantity);
+  Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket);
 
   /**
    * Calls the method in the server to remove the product from the basket
