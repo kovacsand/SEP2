@@ -31,4 +31,12 @@ public interface ProductModel extends Subject
    * @param quantity by how much the stock must be increased
    */
   Product changeStock(int id, int quantity);
+
+  /**
+   * Requests removing the product from the database by calling ProductDAOImplementation
+   * removeProduct method
+   * @param product the product object to be removed
+   * @return the object of the removed product if successful, null if unsuccessful
+   */
+  Product removeProduct(Product product);
 }

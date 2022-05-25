@@ -1,5 +1,6 @@
 package server.model;
 
+import server.model.mediator.ProductDAO;
 import server.model.mediator.ProductDAOImplementation;
 import shared.transferobjects.Product;
 
@@ -65,6 +66,20 @@ public class PMImplementation implements ProductModel
       e.printStackTrace();
     }
     return product;
+  }
+
+  @Override public Product removeProduct(Product product)
+  {
+    Product removedProduct = null;
+    try
+    {
+     removedProduct = ProductDAOImplementation.getInstance().removeProduct(product);
+    }
+    catch(SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return removedProduct;
   }
 
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
