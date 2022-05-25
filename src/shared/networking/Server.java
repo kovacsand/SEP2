@@ -67,10 +67,11 @@ public interface Server extends Remote
    * Adding a product to a basket, which changes the stock of the product
    * @param product to be changed
    * @param quantity to be added to the basket
+   * @param alreadyInBasket boolean to determine if the product had already been in the local basket
    * @return the Product with the new quantity
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
-  Product addProductToBasket(Product product, int quantity) throws RemoteException;
+  Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket) throws RemoteException;
 
   /**
    * Adding a product to a basket, which changes the stock of the product
@@ -80,7 +81,20 @@ public interface Server extends Remote
    */
   Product removeProductFromBasket(Product product) throws RemoteException;
 
-  //TODO javadocs for these two cutie bunnies
+  /**
+   * Call the method on the SaleServer, passing itself as a ClientCallBack object to
+   * be added as looking at the stock view
+   */
   void registerStockViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Calls the method on the SaleServer,passing itself as a ClientCallBack object to
+   * be removed as looking at the stock view
+   */
   void deregisterStockViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Calls the method in Warehouse Server to remove a product from the database
+   */
+  Product removeProduct(Product product) throws RemoteException;
 }

@@ -42,9 +42,15 @@ public interface ProductModel extends Subject
    */
   Product changeStock(int id, int quantity);
 
+  /**
+   * Sends a request to the client to remove the product
+   * @param product selected product from the view
+   * @return successfully removed product, null if not successful
+   */
+  Product removeProduct(Product product);
+
 
   void registerStockViewer();
-
 
   void deregisterStockViewer();
 }

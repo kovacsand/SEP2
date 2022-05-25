@@ -1,5 +1,6 @@
 package server.model;
 
+import server.model.mediator.ProductDAO;
 import server.model.mediator.ProductDAOImplementation;
 import shared.transferobjects.Product;
 
@@ -37,6 +38,20 @@ public class PMImplementation implements ProductModel
       e.printStackTrace();
     }
     return addedProduct;
+  }
+
+  @Override public Product removeProduct(Product product)
+  {
+    Product productToBeDeleted = null;
+    try
+    {
+      productToBeDeleted = ProductDAOImplementation.getInstance().removeProduct(product);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return  productToBeDeleted;
   }
 
   @Override public ArrayList<Product> getAllProducts(char role)
