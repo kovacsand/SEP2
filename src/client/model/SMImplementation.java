@@ -23,7 +23,6 @@ public class SMImplementation implements SaleModel
   public SMImplementation(Client client)
   {
     this.client = client;
-    client.startClient();
   }
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {

@@ -31,7 +31,7 @@ public class SaleViewModel
 
   public Product addProductToBasket(Product product,int quantity)
   {
-    return saleModel.addProductToBasket(product,quantity);
+    return saleModel.addProductToBasket(product,quantity, false);
   }
 
   public Product removeProductFromBasket(Product product)

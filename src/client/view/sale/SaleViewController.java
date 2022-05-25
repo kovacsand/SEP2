@@ -25,6 +25,11 @@ public class SaleViewController implements ViewController
   @FXML private TableColumn<Product, String> productsPriceColumn;
   @FXML private TableColumn<Product, String> productsQuantityColumn;
 
+  @FXML private TableColumn<Product, String> basketProductName;
+  @FXML private TableColumn<Product, String> basketProductDescription;
+  @FXML private TableColumn<Product, String> basketProductPrice;
+  @FXML private TableColumn<Product, String> basketProductQuantity;
+
   private ViewHandler vh;
   private ViewModelFactory vmf;
   private SaleViewModel viewModel;
@@ -46,39 +51,33 @@ public class SaleViewController implements ViewController
 
     productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-    productsDescColumn.setCellValueFactory(
-        new PropertyValueFactory<>("description"));
-    productsPriceColumn.setCellValueFactory(
-        new PropertyValueFactory<>("price"));
-    productsQuantityColumn.setCellValueFactory(
-        new PropertyValueFactory<>("quantity"));
+    productsDescColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+    productsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    productsQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+    basketProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    basketProductDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+    basketProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+    basketProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
 
     fillProductsTable();
-  }
-
-  private void populateTable(ArrayList<Product> products)
-  {
-    for (Product product : products)
-      stockTable.getItems().add(product);
   }
 
   private void fillProductsTable()
   {
     stockTable.getItems().clear();
-
-    if (user instanceof Manager)
-      productsInStock = viewModel.getAllProducts('m');
-    if (user instanceof Salesperson)
-      productsInStock = viewModel.getAllProducts('s');
-
-    populateTable(productsInStock);
+    productsInStock = viewModel.getAllProducts('s');
+    for (Product product : productsInStock)
+      stockTable.getItems().add(product);
     stockTable.getSortOrder().add(productsIdColumn);
   }
 
   private void fillSaleTable()
   {
     saleTable.getItems().clear();
-    populateTable(productsInBasket);
+    for (Product product : productsInBasket)
+      saleTable.getItems().add(product);
     saleTable.getSortOrder().add(productsIdColumn);
   }
 
@@ -119,8 +118,10 @@ public class SaleViewController implements ViewController
 
           Product productCopy = new Product(id, productName, productDesc,
               productPrice, inputNumber);
+          //TODO check if already in basket
           viewModel.addProductToBasket(productCopy, inputNumber);
           productsInBasket.add(productCopy);
+          System.out.println(productsInBasket.size());
         }
         else
           throw new NumberFormatException();
@@ -134,7 +135,7 @@ public class SaleViewController implements ViewController
         alert.showAndWait();
       }
 
-      fillSaleTable();
+      fillSaleTable();;
     }
 
   }
