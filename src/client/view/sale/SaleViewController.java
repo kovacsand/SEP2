@@ -119,9 +119,23 @@ public class SaleViewController implements ViewController
           Product productCopy = new Product(id, productName, productDesc,
               productPrice, inputNumber);
           //TODO check if already in basket
-          viewModel.addProductToBasket(productCopy, inputNumber);
-          productsInBasket.add(productCopy);
-          System.out.println(productsInBasket.size());
+
+          boolean alreadyInBasket = false;
+          for (int i = 0; i < productsInBasket.size(); i++)
+          {
+            Product product = productsInBasket.get(i);
+            if (productCopy.getId() == product.getId())
+            {
+              alreadyInBasket = true;
+              Product increasedProduct = new Product(product.getId(), product.getName(), product.getDescription(), product.getPrice(),product.getQuantity() + inputNumber);
+              productsInBasket.remove(i);
+              productsInBasket.add(i, increasedProduct);
+            }
+          }
+
+          viewModel.addProductToBasket(productCopy, inputNumber, alreadyInBasket);
+          if (! alreadyInBasket)
+            productsInBasket.add(productCopy);
         }
         else
           throw new NumberFormatException();
@@ -134,16 +148,13 @@ public class SaleViewController implements ViewController
         alert.setContentText("Insert valid amount");
         alert.showAndWait();
       }
-
       fillSaleTable();;
     }
-
   }
 
   public void onRemoveButton()
   {
-    viewModel.removeProductFromBasket(
-        saleTable.getSelectionModel().getSelectedItem());
+    viewModel.removeProductFromBasket(saleTable.getSelectionModel().getSelectedItem());
   }
 
   public void onCompleteButton()
