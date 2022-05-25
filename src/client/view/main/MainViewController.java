@@ -3,6 +3,7 @@ package client.view.main;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +23,8 @@ public class MainViewController implements ViewController
   @FXML Button addProduct;
   @FXML Button addAccount;
   @FXML Label usernameLabel;
+  @FXML Button salesButton;
+
 
   /**
    * Initializing ViewHandler
@@ -87,5 +90,10 @@ public class MainViewController implements ViewController
   @FXML private void onViewStockButton()
   {
     vh.openView("Stock");
+  }
+
+  @FXML private void onSalesButton()
+  {
+    vh.openView("Sale");
   }
 }
