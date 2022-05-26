@@ -67,5 +67,4 @@ public class SaleDAOImplementation implements SaleDAO
     }
     return receipt;
   }
-
 }

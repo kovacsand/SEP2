@@ -3,14 +3,12 @@ package client.view.sale;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.transferobjects.Manager;
-import shared.transferobjects.Product;
-import shared.transferobjects.Salesperson;
-import shared.transferobjects.User;
+import shared.transferobjects.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -30,6 +28,8 @@ public class SaleViewController implements ViewController
   @FXML private TableColumn<Product, String> basketProductPrice;
   @FXML private TableColumn<Product, String> basketProductQuantity;
 
+  @FXML private Label totalPriceLabel;
+
   private ViewHandler vh;
   private ViewModelFactory vmf;
   private SaleViewModel viewModel;
@@ -43,6 +43,8 @@ public class SaleViewController implements ViewController
     this.vmf = vmf;
     this.viewModel = vmf.getSaleViewModel();
     this.user = vh.getUser();
+
+    viewModel.totalPriceProperty().bindBidirectional(totalPriceLabel.textProperty());
 
     viewModel.registerStockViewer();
 
@@ -59,7 +61,6 @@ public class SaleViewController implements ViewController
     basketProductDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
     basketProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     basketProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-
 
     fillProductsTable();
   }
@@ -83,6 +84,7 @@ public class SaleViewController implements ViewController
 
   public void onBackButton()
   {
+    onCancelButton();
     viewModel.deregisterStockViewer();
     vh.openView("Main");
   }
@@ -116,9 +118,7 @@ public class SaleViewController implements ViewController
           Double productPrice = stockTable.getSelectionModel().getSelectedItem()
               .getPrice();
 
-          Product productCopy = new Product(id, productName, productDesc,
-              productPrice, inputNumber);
-          //TODO check if already in basket
+          Product productCopy = new Product(id, productName, productDesc, productPrice, inputNumber);
 
           boolean alreadyInBasket = false;
           for (int i = 0; i < productsInBasket.size(); i++)
@@ -148,25 +148,39 @@ public class SaleViewController implements ViewController
         alert.setContentText("Insert valid amount");
         alert.showAndWait();
       }
-      fillSaleTable();;
+      fillSaleTable();
     }
   }
 
   public void onRemoveButton()
   {
-    viewModel.removeProductFromBasket(saleTable.getSelectionModel().getSelectedItem());
+    Product productToBeRemoved = saleTable.getSelectionModel().getSelectedItem();
+    productsInBasket.remove(productToBeRemoved);
+    viewModel.removeProductFromBasket(productToBeRemoved);
+    fillSaleTable();
   }
 
   public void onCompleteButton()
   {
+    Basket basket = new Basket();
+    Salesperson salesperson = (Salesperson) user;
+    for (Product product : productsInBasket)
+      basket.addProduct(product, product.getQuantity());
+    viewModel.finaliseSale(basket, salesperson);
 
+    productsInBasket.clear();
+    fillSaleTable();
   }
 
-  public void onCancelButton(ActionEvent actionEvent)
+  public void onCancelButton()
   {
+    for (Product product: productsInBasket)
+        viewModel.removeProductFromBasket(product);
+    productsInBasket.clear();
+    fillSaleTable();
   }
 
-  public void onSearchButton(ActionEvent actionEvent)
+  public void onSearchButton()
   {
   }
 }

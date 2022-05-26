@@ -1,8 +1,9 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Receipt
+public class Receipt implements Serializable
 {
   /**
    * Receipt class responsible for generating receipt when the Sale is made

@@ -1,9 +1,10 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Basket
+public class Basket implements Serializable
 {
   /**
    * Class that is responsible for Sale object
