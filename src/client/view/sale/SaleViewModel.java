@@ -10,13 +10,14 @@ import shared.transferobjects.Basket;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 import shared.transferobjects.Salesperson;
+import shared.utils.Subject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
-public class SaleViewModel
+public class SaleViewModel implements PropertyChangeListener, Subject
 {
   private final SaleModel saleModel;
   private final ProductModel productModel;
@@ -83,5 +84,22 @@ public class SaleViewModel
   public void deregisterStockViewer()
   {
     productModel.deregisterStockViewer();
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+   support.firePropertyChange(evt);
+  }
+
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.addPropertyChangeListener(propertyName, listener);
+  }
+
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.removePropertyChangeListener(propertyName, listener);
   }
 }

@@ -10,10 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.*;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class SaleViewController implements ViewController
+public class SaleViewController implements ViewController,
+    PropertyChangeListener
 {
   @FXML private TableView<Product> stockTable;
   @FXML private TableView<Product> saleTable;
@@ -28,6 +32,7 @@ public class SaleViewController implements ViewController
   @FXML private TableColumn<Product, String> basketProductPrice;
   @FXML private TableColumn<Product, String> basketProductQuantity;
 
+  @FXML private TextField searchField;
   @FXML private Label totalPriceLabel;
 
   private ViewHandler vh;
@@ -36,6 +41,7 @@ public class SaleViewController implements ViewController
   private User user;
   private ArrayList<Product> productsInStock;
   private ArrayList<Product> productsInBasket;
+  private PropertyChangeSupport support;
 
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
@@ -43,6 +49,8 @@ public class SaleViewController implements ViewController
     this.vmf = vmf;
     this.viewModel = vmf.getSaleViewModel();
     this.user = vh.getUser();
+    support=new PropertyChangeSupport(this);
+    support.addPropertyChangeListener("StockDataChanged",this);
 
     viewModel.totalPriceProperty().bindBidirectional(totalPriceLabel.textProperty());
 
@@ -62,13 +70,13 @@ public class SaleViewController implements ViewController
     basketProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     basketProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+    productsInStock = viewModel.getAllProducts('s');
     fillProductsTable();
   }
 
   private void fillProductsTable()
   {
     stockTable.getItems().clear();
-    productsInStock = viewModel.getAllProducts('s');
     for (Product product : productsInStock)
       stockTable.getItems().add(product);
     stockTable.getSortOrder().add(productsIdColumn);
@@ -182,6 +190,25 @@ public class SaleViewController implements ViewController
 
   public void onSearchButton()
   {
+    ArrayList<Product> searchedProductsInStock = new ArrayList<>();
+    productsInStock = viewModel.getAllProducts('s');
+    if (searchField.getText() != null)
+      for (Product product : productsInStock)
+        if (product.getName().contains(searchField.getText()))
+          searchedProductsInStock.add(product);
+    productsInStock = new ArrayList<>(searchedProductsInStock);
+
+    if (searchField.getText() == null)
+      productsInStock = viewModel.getAllProducts('s');
+
+
+    searchField.setText(null);
+    fillProductsTable();
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 }
 
