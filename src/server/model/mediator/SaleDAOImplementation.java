@@ -15,10 +15,21 @@ import java.util.Map;
 public class SaleDAOImplementation implements SaleDAO
 {
   private static SaleDAOImplementation instance;
+
+  /**
+   * Private constructor following the Singleton Pattern, registering the SQL driver
+   * @throws SQLException if something is wrong with the database
+   */
   private SaleDAOImplementation() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
+
+  /**
+   * Getting the single existing instance
+   * @return the instance
+   * @throws SQLException if something is wrong with the database
+   */
   public static synchronized SaleDAOImplementation getInstance()
       throws SQLException
   {
@@ -26,6 +37,7 @@ public class SaleDAOImplementation implements SaleDAO
       instance = new SaleDAOImplementation();
     return instance;
   }
+
   @Override public Receipt addSale(Basket basket, Salesperson salesperson)
       throws SQLException
   {

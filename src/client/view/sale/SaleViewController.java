@@ -50,7 +50,7 @@ public class SaleViewController implements ViewController,
     this.viewModel = vmf.getSaleViewModel();
     this.user = vh.getUser();
     support=new PropertyChangeSupport(this);
-    support.addPropertyChangeListener("StockDataChanged",this);
+    viewModel.addListener("ProductDataChanged",this);
 
     viewModel.totalPriceProperty().bindBidirectional(totalPriceLabel.textProperty());
 
@@ -208,7 +208,8 @@ public class SaleViewController implements ViewController,
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    support.firePropertyChange(evt);
+    productsInStock = viewModel.getAllProducts('s');
+    fillProductsTable();
   }
 }
 

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
-  *
+  * Interface for Database Access Object accessing Receipts
   * @author S2G2
   * @version 1.0
   * **/

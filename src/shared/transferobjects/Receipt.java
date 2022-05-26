@@ -3,14 +3,13 @@ package shared.transferobjects;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Receipt class responsible for generating receipt when the sale is made
+ * @author S2G2
+ * @version 1.0
+ */
 public class Receipt implements Serializable
 {
-  /**
-   * Receipt class responsible for generating receipt when the Sale is made
-   *
-   * @author S2G2
-   * @version 1.0
-   */
   private int id;
   private Basket basket;
   private LocalDateTime dateTime;

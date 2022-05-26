@@ -16,6 +16,10 @@ public class ReceiptDAOImplementation implements ReceiptDAO
 {
   private static ReceiptDAOImplementation instance;
 
+  /**
+   * Private constructor following the Singleton Pattern, registering the SQL driver
+   * @throws SQLException if something is wrong with the database
+   */
   private ReceiptDAOImplementation() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());

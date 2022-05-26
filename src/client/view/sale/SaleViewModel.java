@@ -34,6 +34,7 @@ public class SaleViewModel implements PropertyChangeListener, Subject
 
     totalPrice = 0;
     totalPriceProperty = new SimpleStringProperty();
+    saleModel.addListener("ProductDataChanged", this::propertyChange);
   }
 
   public Receipt finaliseSale(Basket basket, Salesperson salesperson)
