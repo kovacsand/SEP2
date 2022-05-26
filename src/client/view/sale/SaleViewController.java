@@ -10,10 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.*;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class SaleViewController implements ViewController
+public class SaleViewController implements ViewController,
+    PropertyChangeListener
 {
   @FXML private TableView<Product> stockTable;
   @FXML private TableView<Product> saleTable;
@@ -36,6 +40,7 @@ public class SaleViewController implements ViewController
   private User user;
   private ArrayList<Product> productsInStock;
   private ArrayList<Product> productsInBasket;
+  private PropertyChangeSupport support;
 
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
@@ -43,6 +48,8 @@ public class SaleViewController implements ViewController
     this.vmf = vmf;
     this.viewModel = vmf.getSaleViewModel();
     this.user = vh.getUser();
+    support=new PropertyChangeSupport(this);
+    support.addPropertyChangeListener("StockDataChanged",this);
 
     viewModel.totalPriceProperty().bindBidirectional(totalPriceLabel.textProperty());
 
@@ -182,6 +189,11 @@ public class SaleViewController implements ViewController
 
   public void onSearchButton()
   {
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 }
 
