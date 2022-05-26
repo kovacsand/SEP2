@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * Implementation of the Server interface
  * @author S2G2
- * @version 1.2
+ * @version 1.4
  */
 public class ServerImplementation implements Server
 {
@@ -71,7 +71,7 @@ public class ServerImplementation implements Server
   @Override public Product addProduct(Product product) throws RemoteException
   {
     Product newProduct= warehouseServer.addProduct(product);
-    if(newProduct!=null)
+    if(newProduct != null)
       onProductChange();
     return newProduct;
   }
@@ -91,7 +91,10 @@ public class ServerImplementation implements Server
 
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson) throws RemoteException
   {
-    return saleServer.finaliseSale(basket, salesperson);
+    Receipt newReceipt = saleServer.finaliseSale(basket, salesperson);
+    if (newReceipt != null)
+      onProductChange();
+    return newReceipt;
   }
 
   @Override public Product addProductToBasket(Product product, int quantity, boolean alreadyInBasket) throws RemoteException

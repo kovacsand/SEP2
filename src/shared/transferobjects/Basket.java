@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that is responsible for Basket object
+ * @author S2G2
+ * @version 1.0
+ */
 public class Basket implements Serializable
 {
-  /**
-   * Class that is responsible for Sale object
-   *
-   * @author S2G2
-   * @version 1.0
-   */
   private Map<Product, Integer> products;
   private double totalPrice;
 
@@ -28,7 +27,6 @@ public class Basket implements Serializable
    * Get method for getting ID of the Sale
    * @return id of the Sale
    */
-
   public HashMap<Product, Integer> getProducts()
   {
     return (HashMap<Product, Integer>) products;

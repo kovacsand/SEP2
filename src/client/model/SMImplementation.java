@@ -6,15 +6,19 @@ import shared.transferobjects.Receipt;
 import shared.transferobjects.Basket;
 import shared.transferobjects.Salesperson;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  * Class that implements the SaleModel interface
- *
  * @author S2G2
  * @version 1.0
  */
 public class SMImplementation implements SaleModel
 {
   private Client client;
+  private final PropertyChangeSupport support;
 
   /**
    * One-argument constructor initializing the SaleModelImplementation class
@@ -23,7 +27,16 @@ public class SMImplementation implements SaleModel
   public SMImplementation(Client client)
   {
     this.client = client;
+    this.support = new PropertyChangeSupport(this);
+    client.addListener("ProductDataChanged",this::onProductDataChange);
   }
+
+  @Override public void onProductDataChange(
+      PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
+  }
+
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
     return client.finaliseSale(basket, salesperson);
@@ -37,5 +50,15 @@ public class SMImplementation implements SaleModel
   @Override public Product removeProductFromBasket(Product product)
   {
     return client.removeProductFromBasket(product);
+  }
+
+  @Override public void addListener(String propertyName, PropertyChangeListener listener)
+  {
+    support.addPropertyChangeListener(propertyName, listener);
+  }
+
+  @Override public void removeListener(String propertyName, PropertyChangeListener listener)
+  {
+    support.removePropertyChangeListener(propertyName, listener);
   }
 }

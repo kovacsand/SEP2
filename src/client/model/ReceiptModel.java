@@ -25,6 +25,4 @@ public interface ReceiptModel extends Subject
    * @return the requested receipt object
    */
   Receipt getReceiptDetails(int receiptID);
-
-
 }

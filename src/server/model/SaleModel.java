@@ -8,7 +8,7 @@ import shared.transferobjects.Salesperson;
 /**
  * Interface used for creating receipts and handling baskets
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface SaleModel
 {

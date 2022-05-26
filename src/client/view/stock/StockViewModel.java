@@ -19,7 +19,6 @@ public class StockViewModel implements PropertyChangeListener, Subject
     this.model = productModel;
     support = new PropertyChangeSupport(this);
     model.addListener("ProductDataChanged",this);
-
   }
 
   public ArrayList<Product> getAllProducts(char role)
