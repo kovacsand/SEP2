@@ -28,6 +28,7 @@ public class SaleViewController implements ViewController
   @FXML private TableColumn<Product, String> basketProductPrice;
   @FXML private TableColumn<Product, String> basketProductQuantity;
 
+  @FXML private TextField searchField;
   @FXML private Label totalPriceLabel;
 
   private ViewHandler vh;
@@ -62,13 +63,13 @@ public class SaleViewController implements ViewController
     basketProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     basketProductQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+    productsInStock = viewModel.getAllProducts('s');
     fillProductsTable();
   }
 
   private void fillProductsTable()
   {
     stockTable.getItems().clear();
-    productsInStock = viewModel.getAllProducts('s');
     for (Product product : productsInStock)
       stockTable.getItems().add(product);
     stockTable.getSortOrder().add(productsIdColumn);
@@ -182,6 +183,20 @@ public class SaleViewController implements ViewController
 
   public void onSearchButton()
   {
+    ArrayList<Product> searchedProductsInStock = new ArrayList<>();
+    productsInStock = viewModel.getAllProducts('s');
+    if (searchField.getText() != null)
+      for (Product product : productsInStock)
+        if (product.getName().contains(searchField.getText()))
+          searchedProductsInStock.add(product);
+    productsInStock = new ArrayList<>(searchedProductsInStock);
+
+    if (searchField.getText() == null)
+      productsInStock = viewModel.getAllProducts('s');
+
+
+    searchField.setText(null);
+    fillProductsTable();
   }
 }
 
