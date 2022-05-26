@@ -96,4 +96,8 @@ public class MainViewController implements ViewController
   {
     vh.openView("Sale");
   }
+  @FXML private void onViewReceiptButton ()
+  {
+    vh.openView("Receipt");
+  }
 }

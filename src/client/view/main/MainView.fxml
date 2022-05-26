@@ -15,6 +15,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="salesButton" layoutX="200.0" layoutY="199.0" mnemonicParsing="false" onAction="#onSalesButton" text="Make a sale" />
+      <Button fx:id="salesButton" layoutX="339.0" layoutY="193.0" mnemonicParsing="false" onAction="#onSalesButton" text="Make a sale" />
+      <Button fx:id="viewReceipt" layoutX="72.0" layoutY="193.0" mnemonicParsing="false" text="View receipts" onAction="#onViewReceiptButton"/>
    </children>
 </Pane>

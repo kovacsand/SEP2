@@ -12,6 +12,7 @@ public class ModelFactory
   public SaleModel saleModel;
   private AccountModel accountModel;
   private ProductModel addProductModel;
+  private ReceiptModel receiptModel;
 
   /**
    * One-argument constructor initializing the models
@@ -49,5 +50,9 @@ public class ModelFactory
   public SaleModel getSaleModel()
   {
     return saleModel;
+  }
+  public ReceiptModel getReceiptModel()
+  {
+    return receiptModel;
   }
 }

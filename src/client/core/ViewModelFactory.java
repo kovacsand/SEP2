@@ -3,6 +3,7 @@ package client.core;
 import client.view.addaccount.AddAccountViewModel;
 import client.view.addproduct.AddProductViewModel;
 import client.view.login.LoginViewModel;
+import client.view.receipt.ReceiptViewModel;
 import client.view.sale.SaleViewModel;
 import client.view.stock.StockViewModel;
 
@@ -18,6 +19,7 @@ public class ViewModelFactory
   private final AddProductViewModel addProductVM;
   private final StockViewModel stockVM;
   private final SaleViewModel saleVM;
+  private final ReceiptViewModel receiptVM;
 
   /**
    * One-argument constructor initializing the ViewModelFactory class
@@ -32,6 +34,7 @@ public class ViewModelFactory
     stockVM = new StockViewModel(modelFactory.addProductModel());
     saleVM=new SaleViewModel(modelFactory.getSaleModel(),
         modelFactory.addProductModel());
+    receiptVM=new ReceiptViewModel(modelFactory.getReceiptModel());
   }
 
   /**
@@ -78,5 +81,9 @@ public class ViewModelFactory
   public SaleViewModel getSaleViewModel()
   {
     return saleVM;
+  }
+  public ReceiptViewModel getReceiptViewModel ()
+  {
+    return receiptVM;
   }
 }
