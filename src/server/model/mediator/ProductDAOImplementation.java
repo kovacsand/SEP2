@@ -108,7 +108,7 @@ public class ProductDAOImplementation implements ProductDAO
   @Override public Product changeStock(int id, int quantity) throws SQLException
   {
     Product product = null;
-    ResultSet resultSet = null;
+    ResultSet resultSet;
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(

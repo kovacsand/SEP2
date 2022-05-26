@@ -11,71 +11,74 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="446.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.sale.SaleViewController">
+<AnchorPane prefHeight="577.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.sale.SaleViewController">
    <children>
-      <VBox layoutX="-3.0" layoutY="-3.0" prefHeight="700.0" prefWidth="1100.0">
+      <VBox layoutX="-3.0" layoutY="-3.0" prefHeight="622.0" prefWidth="1147.0">
          <children>
             <HBox prefHeight="150.0" prefWidth="1100.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="880.0" text="TECHhouse" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="141.0" prefWidth="1257.0" text="TECHhouse" textAlignment="CENTER">
                      <font>
                         <Font size="96.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="60.0" prefWidth="1100.0">
+            <HBox prefHeight="80.0" prefWidth="1100.0">
                <children>
-                  <TextField fx:id="searchField" alignment="CENTER" prefHeight="60.0" prefWidth="550.0">
+                  <TextField fx:id="searchField" alignment="CENTER" prefHeight="40.0" prefWidth="350.0">
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#onSearchButton" prefHeight="60.0" prefWidth="100.0" text="Search" textAlignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#onSearchButton" prefHeight="21.0" prefWidth="108.0" text="Search" textAlignment="CENTER">
                      <font>
                         <Font size="22.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="70.0" />
+                        <Insets top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
             <HBox prefHeight="300.0" prefWidth="1100.0">
                <children>
-                  <TableView fx:id="stockTable" prefHeight="300.0" prefWidth="482.0">
+                  <TableView fx:id="stockTable" prefHeight="297.0" prefWidth="494.0">
                     <columns>
-                      <TableColumn fx:id="productsIdColumn" editable="false" prefWidth="75.0" text="ID" />
-                      <TableColumn fx:id="productsNameColumn" editable="false" prefWidth="136.80004119873047" text="Name" />
-                        <TableColumn fx:id="productsDescColumn" editable="false" prefWidth="100.0" text="Description" />
-                        <TableColumn fx:id="productsPriceColumn" editable="false" minWidth="0.0" prefWidth="60.8001708984375" text="Price" />
-                        <TableColumn fx:id="productsQuantityColumn" editable="false" prefWidth="93.60002441406255" text="Quantity" />
+                      <TableColumn fx:id="productsIdColumn" editable="false" prefWidth="45.999999046325684" text="ID" />
+                      <TableColumn fx:id="productsNameColumn" editable="false" prefWidth="125.33330917358398" text="Name" />
+                        <TableColumn fx:id="productsDescColumn" editable="false" prefWidth="168.4444580078125" text="Description" />
+                        <TableColumn fx:id="productsPriceColumn" editable="false" minWidth="0.0" prefWidth="74.22222900390625" text="Price" />
+                        <TableColumn fx:id="productsQuantityColumn" editable="false" prefWidth="79.111083984375" text="Quantity" />
                     </columns>
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TableView>
-                  <TableView fx:id="saleTable" prefHeight="600.0" prefWidth="550.0">
+                  <TableView fx:id="saleTable" prefHeight="297.0" prefWidth="562.0">
                     <columns>
-                      <TableColumn fx:id="basketProductName" editable="false" prefWidth="141.59998166561127" sortable="false" text="Name" />
-                      <TableColumn fx:id="basketProductDescription" editable="false" prefWidth="515.9998474121094" sortable="false" text="Description" />
-                        <TableColumn fx:id="basketProductPrice" editable="false" prefWidth="112.800048828125" sortable="false" text="Price" />
-                        <TableColumn fx:id="basketProductQuantity" editable="false" prefWidth="91.999755859375" sortable="false" text="Quantity" />
+                      <TableColumn fx:id="basketProductName" editable="false" minWidth="0.0" prefWidth="137.333251953125" sortable="false" text="Name" />
+                      <TableColumn fx:id="basketProductDescription" editable="false" minWidth="0.0" prefWidth="265.3333740234375" sortable="false" text="Description" />
+                        <TableColumn fx:id="basketProductPrice" editable="false" prefWidth="92.0" sortable="false" text="Price" />
+                        <TableColumn fx:id="basketProductQuantity" editable="false" prefWidth="66.666748046875" sortable="false" text="Quantity" />
                     </columns>
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="70.0" right="10.0" />
                      </HBox.margin>
                   </TableView>
                </children>
             </HBox>
-            <HBox prefHeight="103.0" prefWidth="1153.0">
+            <HBox prefHeight="81.0" prefWidth="1147.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackButton" prefWidth="183.0" text="Back">
+                  <Button mnemonicParsing="false" onAction="#onBackButton" prefHeight="60.0" prefWidth="114.0" text="Back">
                      <font>
                         <Font size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onAddButton" prefHeight="60.0" prefWidth="100.0" text="Add">
@@ -83,7 +86,7 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onRemoveButton" prefHeight="60.0" prefWidth="100.0" text="Remove">
@@ -91,15 +94,15 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Label fx:id="totalPrice" prefHeight="60.0" prefWidth="462.0" text="Total Price: ">
+                  <Label fx:id="totalPriceLabel" prefHeight="60.0" prefWidth="250.0" text="Total Price: ">
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="200.0" right="100.0" top="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="38.0" />
+                        <Font size="22.0" />
                      </font>
                   </Label>
                   <Button mnemonicParsing="false" onAction="#onCompleteButton" prefHeight="60.0" prefWidth="100.0" text="Complete">
@@ -107,7 +110,7 @@
                         <Font size="17.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#onCancelButton" prefHeight="60.0" prefWidth="100.0" text="Cancel">
@@ -115,7 +118,7 @@
                         <Font size="19.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>

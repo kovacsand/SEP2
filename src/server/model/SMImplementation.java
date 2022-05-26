@@ -18,6 +18,17 @@ public class SMImplementation implements SaleModel
 
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
+    basket.getProducts().forEach((product, quantity) -> {
+      try
+      {
+        ProductDAOImplementation.getInstance().decreaseInBaskets(product);
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+    });
+
     Receipt newReceipt = null;
     try
     {
@@ -72,7 +83,6 @@ public class SMImplementation implements SaleModel
     Product changedProductQuantity = null;
     try
     {
-      System.out.println(product.getQuantity());
       changedProductQuantity = ProductDAOImplementation.getInstance().changeStock(product.getId(), product.getQuantity());
     }
     catch (SQLException e)
