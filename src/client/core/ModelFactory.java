@@ -12,6 +12,7 @@ public class ModelFactory
   public SaleModel saleModel;
   private AccountModel accountModel;
   private ProductModel addProductModel;
+  private ReceiptModel receiptModel;
 
   /**
    * One-argument constructor initializing the models
@@ -22,6 +23,7 @@ public class ModelFactory
     accountModel = new AMImplementation(clientFactory.getClient());
     addProductModel = new PMImplementation(clientFactory.getClient());
     saleModel=new SMImplementation(clientFactory.getClient());
+    receiptModel=new RMImplementation(clientFactory.getClient());
   }
 
   /**
@@ -49,5 +51,9 @@ public class ModelFactory
   public SaleModel getSaleModel()
   {
     return saleModel;
+  }
+  public ReceiptModel getReceiptModel()
+  {
+    return receiptModel;
   }
 }
