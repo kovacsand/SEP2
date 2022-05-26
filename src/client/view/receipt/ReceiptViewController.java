@@ -38,7 +38,7 @@ public class ReceiptViewController implements ViewController
     totalPriceColumn.setCellFactory(new PropertyValueFactory("totalPrice"));
     receipts=new ArrayList<Receipt>();
 
-    fillReceiptTable();
+    //fillReceiptTable();
   }
   private void fillReceiptTable()
   {

@@ -23,6 +23,7 @@ public class ModelFactory
     accountModel = new AMImplementation(clientFactory.getClient());
     addProductModel = new PMImplementation(clientFactory.getClient());
     saleModel=new SMImplementation(clientFactory.getClient());
+    receiptModel=new RMImplementation(clientFactory.getClient());
   }
 
   /**
