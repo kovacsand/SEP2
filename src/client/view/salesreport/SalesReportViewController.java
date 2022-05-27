@@ -36,7 +36,6 @@ public class SalesReportViewController implements ViewController
     pickStartDate.valueProperty().bindBidirectional(viewModel.startDateProperty());
     pickEndDate.valueProperty().bindBidirectional(viewModel.endDateProperty());
     viewModel.totalIncomeProperty().bindBidirectional(totalIncome.textProperty());
-
   }
 
 

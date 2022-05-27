@@ -42,15 +42,15 @@ public class LoginViewModel
   public User login()
   {
     user = model.login(username.getValue(), password.getValue());
-    Platform.runLater(() ->
-    {
-      username.setValue(null);
-      password.setValue(null);
-      if (user == null)
-        errorMessage.setValue("Incorrect credentials!");
-      else
-        errorMessage.setValue("Hello, " + user.getUsername());
-    });
+//    Platform.runLater(() ->
+//    {
+//      username.setValue(null);
+//      password.setValue(null);
+//      if (user == null)
+//        errorMessage.setValue("Incorrect credentials!");
+//      else
+//        errorMessage.setValue("Hello, " + user.getUsername());
+//    });
     return user;
   }
 

@@ -10,6 +10,7 @@ import shared.transferobjects.*;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -58,6 +59,11 @@ public class ServerImplementation implements Server
     System.out.println("The server is running");
   }
 
+  public void stopServer() throws RemoteException, NotBoundException
+  {
+    LocateRegistry.getRegistry(1099).unbind("Server");
+    System.out.println("The server stopped");
+  }
 
   @Override public User login(String username, String password) throws RemoteException
   {

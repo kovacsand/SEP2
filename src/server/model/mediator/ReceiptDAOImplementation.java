@@ -82,13 +82,6 @@ public class ReceiptDAOImplementation implements ReceiptDAO
     return allReceipts;
   }
 
-
-  @Override public double generateIncome(LocalDateTime startDate,
-      LocalDateTime endDate) throws SQLException
-  {
-    return 0;
-  }
-
   @Override public double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws SQLException
   {
     double income = 0;

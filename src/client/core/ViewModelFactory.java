@@ -32,10 +32,10 @@ public class ViewModelFactory
   {
     loginVM = new LoginViewModel(modelFactory.getAccountModel());
     addAccountVM = new AddAccountViewModel(modelFactory.getAccountModel());
-    addProductVM = new AddProductViewModel(modelFactory.addProductModel());
-    stockVM = new StockViewModel(modelFactory.addProductModel());
+    addProductVM = new AddProductViewModel(modelFactory.getAddProductModel());
+    stockVM = new StockViewModel(modelFactory.getAddProductModel());
     saleVM=new SaleViewModel(modelFactory.getSaleModel(),
-        modelFactory.addProductModel());
+        modelFactory.getAddProductModel());
     receiptVM=new ReceiptViewModel(modelFactory.getReceiptModel());
     salesReportVM = new SalesReportViewModel(modelFactory.getReceiptModel());
   }
