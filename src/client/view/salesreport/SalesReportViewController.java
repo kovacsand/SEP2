@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
+import java.time.LocalDateTime;
+
 /**
  * ViewController class of the GUI for SalesReportView
  * @author S2G2
@@ -45,9 +47,15 @@ public class SalesReportViewController implements ViewController
     if (viewModel.startDateProperty().getValue() == null ||
         viewModel.endDateProperty().getValue() == null)
       showErrorWindow("Please select both dates", "One or more fields are empty");
+    else if (viewModel.startDateProperty().getValue().isAfter(viewModel.endDateProperty().getValue()))
+    showErrorWindow("Please select a different date", "The start date is after the end date");
+    else if (viewModel.startDateProperty().getValue().isAfter(LocalDateTime.now().toLocalDate()))
+      showErrorWindow("Please select a start date before today", "The start date is after today");
     else
     {
       viewModel.generateIncome();
+      startDate.setText(viewModel.startDateProperty().getValue().toString());
+      endDate.setText(viewModel.endDateProperty().getValue().toString());
     }
   }
 
