@@ -7,21 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.receipt.ReceiptViewController">
-   <children>
-      <TableView fx:id="receiptTable" prefHeight="430.0" prefWidth="600.0">
-        <columns>
-          <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="salespersonColumn" prefWidth="172.0" text="Salesperson" />
-            <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Date" />
-            <TableColumn fx:id="timeColumn" prefWidth="113.0" text="Time" />
-            <TableColumn fx:id="totalPriceColumn" prefWidth="118.0" text="Total price" />
-        </columns>
-      </TableView>
-      <Pane prefHeight="127.0" prefWidth="600.0">
-         <children>
-            <Button layoutX="534.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
-            <Button layoutX="453.0" layoutY="5.0" mnemonicParsing="false" onAction="#onViewButton" text="View" />
-         </children>
-      </Pane>
-   </children>
+  <TableView fx:id="receiptTable" prefHeight="430.0" prefWidth="600.0">
+    <columns>
+      <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+      <TableColumn fx:id="salespersonColumn" prefWidth="172.0" text="Salesperson" />
+      <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Date" />
+      <TableColumn fx:id="timeColumn" prefWidth="113.0" text="Time" />
+      <TableColumn fx:id="totalPriceColumn" prefWidth="118.0" text="Total price" />
+    </columns>
+  </TableView>
+  <Pane prefHeight="127.0" prefWidth="600.0">
+    <Button layoutX="534.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
+    <Button layoutX="453.0" layoutY="5.0" mnemonicParsing="false" onAction="#onViewButton" text="View" />
+  </Pane>
 </VBox>

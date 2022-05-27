@@ -91,6 +91,11 @@ public class Product implements Serializable
     return quantity;
   }
 
+  public double getTotalPrice()
+  {
+    return price * quantity;
+  }
+
   /**
    * Equals method to check if the Products are the same
    * @param obj that needs to be checked

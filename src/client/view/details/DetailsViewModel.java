@@ -1,4 +1,4 @@
-package client.view.receipt;
+package client.view.details;
 
 import shared.transferobjects.Receipt;
 

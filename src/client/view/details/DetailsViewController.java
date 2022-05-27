@@ -1,9 +1,10 @@
-package client.view.receipt;
+package client.view.details;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,55 +31,56 @@ public class DetailsViewController implements ViewController
   @FXML private TableView<Product> receiptTable;
   @FXML private TableColumn<Product, String> productIdColumn;
   @FXML private TableColumn<Product, String> productNameColumn;
-  @FXML private TableColumn<Integer, String> quantityColumn;
+  @FXML private TableColumn<Product, String> quantityColumn;
   @FXML private TableColumn<Product, String> unitPriceColumn;
-  @FXML private TableColumn<Integer, String> totalPriceColumn;
+  @FXML private TableColumn<Product, String> totalPriceColumn;
 
   @Override public void init (ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
-    //viewModel=vmf.getDetailsViewModel();
-    productIdColumn.setCellFactory(new PropertyValueFactory("id"));
-    productNameColumn.setCellFactory(new PropertyValueFactory("name"));
-    quantityColumn.setCellFactory(new PropertyValueFactory("quantity"));
-    unitPriceColumn.setCellFactory(new PropertyValueFactory("unitPrice"));
-    totalPriceColumn.setCellFactory(new PropertyValueFactory("totalPrice"));
+    receipt = vh.getDetailedReceipt();
+    productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 
     fillLabels();
     fillTable();
   }
+
   private void fillLabels()
   {
     idLabel.setText(""+receipt.getId());
     salespersonLabel.setText(receipt.getSalesperson().getUsername());
     dateLabel.setText(""+receipt.getDateTime().getYear()+"/"+receipt.getDateTime().getMonth()+"/"+receipt.getDateTime().getDayOfMonth());
     timeLabel.setText(""+receipt.getDateTime().getHour()+":"+receipt.getDateTime().getMinute()+":"+receipt.getDateTime().getSecond());
-    salePriceLabel.setText(""+receipt.getSale().getTotalPrice());
+    salePriceLabel.setText(""+receipt.getBasket().getTotalPrice());
   }
   private void fillTable()
   {
     receiptTable.getItems().clear();
-    receipt=viewModel.getReceipt();
-    populateReceiptTable(receipt.getSale().getProducts());
+    populateReceiptTable(receipt.getBasket().getProducts());
     receiptTable.getSortOrder().add(productIdColumn);
   }
   private void populateReceiptTable(HashMap<Product, Integer> products)
   {
     productListSize=0;
+    productList = new ArrayList<>();
+    productsQuantityList = new ArrayList<>();
     for (Product i:products.keySet())
     {
       productList.add(i);
       productsQuantityList.add(products.get(i));
       productListSize++;
     }
-    for (int i=0;i<=productListSize;i++)
+    for (int i=0;i<productListSize;i++)
     {
       receiptTable.getItems().add(productList.get(i));
-
     }
   }
   @FXML private void onBackButton()
   {
-    vh.openView("ReceiptTable");
+    vh.openView("Receipt");
   }
 }

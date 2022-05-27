@@ -18,7 +18,6 @@ public class ReceiptViewController implements ViewController
   private ReceiptModel model;
   private ReceiptViewModel viewModel;
   private ArrayList<Receipt> receipts;
-  private int selectedReceiptId;
   @FXML private TableView<Receipt> receiptTable;
   @FXML private TableColumn<Receipt, String> idColumn;
   @FXML private TableColumn<Receipt, String> salespersonColumn;
@@ -30,22 +29,23 @@ public class ReceiptViewController implements ViewController
   public void init (ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
-    viewModel=vmf.getReceiptViewModel();
-    idColumn.setCellFactory(new PropertyValueFactory("id"));
-    salespersonColumn.setCellFactory(new PropertyValueFactory("salesperson"));
-    dateColumn.setCellFactory(new PropertyValueFactory("date"));
-    timeColumn.setCellFactory(new PropertyValueFactory("time"));
-    totalPriceColumn.setCellFactory(new PropertyValueFactory("totalPrice"));
-    receipts=new ArrayList<Receipt>();
+    receipts = new ArrayList<>();
+    viewModel = vmf.getReceiptViewModel();
 
-    //fillReceiptTable();
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    salespersonColumn.setCellValueFactory(new PropertyValueFactory<>("salespersonName"));
+    dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+    timeColumn.setCellValueFactory(new PropertyValueFactory("time"));
+    totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+
+    receiptTable.getSortOrder().add(idColumn);
+    fillReceiptTable();
   }
   private void fillReceiptTable()
   {
     receiptTable.getItems().clear();
-    receipts=viewModel.getAllReceipts();
+    receipts = viewModel.getAllReceipts();
     populateReceiptTable(receipts);
-    receiptTable.getSortOrder().add(idColumn);
   }
   private void populateReceiptTable(ArrayList<Receipt> receipts)
   {
@@ -58,7 +58,13 @@ public class ReceiptViewController implements ViewController
   }
   @FXML private void onViewButton ()
   {
-    selectedReceiptId=receiptTable.getSelectionModel().getSelectedItem().getId();
-    vh.openView("ReceiptDetails");
+    Receipt selectedReceipt = receiptTable.getSelectionModel().getSelectedItem();
+    if (selectedReceipt == null)
+      showErrorWindow("No Receipt selected!", "Please select the Receipt for which you want to see its details.");
+    else
+    {
+      vh.setDetailedReceipt(selectedReceipt);
+      vh.openView("Details");
+    }
   }
 }

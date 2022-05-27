@@ -69,14 +69,14 @@ public class ReceiptDAOImplementation implements ReceiptDAO
         {
           int productId = basketSet.getInt("id");
           String name = basketSet.getString("name");
-          String descript = basketSet.getString("description");
+          String description = basketSet.getString("description");
           double price = basketSet.getDouble("price");
           int quantity = basketSet.getInt("quantity");
-          basket.addProduct(new Product(productId,name,descript,price,quantity),quantity);
+          basket.addProduct(new Product(productId,name,description,price,quantity),quantity);
         }
 
         LocalDateTime date = resultSet.getTimestamp("date_time").toLocalDateTime();
-        allReceipts.add(new Receipt(id,salesperson,null,date));
+        allReceipts.add(new Receipt(id,salesperson,basket,date));
       }
 
     }

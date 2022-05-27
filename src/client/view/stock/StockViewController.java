@@ -54,7 +54,6 @@ public class StockViewController implements ViewController, PropertyChangeListen
       removeProductButton.setVisible(true);
     }
 
-
     productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     productsDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

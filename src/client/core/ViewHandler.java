@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import shared.transferobjects.Receipt;
 import shared.transferobjects.User;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class ViewHandler
   private Stage stage;
   private ViewModelFactory vmf;
   private User user;
+  private Receipt detailedReceipt;
 
 
   /**
@@ -73,6 +75,11 @@ public class ViewHandler
     this.user = user;
   }
 
+  public void setDetailedReceipt(Receipt detailedReceipt)
+  {
+    this.detailedReceipt = detailedReceipt;
+  }
+
   /**
    * Getting the user of the system
    * @return the user info
@@ -80,5 +87,10 @@ public class ViewHandler
   public User getUser()
   {
     return user;
+  }
+
+  public Receipt getDetailedReceipt()
+  {
+    return detailedReceipt;
   }
 }
