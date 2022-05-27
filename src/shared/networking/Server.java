@@ -4,6 +4,7 @@ import shared.transferobjects.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -112,10 +113,10 @@ public interface Server extends Remote
   ArrayList<Receipt> getAllReceipts() throws RemoteException;
 
   /**
-   * Calls the method in the ReceiptSever to return a requested receipt as a receipt object
-   * @param receiptID the receipt to display details of
-   * @return the requested receipt as a receipt object
-   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   * Calls generateIncome method in the ReceiptServer to get the income in the given timeframe
+   * @param startDate starting date of the given timeframe
+   * @param endDate end date of the given timeframe
+   * @return total income
    */
-  Receipt getReceiptDetails(int receiptID) throws RemoteException;
+  double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws RemoteException;
 }

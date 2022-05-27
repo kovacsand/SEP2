@@ -2,6 +2,7 @@ package server.networking;
 
 import shared.transferobjects.Receipt;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -18,11 +19,10 @@ public interface ReceiptServer
   ArrayList<Receipt> getAllReceipts();
 
   /**
-   * calls the method in the ReceiptModel to request details of one receipt
-   * @param receiptID id of the requested receipt
-   * @return requested receipt as an Receipt object
+   * Calls generateIncome method in the ReceiptModel to get the income in the given timeframe
+   * @param startDate starting date of the given timeframe
+   * @param endDate end date of the given timeframe
+   * @return total income
    */
-  Receipt getReceiptDetails(int receiptID);
-
-
+  double generateIncome(LocalDateTime startDate, LocalDateTime endDate);
 }

@@ -5,6 +5,7 @@ import shared.transferobjects.Receipt;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class RMImplementation implements ReceiptModel
@@ -23,9 +24,11 @@ public class RMImplementation implements ReceiptModel
     return client.getAllReceipts();
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID)
+
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate)
   {
-    return client.getReceiptDetails(receiptID);
+    return client.generateIncome(startDate, endDate);
   }
 
   @Override public void addListener(String propertyName,
