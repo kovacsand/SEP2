@@ -5,6 +5,7 @@ import server.model.RMImplementation;
 import server.model.ReceiptModel;
 import shared.transferobjects.Receipt;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReceiptSeverImplementation implements ReceiptServer
@@ -20,8 +21,9 @@ public class ReceiptSeverImplementation implements ReceiptServer
     return receiptModel.getAllReceipts();
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID)
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate)
   {
-    return receiptModel.getReceiptDetails(receiptID);
+    return receiptModel.generateIncome(startDate, endDate);
   }
 }

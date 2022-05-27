@@ -83,16 +83,11 @@ public class ReceiptDAOImplementation implements ReceiptDAO
     return allReceipts;
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID) throws SQLException
+
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate) throws SQLException
   {
-    ResultSet resultSet = null;
-    Receipt receiptDetails = null;
-
-    try (Connection connection = getConnection())
-    {
-      return null;
-    }
+    return 0;
   }
-
 
 }
