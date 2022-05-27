@@ -18,6 +18,7 @@ public class ReceiptDAOImplementation implements ReceiptDAO
 
   /**
    * Private constructor following the Singleton Pattern, registering the SQL driver
+   *
    * @throws SQLException if something is wrong with the database
    */
   private ReceiptDAOImplementation() throws SQLException
@@ -27,6 +28,7 @@ public class ReceiptDAOImplementation implements ReceiptDAO
 
   /**
    * Getting the single instance
+   *
    * @return the instance
    * @throws SQLException if something wrong with database
    */
@@ -36,7 +38,6 @@ public class ReceiptDAOImplementation implements ReceiptDAO
       instance = new ReceiptDAOImplementation();
     return instance;
   }
-
 
   @Override public ArrayList<Receipt> getAllReceipts() throws SQLException
   {
@@ -57,15 +58,13 @@ public class ReceiptDAOImplementation implements ReceiptDAO
         //Finding the Salesperson
         Salesperson salesperson = new Salesperson(resultSet.getString("salesperson"));
 
-
         //Filling the basket
         Basket basket = new Basket();
         PreparedStatement basketStatement = connection.prepareStatement(
-    "SELECT p.id, p.name, p.description, p.price, sp.quantity FROM Products p, SoldProducts sp WHERE p.id IN (SELECT sp.product_id WHERE receipt_id = ?);"
-        );
-        basketStatement.setInt(1,id);
+            "SELECT p.id, p.name, p.description, p.price, sp.quantity FROM Products p, SoldProducts sp WHERE p.id IN (SELECT sp.product_id WHERE receipt_id = ?);");
+        basketStatement.setInt(1, id);
         ResultSet basketSet = basketStatement.executeQuery();
-        while(basketSet.next())
+        while (basketSet.next())
         {
           int productId = basketSet.getInt("id");
           String name = basketSet.getString("name");
@@ -90,4 +89,26 @@ public class ReceiptDAOImplementation implements ReceiptDAO
     return 0;
   }
 
+  @Override public double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws SQLException
+  {
+    double income = 0;
+    String start = "\'" + startDate.getYear() + "-" + startDate.getMonth() + "-"
+        + startDate.getDayOfMonth() + " 00:00:01\'";
+    String end =
+        "\'" + endDate.getYear() + "-" + endDate.getMonth() + "-" + endDate.getDayOfMonth()
+            + " 23:59:59\'";
+    ResultSet resultSet;
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM Receipts WHERE date_time BETWEEN " + start + " AND "
+              + end);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        income += resultSet.getDouble("total_price");
+      }
+    }
+    return income;
+  }
 }
