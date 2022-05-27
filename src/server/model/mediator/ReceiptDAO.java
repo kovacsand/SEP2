@@ -22,14 +22,10 @@ public interface ReceiptDAO extends DAOInterface
  ArrayList<Receipt> getAllReceipts() throws SQLException;
 
  /**
-  * Getting details of one receipt from database
-  * @param receiptID the id of the requested receipt
-  * @return Details of the receipt
-  * @throws SQLException
+  * Getting the income of the given timeframe
+  * @param startDate starting date of the given timeframe
+  * @param endDate end date of the given timeframe
+  * @return total income
   */
- Receipt getReceiptDetails(int receiptID) throws SQLException;
-
-
- double generateIncome (LocalDateTime startDate, LocalDateTime endDate)
-     throws SQLException;
+  double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws SQLException;
 }

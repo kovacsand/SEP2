@@ -68,30 +68,25 @@ public class ReceiptDAOImplementation implements ReceiptDAO
         {
           int productId = basketSet.getInt("id");
           String name = basketSet.getString("name");
-          String descript = basketSet.getString("description");
+          String description = basketSet.getString("description");
           double price = basketSet.getDouble("price");
           int quantity = basketSet.getInt("quantity");
-          basket.addProduct(
-              new Product(productId, name, descript, price, quantity), quantity);
+          basket.addProduct(new Product(productId,name,description,price,quantity),quantity);
         }
 
         LocalDateTime date = resultSet.getTimestamp("date_time").toLocalDateTime();
-        allReceipts.add(new Receipt(id, salesperson, null, date));
+        allReceipts.add(new Receipt(id,salesperson,basket,date));
       }
 
     }
     return allReceipts;
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID) throws SQLException
-  {
-    ResultSet resultSet = null;
-    Receipt receiptDetails = null;
 
-    try (Connection connection = getConnection())
-    {
-      return null;
-    }
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate) throws SQLException
+  {
+    return 0;
   }
 
   @Override public double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws SQLException

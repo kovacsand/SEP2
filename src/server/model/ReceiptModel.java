@@ -2,6 +2,7 @@ package server.model;
 
 import shared.transferobjects.Receipt;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -18,12 +19,12 @@ public interface ReceiptModel
    */
   ArrayList<Receipt> getAllReceipts();
 
-  /**
-   * Calls the method in the ReceiptDAO to get details about a single receipt
-   * Uses a try/catch for SQLExceptions
-   * @param receiptID the id of the requested receipt
-   * @return the requested receipt as a receipt object if successful, null if unsuccessful
-   */
-  Receipt getReceiptDetails(int receiptID);
 
+  /**
+   * Calls generateIncome method in the ReceiptDAO to get the income in the given timeframe
+   * @param startDate starting date of the given timeframe
+   * @param endDate end date of the given timeframe
+   * @return total income
+   */
+  double generateIncome(LocalDateTime startDate, LocalDateTime endDate);
 }

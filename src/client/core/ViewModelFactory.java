@@ -5,6 +5,7 @@ import client.view.addproduct.AddProductViewModel;
 import client.view.login.LoginViewModel;
 import client.view.receipt.ReceiptViewModel;
 import client.view.sale.SaleViewModel;
+import client.view.salesreport.SalesReportViewModel;
 import client.view.stock.StockViewModel;
 
 /**
@@ -20,6 +21,7 @@ public class ViewModelFactory
   private final StockViewModel stockVM;
   private final SaleViewModel saleVM;
   private final ReceiptViewModel receiptVM;
+  private final SalesReportViewModel salesReportVM;
 
   /**
    * One-argument constructor initializing the ViewModelFactory class
@@ -35,6 +37,7 @@ public class ViewModelFactory
     saleVM=new SaleViewModel(modelFactory.getSaleModel(),
         modelFactory.addProductModel());
     receiptVM=new ReceiptViewModel(modelFactory.getReceiptModel());
+    salesReportVM = new SalesReportViewModel(modelFactory.getReceiptModel());
   }
 
   /**
@@ -86,4 +89,12 @@ public class ViewModelFactory
   {
     return receiptVM;
   }
+
+  /**
+   * Returns the SalesReportViewModel object
+   * @return SalesReportViewModel object initialize in the constructor
+   */
+  public SalesReportViewModel getSalesReportViewModel() {
+    return salesReportVM;
+}
 }

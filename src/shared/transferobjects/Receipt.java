@@ -55,7 +55,7 @@ public class Receipt implements Serializable
    * Get method to get the Sale object of the Receipt
    * @return Sale object of the Receipt
    */
-  public Basket getSale()
+  public Basket getBasket()
   {
     return basket;
   }
@@ -69,6 +69,16 @@ public class Receipt implements Serializable
     return dateTime;
   }
 
+  public String getDate()
+  {
+    return dateTime.getYear() + "/" + dateTime.getMonth() + "/" + dateTime.getDayOfMonth();
+  }
+
+  public String getTime()
+  {
+    return dateTime.getHour() + ":" + dateTime.getMinute() + ":" + dateTime.getSecond();
+  }
+
   /**
    * Get method to get the User who made the sale
    * @return salesperson object that made the sale
@@ -76,5 +86,15 @@ public class Receipt implements Serializable
   public Salesperson getSalesperson()
   {
     return salesperson;
+  }
+
+  public String getSalespersonName()
+  {
+    return salesperson.getUsername();
+  }
+
+  public String getTotalPrice()
+  {
+    return basket.getTotalPrice() + "";
   }
 }
