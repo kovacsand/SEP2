@@ -20,6 +20,7 @@ public interface ViewController
 
   default void showErrorWindow(String headerText, String contentText)
   {
+
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setHeaderText(headerText);

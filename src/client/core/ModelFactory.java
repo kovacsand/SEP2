@@ -39,7 +39,7 @@ public class ModelFactory
    * Gets the product model
    * @return the ProductModel object
    */
-  public ProductModel addProductModel()
+  public ProductModel getAddProductModel()
   {
     return addProductModel;
   }
