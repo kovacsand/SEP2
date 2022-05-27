@@ -24,6 +24,7 @@ public class MainViewController implements ViewController
   @FXML Button addAccount;
   @FXML Label usernameLabel;
   @FXML Button salesButton;
+  @FXML Button salesReportButton;
 
 
   /**
@@ -100,4 +101,5 @@ public class MainViewController implements ViewController
   {
     vh.openView("Receipt");
   }
+  @FXML private void onSalesReportButton() {vh.openView("SalesReport");}
 }
