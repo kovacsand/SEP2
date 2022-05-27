@@ -16,6 +16,7 @@
             <Font size="20.0" />
          </font></Label>
       <Button fx:id="salesButton" layoutX="339.0" layoutY="193.0" mnemonicParsing="false" onAction="#onSalesButton" text="Make a sale" />
-      <Button fx:id="viewReceipt" layoutX="72.0" layoutY="193.0" mnemonicParsing="false" text="View receipts" onAction="#onViewReceiptButton"/>
+      <Button fx:id="viewReceipt" layoutX="72.0" layoutY="193.0" mnemonicParsing="false" onAction="#onViewReceiptButton" text="View receipts" />
+      <Button fx:id="salesReportButton" layoutX="206.0" layoutY="193.0" mnemonicParsing="false" onAction="#onSalesReportButton" text="Sales Report" />
    </children>
 </Pane>
