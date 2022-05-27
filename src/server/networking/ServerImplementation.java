@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -155,9 +156,10 @@ public class ServerImplementation implements Server
     return receiptServer.getAllReceipts();
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID)
-      throws RemoteException
+
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate)
   {
-    return receiptServer.getReceiptDetails(receiptID);
+    return receiptServer.generateIncome(startDate, endDate);
   }
 }

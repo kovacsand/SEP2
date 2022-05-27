@@ -4,6 +4,7 @@ import server.model.mediator.ReceiptDAOImplementation;
 import shared.transferobjects.Receipt;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class RMImplementation implements ReceiptModel
@@ -11,7 +12,8 @@ public class RMImplementation implements ReceiptModel
   @Override public ArrayList<Receipt> getAllReceipts()
   {
     ArrayList<Receipt> allReceipts = null;
-    try{
+    try
+    {
       allReceipts = ReceiptDAOImplementation.getInstance().getAllReceipts();
     }
     catch(SQLException e)
@@ -21,17 +23,18 @@ public class RMImplementation implements ReceiptModel
     return allReceipts;
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID)
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate)
   {
-    Receipt receiptDetails = null;
-    try{
-      receiptDetails = ReceiptDAOImplementation.getInstance()
-          .getReceiptDetails(receiptID);
+    double income = 0;
+    try
+    {
+      income = ReceiptDAOImplementation.getInstance().generateIncome(startDate, endDate);
     }
-    catch(SQLException e)
+    catch (SQLException e)
     {
       e.printStackTrace();
     }
-    return receiptDetails;
+    return income;
   }
 }

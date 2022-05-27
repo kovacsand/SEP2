@@ -3,6 +3,7 @@ package client.model;
 import shared.transferobjects.Receipt;
 import shared.utils.Subject;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -19,10 +20,12 @@ public interface ReceiptModel extends Subject
    */
   ArrayList<Receipt> getAllReceipts();
 
+
   /**
-   * Calls the getReceiptDetails method in the client to get the details of the receipt
-   * @param receiptID id of the requested receipt
-   * @return the requested receipt object
+   * Calls generateIncome method in the client to get the income in the given timeframe
+   * @param startDate starting date of the given timeframe
+   * @param endDate end date of the given timeframe
+   * @return total income
    */
-  Receipt getReceiptDetails(int receiptID);
+  double generateIncome(LocalDateTime startDate, LocalDateTime endDate);
 }

@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -218,7 +219,7 @@ public class RMIClient implements Client, ClientCallBack
     ArrayList<Receipt> allReceipts = null;
     try
     {
-      return server.getAllReceipts();
+      allReceipts = server.getAllReceipts();
     }
     catch (RemoteException e)
     {
@@ -227,18 +228,20 @@ public class RMIClient implements Client, ClientCallBack
     return allReceipts;
   }
 
-  @Override public Receipt getReceiptDetails(int receiptID)
+
+  @Override public double generateIncome(LocalDateTime startDate,
+      LocalDateTime endDate)
   {
-    Receipt requestedReceipt = null;
+    double income = 0;
     try
     {
-      return server.getReceiptDetails(receiptID);
+      income = server.generateIncome(startDate, endDate);
     }
     catch (RemoteException e)
     {
       e.printStackTrace();
     }
-    return requestedReceipt;
+    return income;
   }
 
   @Override public void onProductDataChange()
