@@ -28,6 +28,8 @@ public interface ReceiptDAO extends DAOInterface
   * @throws SQLException
   */
  Receipt getReceiptDetails(int receiptID) throws SQLException;
+
+
  double generateIncome (LocalDateTime startDate, LocalDateTime endDate)
      throws SQLException;
 }
