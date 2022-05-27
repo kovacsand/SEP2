@@ -1,6 +1,7 @@
 package client.view.salesreport;
 
 import client.model.ReceiptModel;
+import javafx.application.Platform;
 import javafx.beans.property.*;
 
 
@@ -21,10 +22,14 @@ public class SalesReportViewModel
   {
     this.model = receiptModel;
     totalIncome = new SimpleStringProperty();
-    startDate = new SimpleObjectProperty<LocalDate>();
-    endDate = new SimpleObjectProperty<LocalDate>();
+    startDate = new SimpleObjectProperty();
+    endDate = new SimpleObjectProperty();
   }
 
+  /**
+   * Displays total income
+   * @return total income
+   */
   public StringProperty totalIncomeProperty()
   {
     return totalIncome;
@@ -55,7 +60,8 @@ public class SalesReportViewModel
   {
     LocalDateTime startTime = LocalDateTime.of(startDate.getValue(), LocalTime.of(0,0));
     LocalDateTime endTime = LocalDateTime.of(endDate.getValue(),LocalTime.of(0,0));
-    totalIncome = new SimpleStringProperty("DKK: " + model.generateIncome(startTime,endTime));
+    Platform.runLater(()->
+    totalIncome.setValue("DKK: " + model.generateIncome(startTime,endTime)));
 
   }
 }
