@@ -4,6 +4,7 @@ import shared.transferobjects.Receipt;
 import shared.utils.Subject;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -27,4 +28,6 @@ public interface ReceiptDAO extends DAOInterface
   * @throws SQLException
   */
  Receipt getReceiptDetails(int receiptID) throws SQLException;
+ double generateIncome (LocalDateTime startDate, LocalDateTime endDate)
+     throws SQLException;
 }
