@@ -3,11 +3,9 @@ package client.view.main;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
@@ -15,17 +13,19 @@ import shared.transferobjects.User;
 /**
  * ViewController class of the GUI for the main window
  * @author S2G2
- * @version 1.0
+ * @version 1.2
  */
 public class MainViewController implements ViewController
 {
   private ViewHandler vh;
-  @FXML Button addProduct;
-  @FXML Button addAccount;
-  @FXML Label usernameLabel;
-  @FXML Button salesButton;
-  @FXML Button salesReportButton;
+  @FXML private Button addAccountButton;
+  @FXML private Button addProductButton;
+  @FXML private Button salesButton;
+  @FXML private Button stockButton;
+  @FXML private Button receiptButton;
+  @FXML private Button salesReportButton;
 
+  @FXML private Label welcomeMessageLabel;
 
   /**
    * Initializing ViewHandler
@@ -35,34 +35,41 @@ public class MainViewController implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh=vh;
-    if(vh.getUser() instanceof Manager)
-    {
-      //SHOW MANAGER THINGS
-      salesButton.setDisable(true);
-    }
-    if (vh.getUser() instanceof Salesperson)
-    {
-      //SHOW SALESPERSON THINGS
-      addAccount.setDisable(true);
-      addProduct.setDisable(true);
-    }
-    if (vh.getUser() instanceof Accountant)
-    {
-      //SHOW ACCOUNTANT THINGS
-      addAccount.setDisable(true);
-      addProduct.setDisable(true);
-    }
+
+    //Setting all the buttons disabled
+    addAccountButton.setDisable(true);
+    addProductButton.setDisable(true);
+    salesButton.setDisable(true);
+    stockButton.setDisable(true);
+    receiptButton.setDisable(true);
+    salesReportButton.setDisable(true);
+
+    //Setting the welcome message
     User loggedInUser = vh.getUser();
     String name = loggedInUser.getUsername();
-    String role = null;
-    if (loggedInUser instanceof Manager)
-      role = "Manager";
-    if (loggedInUser instanceof Salesperson)
-      role = "Salesperson";
-    if (loggedInUser instanceof Accountant)
-      role = "Accountant";
-    usernameLabel.setText(String.format("Welcome, %s (%s)", name, role));
+    String role = (loggedInUser instanceof Manager ? "Manager" :
+        loggedInUser instanceof Salesperson ? "Salesperson" : "Accountant");
+    welcomeMessageLabel.setText(String.format("Welcome, %s (%s)", name, role));
+
+    //Enabling buttons based on role
+    switch (role)
+    {
+      case "Manager":
+        addAccountButton.setDisable(false);
+        addProductButton.setDisable(false);
+        stockButton.setDisable(false);
+        break;
+      case "Salesperson":
+        stockButton.setDisable(false);
+        salesButton.setDisable(false);
+        break;
+      case "Accountant":
+        receiptButton.setDisable(false);
+        salesReportButton.setDisable(false);
+        break;
+    }
   }
+
   /**
    * On Add Product button press
    */
@@ -84,22 +91,35 @@ public class MainViewController implements ViewController
    */
   @FXML private void onLogOutButton()
   {
-    addProduct.setDisable(false);
-    addAccount.setDisable(false);
     vh.openView("Login");
   }
+
+  /**
+   * On View Stock button press
+   */
   @FXML private void onViewStockButton()
   {
     vh.openView("Stock");
   }
 
+  /**
+   * On Make a sale button press
+   */
   @FXML private void onSalesButton()
   {
     vh.openView("Sale");
   }
-  @FXML private void onViewReceiptButton ()
+
+  /**
+   * On View Receipts button press
+   */
+  @FXML private void onViewReceiptsButton()
   {
     vh.openView("Receipt");
   }
+
+  /**
+   * On Sales Reports button press
+   */
   @FXML private void onSalesReportButton() {vh.openView("SalesReport");}
 }

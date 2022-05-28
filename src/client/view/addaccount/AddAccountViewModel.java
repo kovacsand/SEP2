@@ -1,7 +1,6 @@
 package client.view.addaccount;
 
 import client.model.AccountModel;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.User;
@@ -14,9 +13,9 @@ import shared.transferobjects.User;
 public class AddAccountViewModel
 {
   private final AccountModel model;
-  private StringProperty username;
-  private StringProperty password;
-  private StringProperty role;
+  private final StringProperty username;
+  private final StringProperty password;
+  private final StringProperty role;
 
   /**
    * One-argument constructor initializing accountModel object and SimpleStringProperties
@@ -59,17 +58,9 @@ public class AddAccountViewModel
 
   /**
    * Passing the values of the GUI to the model, to add the account to the database later
-   * Clears the values afterwards for the next addition
    */
   public User addAccount()
   {
-    User addedUser = model.addAccount(username.getValue(), password.getValue(), role.getValue());
-    Platform.runLater(() ->
-    {
-      username.setValue(null);
-      password.setValue(null);
-      role.setValue(null);
-    });
-    return addedUser;
+    return model.addAccount(username.getValue(), password.getValue(), role.getValue());
   }
 }

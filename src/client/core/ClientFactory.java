@@ -14,7 +14,7 @@ public class ClientFactory
 
   /**
    * Gets the RMIClient object if it exists, uses lazy instantiation to create one in case it's null
-   * @return new RMIClient object
+   * @return RMIClient object
    */
   public Client getClient()
   {

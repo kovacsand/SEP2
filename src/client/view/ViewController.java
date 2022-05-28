@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
 /**
  * Interface for ViewController to make sure each ViewController implements this method.
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface ViewController
 {
@@ -18,9 +18,13 @@ public interface ViewController
    */
   void init(ViewHandler vh, ViewModelFactory vmf);
 
+  /**
+   * A method for showing an Error Window that is implement by default
+   * @param headerText the header of the Alert Window
+   * @param contentText the content of the Alert Window
+   */
   default void showErrorWindow(String headerText, String contentText)
   {
-
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setHeaderText(headerText);

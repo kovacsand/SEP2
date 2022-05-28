@@ -6,12 +6,13 @@ import client.view.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
  * ViewController class of the GUI for adding an account
+ * @author S2G2
+ * @version 1.1
  */
 public class AddAccountViewController implements ViewController
 {
@@ -45,50 +46,28 @@ public class AddAccountViewController implements ViewController
     roleField.getItems().addAll(roles);
   }
 
-  private void createAlertWindow()
-  {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("One of the fields is empty");
-    alert.showAndWait();
-    viewModel.getUsername().setValue(null);
-    viewModel.getPassword().setValue(null);
-    viewModel.getRole().setValue(null);
-  }
-
-  private void createAlertWindowOverLengthLimit()
-  {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("Username or password too long");
-    alert.showAndWait();
-    viewModel.getUsername().setValue(null);
-    viewModel.getPassword().setValue(null);
-    viewModel.getRole().setValue(null);
-  }
-
   /**
    * On Add button press
    */
   @FXML public void onAddButton()
   {
-    if (usernameField.getText().length() < 60
-        && passwordField.getText().length() < 80)
+    String username = usernameField.getText();
+    String password = passwordField.getText();
+    String role = roleField.getValue();
+    viewModel.getUsername().setValue(null);
+    viewModel.getPassword().setValue(null);
+    viewModel.getRole().setValue(null);
+    if (username == null || password == null || role == null)
     {
-      String username = viewModel.getUsername().getValue();
-      String password = viewModel.getPassword().getValue();
-      String role = viewModel.getRole().getValue();
-      if (role == null || password == null || username == null)
-        createAlertWindow();
-      else
-        viewModel.addAccount();
+      showErrorWindow("An error has been encountered", "One or several fields are empty");
+      return;
     }
-    else
+    if (username.length() > 60 || password.length() > 80)
     {
-        createAlertWindowOverLengthLimit();
+      showErrorWindow("An error has been encountered", "Username or password is too long");
+      return;
     }
+    viewModel.addAccount();
   }
   /**
    * On Cancel button press

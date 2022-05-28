@@ -8,9 +8,6 @@ import shared.networking.ServerTest;
 
 import static org.junit.Assert.*;
 
-//Due to the LoginViewModel changing JavaFX objects,
-// the Platform.RunLater() part has to be commented out
-// when running this test class.
 public class LoginViewModelTest
 {
   private LoginViewModel loginViewModel;
