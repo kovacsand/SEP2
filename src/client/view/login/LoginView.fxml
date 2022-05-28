@@ -10,50 +10,37 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.login.LoginViewController">
-   <children>
-      <Label text="TECHhouse Login">
-         <VBox.margin>
-            <Insets bottom="40.0" />
-         </VBox.margin>
-         <font>
-            <Font size="25.0" />
-         </font>
+   <Label text="TECHhouse Login">
+      <VBox.margin>
+         <Insets bottom="40.0" />
+      </VBox.margin>
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0">
+      <Label text="Username">
+         <HBox.margin>
+            <Insets right="18.0" />
+         </HBox.margin>
       </Label>
-      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="300.0">
-         <children>
-            <Label text="Username">
-               <HBox.margin>
-                  <Insets right="18.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="usernameField" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="300.0">
-         <children>
-            <Label text="Password">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Label>
-            <PasswordField fx:id="passwordField"/>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label fx:id="errorLabel" text="ERROR" textFill="#f70707">
-               <HBox.margin>
-                  <Insets right="50.0" />
-               </HBox.margin>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#onLoginButton" text="LOG IN" fx:id="LoginButton" defaultButton="true"/>
-         </children>
-         <VBox.margin>
+      <TextField fx:id="usernameField" />
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="67.0" prefWidth="300.0">
+      <Label text="Password">
+         <opaqueInsets>
             <Insets />
-         </VBox.margin>
-      </HBox>
-   </children>
+         </opaqueInsets>
+         <HBox.margin>
+            <Insets right="20.0" />
+         </HBox.margin>
+      </Label>
+      <PasswordField fx:id="passwordField" />
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#onLoginButton" text="LOG IN" />
+   </HBox>
 </VBox>

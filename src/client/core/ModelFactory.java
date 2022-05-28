@@ -5,14 +5,14 @@ import client.model.*;
 /**
  * A class factory for creating the client-side models
  * @author S2G2
- * @version 1.0
+ * @version 1.2
  */
 public class ModelFactory
 {
-  public SaleModel saleModel;
-  private AccountModel accountModel;
-  private ProductModel addProductModel;
-  private ReceiptModel receiptModel;
+  private final AccountModel accountModel;
+  private final ProductModel productModel;
+  private final SaleModel saleModel;
+  private final ReceiptModel receiptModel;
 
   /**
    * One-argument constructor initializing the models
@@ -21,7 +21,7 @@ public class ModelFactory
   public ModelFactory(ClientFactory clientFactory)
   {
     accountModel = new AMImplementation(clientFactory.getClient());
-    addProductModel = new PMImplementation(clientFactory.getClient());
+    productModel = new PMImplementation(clientFactory.getClient());
     saleModel=new SMImplementation(clientFactory.getClient());
     receiptModel=new RMImplementation(clientFactory.getClient());
   }
@@ -39,9 +39,9 @@ public class ModelFactory
    * Gets the product model
    * @return the ProductModel object
    */
-  public ProductModel getAddProductModel()
+  public ProductModel getProductModel()
   {
-    return addProductModel;
+    return productModel;
   }
 
   /**
@@ -52,6 +52,11 @@ public class ModelFactory
   {
     return saleModel;
   }
+
+  /**
+   * Gets the receipt model
+   * @return the ReceiptModel object
+   */
   public ReceiptModel getReceiptModel()
   {
     return receiptModel;

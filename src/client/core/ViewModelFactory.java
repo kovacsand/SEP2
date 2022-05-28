@@ -11,7 +11,7 @@ import client.view.stock.StockViewModel;
 /**
  * A class factory for creating view models
  * @author S2G2
- * @version 1.1
+ * @version 1.2
  */
 public class ViewModelFactory
 {
@@ -24,7 +24,7 @@ public class ViewModelFactory
   private final SalesReportViewModel salesReportVM;
 
   /**
-   * One-argument constructor initializing the ViewModelFactory class
+   * One-argument constructor initializing all the ViewModels
    * @param modelFactory  ModelFactory object that has the necessary get methods for each model
    *                      and initializes them
    */
@@ -32,10 +32,9 @@ public class ViewModelFactory
   {
     loginVM = new LoginViewModel(modelFactory.getAccountModel());
     addAccountVM = new AddAccountViewModel(modelFactory.getAccountModel());
-    addProductVM = new AddProductViewModel(modelFactory.getAddProductModel());
-    stockVM = new StockViewModel(modelFactory.getAddProductModel());
-    saleVM=new SaleViewModel(modelFactory.getSaleModel(),
-        modelFactory.getAddProductModel());
+    addProductVM = new AddProductViewModel(modelFactory.getProductModel());
+    stockVM = new StockViewModel(modelFactory.getProductModel());
+    saleVM=new SaleViewModel(modelFactory.getSaleModel(), modelFactory.getProductModel());
     receiptVM=new ReceiptViewModel(modelFactory.getReceiptModel());
     salesReportVM = new SalesReportViewModel(modelFactory.getReceiptModel());
   }
@@ -80,11 +79,15 @@ public class ViewModelFactory
    * Gets the SaleViewModel object
    * @return SaleViewModel object initialized in the constructor
    */
-
   public SaleViewModel getSaleViewModel()
   {
     return saleVM;
   }
+
+  /**
+   * Gets the ReceiptViewModel object
+   * @return SaleViewModel object initialized in the constructor
+   */
   public ReceiptViewModel getReceiptViewModel ()
   {
     return receiptVM;
@@ -94,7 +97,8 @@ public class ViewModelFactory
    * Returns the SalesReportViewModel object
    * @return SalesReportViewModel object initialize in the constructor
    */
-  public SalesReportViewModel getSalesReportViewModel() {
+  public SalesReportViewModel getSalesReportViewModel()
+  {
     return salesReportVM;
-}
+  }
 }
