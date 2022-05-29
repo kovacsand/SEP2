@@ -5,7 +5,7 @@ import shared.transferobjects.User;
 /**
  * Interface for server-side to handle everything with the accounts.
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface AccountServer
 {

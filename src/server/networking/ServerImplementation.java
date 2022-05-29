@@ -8,15 +8,15 @@ import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.*;
 
-import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Implementation of the Server interface
@@ -29,7 +29,7 @@ public class ServerImplementation implements Server
   private final WarehouseServer warehouseServer;
   private final SaleServer saleServer;
   private final ReceiptServer receiptServer;
-  private Set<ClientCallBack> clients;
+  private final Set<ClientCallBack> clients;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
