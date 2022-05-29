@@ -5,7 +5,7 @@ import shared.transferobjects.Product;
 import java.util.ArrayList;
 
 /**
- * Interface used for adding products to the database and
+ * Interface used for handling products in the database
  * @author S2G2
  * @version 1.1
  */

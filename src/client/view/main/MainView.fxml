@@ -5,17 +5,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainViewController">
    <Button fx:id="addAccountButton" layoutX="27.0" layoutY="112.0" mnemonicParsing="false" onAction="#onCreateAccountButton" text="Create an account" />
-   <Button fx:id="addProductButton" layoutX="200.0" layoutY="181.0" mnemonicParsing="false" onAction="#onAddProductButton" text="Add a product" />
+   <Button fx:id="addProductButton" layoutX="187.0" layoutY="169.0" mnemonicParsing="false" onAction="#onAddProductButton" text="Add a product" />
    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogOutButton" text="Log out" />
-   <Button fx:id="stockButton" layoutX="210.0" layoutY="112.0" mnemonicParsing="false" onAction="#onViewStockButton" text="View stock" />
+   <Button fx:id="stockButton" layoutX="197.0" layoutY="112.0" mnemonicParsing="false" onAction="#onViewStockButton" text="View stock" />
    <Label fx:id="welcomeMessageLabel" alignment="CENTER" layoutX="83.0" layoutY="49.0" prefHeight="30.0" prefWidth="328.0" text="Welcome, User (Role)" textAlignment="CENTER">
       <font>
          <Font size="20.0" />
       </font>
    </Label>
-   <Button fx:id="salesButton" layoutX="43.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSalesButton" text="Make a sale" />
+   <Button fx:id="salesButton" layoutX="42.0" layoutY="169.0" mnemonicParsing="false" onAction="#onSalesButton" text="Make a sale" />
    <Button fx:id="receiptButton" layoutX="348.0" layoutY="112.0" mnemonicParsing="false" onAction="#onViewReceiptsButton" text="View receipts" />
-   <Button fx:id="salesReportButton" layoutX="347.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSalesReportButton" text="Sales Reports" />
+   <Button fx:id="salesReportButton" layoutX="347.0" layoutY="169.0" mnemonicParsing="false" onAction="#onSalesReportButton" text="Sales Reports" />
+   <Button layoutX="396.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOpenUserGuideButton" text="User Guide" />
 </Pane>
