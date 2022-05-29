@@ -6,8 +6,6 @@ import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
 
-import java.beans.PropertyChangeSupport;
-
 /**
  * Class that implements the AccountModel interface on client side.
  * @author S2G2
@@ -15,19 +13,15 @@ import java.beans.PropertyChangeSupport;
  */
 public class AMImplementation implements AccountModel
 {
-  private final PropertyChangeSupport support;
   private final Client client;
 
   /**
-   * One-argument constructor initializing the AccountModel implementation class,
-   * also initializes the PropertyChangeSupport object and adds listeners for onLoginReply() method
+   * One-argument constructor initializing the AccountModel implementation class
    * @param client Client object that will pass the necessary information
    */
   public AMImplementation(Client client)
   {
-    support = new PropertyChangeSupport(this);
     this.client = client;
-    //client.startClient();
   }
 
   @Override public User login(String username, String password)

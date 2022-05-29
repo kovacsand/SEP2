@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 /**
  * Class that implements the AddProduct interface
- *
  * @author S2G2
- * @version 1.0
+ * @version 1.2
  */
 public class PMImplementation implements ProductModel
 {
@@ -22,7 +21,6 @@ public class PMImplementation implements ProductModel
   /**
    * One-argument constructor initializing the AddProductModel implementation class,
    * also initializes the PropertyChangeSupport object
-   *
    * @param client Client object that will pass the necessary information
    */
   public PMImplementation(Client client)
