@@ -3,6 +3,9 @@ package client.model;
 import client.networking.Client;
 import shared.transferobjects.Receipt;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -13,6 +16,7 @@ import java.util.ArrayList;
  */
 public class RMImplementation implements ReceiptModel
 {
+  private final PropertyChangeSupport support;
   private final Client client;
 
   /**
@@ -21,7 +25,24 @@ public class RMImplementation implements ReceiptModel
    */
   public RMImplementation(Client client)
   {
+    this.support = new PropertyChangeSupport(this);
     this.client = client;
+    client.addListener("ReceiptDataChanged",this::onReceiptDataChange);
+  }
+
+  @Override public void onReceiptDataChange(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
+  }
+
+  @Override public void registerReceiptViewer()
+  {
+    client.registerReceiptViewer();
+  }
+
+  @Override public void deregisterReceiptViewer()
+  {
+    client.deregisterReceiptViewer();
   }
 
   @Override public ArrayList<Receipt> getAllReceipts()
@@ -33,5 +54,17 @@ public class RMImplementation implements ReceiptModel
       LocalDateTime endDate)
   {
     return client.generateIncome(startDate, endDate);
+  }
+
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.addPropertyChangeListener(propertyName, listener);
+  }
+
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    support.removePropertyChangeListener(propertyName, listener);
   }
 }
