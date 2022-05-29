@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public abstract class User implements Serializable
 {
-  private String username;
+  private final String username;
 
   /**
    * Two-argument constructor initializing the User object
