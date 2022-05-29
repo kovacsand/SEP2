@@ -16,4 +16,10 @@ public interface ClientCallBack extends Remote, Serializable
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   void onProductDataChange() throws RemoteException;
+
+  /**
+   * Method to tell the client that the Receipt table in the Database had been updated
+   * @throws RemoteException all methods of a class implementing Remote should throw this exception
+   */
+  void onReceiptDataChange() throws RemoteException;
 }

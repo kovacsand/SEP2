@@ -3,12 +3,15 @@ package client.view.receipt;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.Receipt;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 //TODO live update for Receipts
@@ -17,7 +20,8 @@ import java.util.ArrayList;
  * @author S2G2
  * @version 1.0
  */
-public class ReceiptViewController implements ViewController
+public class ReceiptViewController implements ViewController,
+    PropertyChangeListener
 {
   @FXML private TableView<Receipt> receiptTable;
   @FXML private TableColumn<Receipt, String> idColumn;
@@ -35,6 +39,9 @@ public class ReceiptViewController implements ViewController
     this.vh=vh;
     receipts = new ArrayList<>();
     viewModel = vmf.getReceiptViewModel();
+
+    viewModel.addListener("ReceiptDataChanged", this);
+    viewModel.registerStockViewer();
 
     idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     salespersonColumn.setCellValueFactory(new PropertyValueFactory<>("salespersonName"));
@@ -62,6 +69,7 @@ public class ReceiptViewController implements ViewController
    */
   @FXML private void onBackButton()
   {
+    viewModel.deregisterStockViewer();
     vh.openView("Main");
   }
 
@@ -76,7 +84,13 @@ public class ReceiptViewController implements ViewController
       showErrorWindow("Please select the Receipt for which you want to see its details.");
       return;
     }
+    viewModel.deregisterStockViewer();
     vh.setDetailedReceipt(selectedReceipt);
     vh.openView("Details");
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(this::fillReceiptTable);
   }
 }

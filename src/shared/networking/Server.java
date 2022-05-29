@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Interface for the RMI server. It ensures, that the connection is established between the client(s) and the server.
  * @author S2G2
- * @version 1.4
+ * @version 1.5
  */
 public interface Server extends Remote
 {
@@ -98,6 +98,22 @@ public interface Server extends Remote
    * @throws RemoteException all methods of a class implementing remote should throw this exception
    */
   void deregisterStockViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Call the method on the SaleServer, passing itself as a ClientCallBack object to
+   * be added as looking at the receipt view
+   * @param client the user as a client object
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   */
+  void registerReceiptViewer(ClientCallBack client) throws RemoteException;
+
+  /**
+   * Calls the method on the SaleServer,passing itself as a ClientCallBack object to
+   * be removed as looking at the receipt view
+   * @param client the user as a client object
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
+   */
+  void deregisterReceiptViewer(ClientCallBack client) throws RemoteException;
 
   /**
    * Calls the method in Warehouse Server to remove a product from the database

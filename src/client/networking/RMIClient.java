@@ -148,6 +148,30 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
+  @Override public void registerReceiptViewer()
+  {
+    try
+    {
+      server.registerReceiptViewer(this);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void deregisterReceiptViewer()
+  {
+    try
+    {
+      server.deregisterReceiptViewer(this);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
 
@@ -242,6 +266,11 @@ public class RMIClient implements Client, ClientCallBack
   @Override public void onProductDataChange()
   {
     support.firePropertyChange("ProductDataChanged", 0, 1);
+  }
+
+  @Override public void onReceiptDataChange() throws RemoteException
+  {
+    support.firePropertyChange("ReceiptDataChanged", 0, 1);
   }
 
   @Override public void addListener(String propertyName,

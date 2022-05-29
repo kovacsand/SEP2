@@ -29,7 +29,8 @@ public class ServerImplementation implements Server
   private final WarehouseServer warehouseServer;
   private final SaleServer saleServer;
   private final ReceiptServer receiptServer;
-  private final Set<ClientCallBack> clients;
+  private final Set<ClientCallBack> stockViewerClients;
+  private final Set<ClientCallBack> receiptViewerClients;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
@@ -38,7 +39,8 @@ public class ServerImplementation implements Server
   public ServerImplementation() throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    clients = new HashSet<>();
+    stockViewerClients = new HashSet<>();
+    receiptViewerClients = new HashSet<>();
     accountServer = new AccountServerImplementation(new AMImplementation());
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
     saleServer = new SaleServerImplementation(new SMImplementation());
@@ -104,6 +106,7 @@ public class ServerImplementation implements Server
     if (newReceipt != null)
     {
       onProductChange();
+      onReceiptChange();
       System.out.println("New Receipt generated");
     }
     return newReceipt;
@@ -131,7 +134,7 @@ public class ServerImplementation implements Server
    */
   private void onProductChange()
   {
-    for (ClientCallBack client: clients)
+    for (ClientCallBack client: stockViewerClients)
     {
       try
       {
@@ -144,14 +147,41 @@ public class ServerImplementation implements Server
     }
   }
 
+  private void onReceiptChange()
+  {
+    for (ClientCallBack client: receiptViewerClients)
+    {
+      try
+      {
+        client.onReceiptDataChange();
+      }
+      catch (RemoteException e)
+      {
+        e.printStackTrace();
+      }
+    }
+  }
+
   @Override public void registerStockViewer(ClientCallBack client)
   {
-    clients.add(client);
+    stockViewerClients.add(client);
   }
 
   @Override public void deregisterStockViewer(ClientCallBack client)
   {
-    clients.remove(client);
+    stockViewerClients.remove(client);
+  }
+
+  @Override public void registerReceiptViewer(ClientCallBack client)
+      throws RemoteException
+  {
+    receiptViewerClients.add(client);
+  }
+
+  @Override public void deregisterReceiptViewer(ClientCallBack client)
+      throws RemoteException
+  {
+    receiptViewerClients.remove(client);
   }
 
   @Override public Product removeProduct(Product product) throws RemoteException

@@ -69,6 +69,18 @@ public interface Client extends Subject
   void deregisterStockViewer();
 
   /**
+   * Call the method on the server, passing itself as a ClientCallBack object to
+   * be added as looking at the receipt view
+   */
+  void registerReceiptViewer();
+
+  /**
+   * Calls the method on the server,passing itself as a ClientCallBack object to
+   * be removed as looking at the receipt view
+   */
+  void deregisterReceiptViewer();
+
+  /**
    * Calls the method on the server to insert the sale and the receipt
    * @param basket the Sale transferObject with products, quantities,
    * @param salesperson the Salesperson who is making this sale
