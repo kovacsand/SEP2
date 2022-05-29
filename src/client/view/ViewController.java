@@ -20,14 +20,13 @@ public interface ViewController
 
   /**
    * A method for showing an Error Window that is implement by default
-   * @param headerText the header of the Alert Window
    * @param contentText the content of the Alert Window
    */
-  default void showErrorWindow(String headerText, String contentText)
+  default void showErrorWindow(String contentText)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
-    alert.setHeaderText(headerText);
+    alert.setHeaderText("An error has been encountered");
     alert.setContentText(contentText);
     alert.showAndWait();
   }

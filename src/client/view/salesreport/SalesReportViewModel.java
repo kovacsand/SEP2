@@ -4,11 +4,15 @@ import client.model.ReceiptModel;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * A class that determines the behaviour of the GUI while viewing receipts
+ * @author S2G2
+ * @version 1.0
+ */
 public class SalesReportViewModel
 {
   private final ReceiptModel model;
@@ -17,7 +21,10 @@ public class SalesReportViewModel
   private Property<LocalDate> startDate;
   private Property<LocalDate> endDate;
 
-
+  /**
+   * A one-argument constructor that initializes all fields
+   * @param receiptModel the model to be used by the viewmodel
+   */
   public SalesReportViewModel (ReceiptModel receiptModel)
   {
     this.model = receiptModel;
@@ -62,6 +69,5 @@ public class SalesReportViewModel
     LocalDateTime endTime = LocalDateTime.of(endDate.getValue(),LocalTime.of(0,0));
     Platform.runLater(()->
     totalIncome.setValue("DKK: " + model.generateIncome(startTime,endTime)));
-
   }
 }

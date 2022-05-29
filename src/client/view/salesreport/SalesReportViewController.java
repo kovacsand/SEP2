@@ -40,27 +40,33 @@ public class SalesReportViewController implements ViewController
     viewModel.totalIncomeProperty().bindBidirectional(totalIncome.textProperty());
   }
 
-
+  /**
+   * Checks the dates and fetches data from the database through the ViewModel
+   */
   @FXML private void onCreateReportButton()
   {
     if (viewModel.startDateProperty().getValue() == null ||
         viewModel.endDateProperty().getValue() == null)
-      showErrorWindow("Please select both dates", "One or more fields are empty");
+      showErrorWindow("One or more fields are empty");
     else if (viewModel.startDateProperty().getValue().isAfter(viewModel.endDateProperty().getValue()))
-    showErrorWindow("Please select a different date", "The start date is after the end date");
+    showErrorWindow("The start date is after the end date");
     else if (viewModel.startDateProperty().getValue().isAfter(LocalDateTime.now().toLocalDate()))
-      showErrorWindow("Please select a start date before today", "The start date is after today");
+      showErrorWindow("The start date is after today");
     else
     {
       viewModel.generateIncome();
       startDate.setText(viewModel.startDateProperty().getValue().toString());
       endDate.setText(viewModel.endDateProperty().getValue().toString());
+      pickStartDate.setValue(null);
+      pickEndDate.setValue(null);
     }
   }
 
+  /**
+   * On Back button press opens the Main window
+   */
   @FXML private void onBackButton()
   {
     vh.openView("Main");
   }
-
 }

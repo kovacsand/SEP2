@@ -4,7 +4,6 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 /**
@@ -37,19 +36,23 @@ public class AddProductViewController implements ViewController
   }
 
   /**
-   * A method that activates when the confirm button is pressed while creating a new product. It calls a method in AddProductViewModel
+   * Onclick method for Add button
    */
-  @FXML private void onAddProductButton ()
+  @FXML private void onAddProductButton()
   {
-    String price=priceField.getText();
-    String name=nameField.getText();
-    String description=descriptionField.getText();
-    if (nameField.getText().trim().isEmpty()||descriptionField.getText().trim().isEmpty()||priceField.getText().trim().isEmpty())
+    boolean inputSufficient = true;
+
+    String name = nameField.getText();
+    String description = descriptionField.getText();
+    String price = priceField.getText();
+
+    if (name == null || description == null || price == null || name.trim().equals("") || description.trim().equals("") || price.trim().equals(""))
     {
-      createAlertWindowEmptyField();
+      showErrorWindow("One or several fields are empty");
+      inputSufficient = false;
     }
 
-    else
+    if (inputSufficient)
     {
       try
       {
@@ -57,48 +60,31 @@ public class AddProductViewController implements ViewController
       }
       catch (NumberFormatException nfe)
       {
-        createAlertWindowPriceNotDouble();
-      }
-
-      if (nameField.getText().length() < 100
-          && descriptionField.getText().length() < 280 && tempPrice < 1000000000)
-      {
-        viewModel.addProduct();
-      }
-      else
-      {
-        createAlertWindowInputTooLong();
+        showErrorWindow("Price is not a number");
+        inputSufficient = false;
       }
     }
+
+    if (inputSufficient && nameField.getText().length() > 100
+        || descriptionField.getText().length() > 280 || tempPrice > 1000000000)
+    {
+      showErrorWindow("Input too long");
+      inputSufficient = false;
+    }
+
+    if (inputSufficient)
+      viewModel.addProduct();
+
+    viewModel.nameProperty().setValue(null);
+    viewModel.descriptionProperty().setValue(null);
+    viewModel.priceProperty().setValue(null);
+    nameField.requestFocus();
   }
   /**
-   * A method that activates when the cancel button is pressed while creating a new product. It opens the Main window.
+   * On Back button press, it opens the Main window
    */
   @FXML private void onBackButton()
   {
     vh.openView("Main");
-  }
-  private void createAlertWindowPriceNotDouble() {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("Price is not a double");
-    tempPrice=0;
-    alert.showAndWait();
-  }
-  private void createAlertWindowInputTooLong() {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("Input too long");
-    tempPrice=0;
-    alert.showAndWait();
-  }
-  private void createAlertWindowEmptyField() {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error");
-    alert.setHeaderText("An error has been encountered");
-    alert.setContentText("Fields can't be empty");
-    alert.showAndWait();
   }
 }

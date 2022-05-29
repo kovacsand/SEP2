@@ -4,7 +4,6 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,34 +12,35 @@ import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * A class that controls the GUI for viewing details about a receipt
+ * @author S2G2
+ * @version 1.0
+ */
 public class DetailsViewController implements ViewController
 {
   private ViewHandler vh;
   private Receipt receipt;
-  private int productListSize;
-  private DetailsViewModel viewModel;
-  private ArrayList<Product> productList;
-  private ArrayList<Integer> productsQuantityList;
+
   @FXML private Label idLabel;
   @FXML private Label salespersonLabel;
   @FXML private Label dateLabel;
   @FXML private Label timeLabel;
   @FXML private Label salePriceLabel;
-  @FXML private TableView<Product> receiptTable;
-  @FXML private TableColumn<Product, String> productIdColumn;
-  @FXML private TableColumn<Product, String> productNameColumn;
+  @FXML private TableView<Product> basketTable;
+  @FXML private TableColumn<Product, String> idColumn;
+  @FXML private TableColumn<Product, String> nameColumn;
   @FXML private TableColumn<Product, String> quantityColumn;
   @FXML private TableColumn<Product, String> unitPriceColumn;
   @FXML private TableColumn<Product, String> totalPriceColumn;
 
   @Override public void init (ViewHandler vh, ViewModelFactory vmf)
   {
-    this.vh=vh;
+    this.vh = vh;
     receipt = vh.getDetailedReceipt();
-    productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-    productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
@@ -49,6 +49,9 @@ public class DetailsViewController implements ViewController
     fillTable();
   }
 
+  /**
+   * Changes the labels to show details about the Receipt
+   */
   private void fillLabels()
   {
     idLabel.setText(""+receipt.getId());
@@ -57,28 +60,25 @@ public class DetailsViewController implements ViewController
     timeLabel.setText(""+receipt.getDateTime().getHour()+":"+receipt.getDateTime().getMinute()+":"+receipt.getDateTime().getSecond());
     salePriceLabel.setText(""+receipt.getBasket().getTotalPrice());
   }
+
+  /**
+   * Populates the table to show details about the Receipt's Basket
+   */
   private void fillTable()
   {
-    receiptTable.getItems().clear();
-    populateReceiptTable(receipt.getBasket().getProducts());
-    receiptTable.getSortOrder().add(productIdColumn);
+    basketTable.getItems().clear();
+    ArrayList<Product> products = new ArrayList<>();
+
+    receipt.getBasket().getProducts().forEach((product, quantity) -> products.add(product));
+    for (Product product : products)
+      basketTable.getItems().add(product);
+
+    basketTable.getSortOrder().add(idColumn);
   }
-  private void populateReceiptTable(HashMap<Product, Integer> products)
-  {
-    productListSize=0;
-    productList = new ArrayList<>();
-    productsQuantityList = new ArrayList<>();
-    for (Product i:products.keySet())
-    {
-      productList.add(i);
-      productsQuantityList.add(products.get(i));
-      productListSize++;
-    }
-    for (int i=0;i<productListSize;i++)
-    {
-      receiptTable.getItems().add(productList.get(i));
-    }
-  }
+
+  /**
+   * On Back button press opens the Main window
+   */
   @FXML private void onBackButton()
   {
     vh.openView("Receipt");

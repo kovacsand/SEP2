@@ -1,36 +1,33 @@
 package client.view.addproduct;
 
 import client.model.ProductModel;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Product;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * A class that determines the behaviour of the GUI while creating a new product.
  * @author S2G2
  * @version 1.0
  */
-public class AddProductViewModel implements PropertyChangeListener
+public class AddProductViewModel
 {
   private final ProductModel model;
-  private StringProperty name;
-  private StringProperty price;
-  private StringProperty description;
+  private final StringProperty name;
+  private final StringProperty price;
+  private final StringProperty description;
 
   /**
-   * An argument constructor that initializes all fields.
+   * A one-argument constructor that initializes all fields.
    * @param addProductModel the model to be used by the viewmodel
    */
   public AddProductViewModel (ProductModel addProductModel)
   {
-    model=addProductModel;
-    name=new SimpleStringProperty();
-    price=new SimpleStringProperty();
-    description=new SimpleStringProperty();
+    model = addProductModel;
+    name = new SimpleStringProperty(null);
+    price = new SimpleStringProperty(null);
+    description = new SimpleStringProperty(null);
   }
 
   /**
@@ -39,17 +36,7 @@ public class AddProductViewModel implements PropertyChangeListener
    */
   public Product addProduct ()
   {
-    String productName = name.getValue();
-    String productDescription = description.getValue();
-    String productPrice = price.getValue();
-    System.out.println("You are creating a product named "+productName+" described as "+productDescription+" priced at "+productPrice);
-    Platform.runLater(()->
-        {
-          name.setValue("");
-          description.setValue("");
-          price.setValue("");       }
-    );
-    return model.addProduct(productName, productDescription, Double.parseDouble(productPrice));
+    return model.addProduct(name.getValue(), description.getValue(), Double.parseDouble(price.getValue()));
   }
 
   /**
@@ -77,10 +64,5 @@ public class AddProductViewModel implements PropertyChangeListener
   public StringProperty descriptionProperty()
   {
     return description;
-  }
-
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    System.out.println(evt.getNewValue() != null ? "New product added " + evt.getNewValue() : "ERROR - run, product not added");
   }
 }

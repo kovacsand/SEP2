@@ -8,40 +8,35 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.details.DetailsViewController">
-   <children>
-      <Pane prefHeight="84.0" prefWidth="600.0">
-         <children>
-            <Text layoutX="32.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt id" />
-            <Text layoutX="186.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salesperson" />
-            <Text layoutX="319.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-            <Text layoutX="426.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
-            <Text layoutX="514.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale price" />
-            <Label fx:id="idLabel" layoutX="37.0" layoutY="42.0" text="id label" />
-            <Label fx:id="salespersonLabel" layoutX="171.0" layoutY="42.0" text="salesperson label" />
-            <Label fx:id="dateLabel" layoutX="304.0" layoutY="42.0" text="date label" />
-            <Label fx:id="timeLabel" layoutX="411.0" layoutY="42.0" text="time label" />
-            <Label fx:id="salePriceLabel" layoutX="499.0" layoutY="42.0" text="sale price label" />
-         </children>
-      </Pane>
-      <TableView fx:id="receiptTable" prefHeight="281.0" prefWidth="241.0">
-        <columns>
-            <TableColumn id="id" fx:id="productIdColumn" prefWidth="66.66668832302094" text="Product id" />
-            <TableColumn id="name" fx:id="productNameColumn" prefWidth="172.00005340576172" text="Product name" />
-            <TableColumn id="quantity" fx:id="quantityColumn" prefWidth="78.6666259765625" text="Quantity" />
-            <TableColumn id="unitPrice" fx:id="unitPriceColumn" prefWidth="163.33331298828125" text="Unit price" />
-            <TableColumn id="totalPrice" fx:id="totalPriceColumn" prefWidth="107.999989827474" text="Total price" />
-        </columns>
-      </TableView>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0">
-        <buttons>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+    <Pane prefHeight="84.0" prefWidth="600.0">
+        <Label fx:id="idLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="42.0" text="id" textAlignment="CENTER" />
+        <Label fx:id="salespersonLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="42.0" text="salesperson" textAlignment="CENTER" />
+        <Label fx:id="dateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="295.0" layoutY="42.0" text="date" textAlignment="CENTER" />
+        <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="399.0" layoutY="42.0" text="time" textAlignment="CENTER" />
+        <Label fx:id="salePriceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="42.0" text="sale_price" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="14.0" text="Receipt ID" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="14.0" text="Salesperson" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="294.0" layoutY="14.0" text="Date" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="14.0" text="Time" textAlignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="14.0" text="Sale Price" textAlignment="CENTER" />
+    </Pane>
+    <TableView fx:id="basketTable" prefHeight="281.0" prefWidth="241.0">
+      <columns>
+          <TableColumn id="id" fx:id="idColumn" prefWidth="66.66668832302094" text="Product id" />
+          <TableColumn id="name" fx:id="nameColumn" prefWidth="172.00005340576172" text="Product name" />
+          <TableColumn id="quantity" fx:id="quantityColumn" prefWidth="78.6666259765625" text="Quantity" />
+          <TableColumn id="unitPrice" fx:id="unitPriceColumn" prefWidth="163.33331298828125" text="Unit price" />
+          <TableColumn id="totalPrice" fx:id="totalPriceColumn" prefWidth="107.999989827474" text="Total price" />
+      </columns>
+    </TableView>
+    <ButtonBar prefHeight="40.0" prefWidth="200.0">
+      <buttons>
           <Button mnemonicParsing="false" onAction="#onBackButton" text="Back" />
-        </buttons>
-      </ButtonBar>
-   </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
+      </buttons>
+    </ButtonBar>
 </VBox>
