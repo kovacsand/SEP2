@@ -30,10 +30,6 @@ public class AMImplementation implements AccountModel
     {
       e.printStackTrace();
     }
-    if (user == null)
-      System.out.println("Incorrect credentials");
-    else
-      System.out.println("User logged in as: " + user.getUsername());
     return user;
   }
 

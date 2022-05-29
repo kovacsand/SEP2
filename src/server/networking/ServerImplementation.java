@@ -30,7 +30,6 @@ public class ServerImplementation implements Server
   private final SaleServer saleServer;
   private final ReceiptServer receiptServer;
   private Set<ClientCallBack> clients;
-  private PropertyChangeSupport support;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
@@ -44,7 +43,6 @@ public class ServerImplementation implements Server
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
     saleServer = new SaleServerImplementation(new SMImplementation());
     receiptServer = new ReceiptSeverImplementation(new RMImplementation());
-    support = new PropertyChangeSupport(this);
   }
 
   /**
@@ -59,19 +57,20 @@ public class ServerImplementation implements Server
     System.out.println("The server is running");
   }
 
-  public void stopServer() throws RemoteException, NotBoundException
-  {
-    LocateRegistry.getRegistry(1099).unbind("Server");
-    System.out.println("The server stopped");
-  }
-
   @Override public User login(String username, String password) throws RemoteException
   {
-    return accountServer.login(username, password);
+
+    User loggedInUser = accountServer.login(username, password);
+    if (loggedInUser != null)
+      System.out.println("User logged in as: " + loggedInUser.getUsername());
+    return loggedInUser;
   }
 
   @Override public User addAccount(User user, String password) throws RemoteException
   {
+    User newlyAddedUser = accountServer.addAccount(user, password);
+    if (newlyAddedUser != null)
+      System.out.println("New Account added: " + newlyAddedUser.getUsername());
     return accountServer.addAccount(user, password);
   }
 
@@ -79,7 +78,10 @@ public class ServerImplementation implements Server
   {
     Product newProduct= warehouseServer.addProduct(product);
     if(newProduct != null)
+    {
       onProductChange();
+      System.out.println("New Product added: " + newProduct.getName());
+    }
     return newProduct;
   }
 
@@ -100,7 +102,10 @@ public class ServerImplementation implements Server
   {
     Receipt newReceipt = saleServer.finaliseSale(basket, salesperson);
     if (newReceipt != null)
+    {
       onProductChange();
+      System.out.println("New Receipt generated");
+    }
     return newReceipt;
   }
 
@@ -161,7 +166,6 @@ public class ServerImplementation implements Server
   {
     return receiptServer.getAllReceipts();
   }
-
 
   @Override public double generateIncome(LocalDateTime startDate,
       LocalDateTime endDate)
