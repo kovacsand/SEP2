@@ -1,7 +1,6 @@
 package server.model;
 
 import shared.transferobjects.Product;
-import shared.utils.Subject;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,7 @@ public interface ProductModel
    * @return the newly added Product object
    */
   Product addProduct(Product product);
+
   /**
    * Getting all products from the database depending on the role
    * @param role determines which SQL statement database has to make

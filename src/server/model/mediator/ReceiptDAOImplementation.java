@@ -1,16 +1,16 @@
 package server.model.mediator;
 
-import javafx.util.converter.LocalDateTimeStringConverter;
 import shared.transferobjects.*;
 
-import java.beans.PropertyChangeListener;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 
 /**
- * Implementation of Data Access Object interface handling receipts. It is created following the Singleton Pattern
+ * Implementation of Data Access Object interface handling receipts.
+ * It is created following the Singleton Design Pattern
+ * @author S2G2
+ * @version 1.1
  */
 public class ReceiptDAOImplementation implements ReceiptDAO
 {
@@ -18,7 +18,6 @@ public class ReceiptDAOImplementation implements ReceiptDAO
 
   /**
    * Private constructor following the Singleton Pattern, registering the SQL driver
-   *
    * @throws SQLException if something is wrong with the database
    */
   private ReceiptDAOImplementation() throws SQLException
@@ -28,7 +27,6 @@ public class ReceiptDAOImplementation implements ReceiptDAO
 
   /**
    * Getting the single instance
-   *
    * @return the instance
    * @throws SQLException if something wrong with database
    */
@@ -47,7 +45,7 @@ public class ReceiptDAOImplementation implements ReceiptDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM Receipts");
+          "SELECT * FROM Receipts;");
       resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -77,31 +75,24 @@ public class ReceiptDAOImplementation implements ReceiptDAO
         LocalDateTime date = resultSet.getTimestamp("date_time").toLocalDateTime();
         allReceipts.add(new Receipt(id,salesperson,basket,date));
       }
-
     }
     return allReceipts;
   }
 
   @Override public double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws SQLException
   {
-    double income = 0;
-    String start = "\'" + startDate.getYear() + "-" + startDate.getMonth() + "-"
-        + startDate.getDayOfMonth() + " 00:00:01\'";
-    String end =
-        "\'" + endDate.getYear() + "-" + endDate.getMonth() + "-" + endDate.getDayOfMonth()
-            + " 23:59:59\'";
-    ResultSet resultSet;
+    String start =  startDate.getYear() + "-" + startDate.getMonthValue() + "-" + startDate.getDayOfMonth() + " 00:00:00.000000";
+    String end = endDate.getYear() + "-" + endDate.getMonthValue() + "-" + endDate.getDayOfMonth() + " 23:59:59.999999";
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM Receipts WHERE date_time BETWEEN " + start + " AND "
-              + end);
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
-      {
-        income += resultSet.getDouble("total_price");
-      }
+          "SELECT SUM(total_price) FROM Receipts WHERE date_time BETWEEN ? AND ?;");
+      statement.setTimestamp(1, Timestamp.valueOf(start));
+      statement.setTimestamp(2, Timestamp.valueOf(end));
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+        return resultSet.getDouble(1);
     }
-    return income;
+    return 0;
   }
 }

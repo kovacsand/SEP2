@@ -12,13 +12,6 @@ import java.sql.SQLException;
  */
 public class AMImplementation implements AccountModel
 {
-  /**
-   * Zero-argument constructor initializing the AccountModel implementation class
-   */
-  public AMImplementation()
-  {
-  }
-
   @Override public User login(String username, String password)
   {
     User user = null;
@@ -51,4 +44,3 @@ public class AMImplementation implements AccountModel
     return addedUser;
   }
 }
-

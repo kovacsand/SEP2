@@ -8,13 +8,15 @@ import shared.transferobjects.User;
 import java.sql.*;
 
 /**
- * Implementation of Data Access Object interface handling products. It is created following the Singleton Pattern
+ * Implementation of Data Access Object interface handling products.
+ * It is created following the Singleton Design Pattern
  * @author S2G2
  * @version 1.0
  */
 public class AccountDAOImplementation implements AccountDAO
 {
   private static AccountDAOImplementation instance;
+
   /**
    * Private constructor following the Singleton Pattern, registering the SQL driver
    * @throws SQLException if something is wrong with the database
@@ -65,7 +67,7 @@ public class AccountDAOImplementation implements AccountDAO
   {
     try(Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT username FROM Employees WHERE username = ?");
+      PreparedStatement statement = connection.prepareStatement("SELECT username FROM Employees WHERE username = ?;");
       statement.setString(1, user.getUsername());
       ResultSet resultSet = statement.executeQuery();
       if(resultSet.next())

@@ -9,13 +9,13 @@ import shared.transferobjects.Salesperson;
 
 import java.sql.SQLException;
 
+/**
+ * Class that implements the SaleModel interface on server side.
+ * @author S2G2
+ * @version 1.0
+ */
 public class SMImplementation implements SaleModel
 {
-  public SMImplementation()
-  {
-
-  }
-
   @Override public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
     basket.getProducts().forEach((product, quantity) -> {
