@@ -1,7 +1,6 @@
 package server.model.mediator;
 
 import shared.transferobjects.Receipt;
-import shared.utils.Subject;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;

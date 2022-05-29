@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- * Server-side class between the receipt model and the RMI client
+ * Interface for server-side to handle everything with the receipts.
  * @author S2G2
  * @version 1.0
  */

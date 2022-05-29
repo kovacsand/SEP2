@@ -1,6 +1,5 @@
 package server.model.mediator;
 
-import server.networking.SaleServerImplementation;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 import shared.transferobjects.Basket;
@@ -8,10 +7,15 @@ import shared.transferobjects.Salesperson;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of Data Access Object interface handling Receipts and SoldProducts.
+ * It is created following the Singleton Design Pattern
+ * @author S2G2
+ * @version 1.1
+ */
 public class SaleDAOImplementation implements SaleDAO
 {
   private static SaleDAOImplementation instance;
@@ -41,9 +45,9 @@ public class SaleDAOImplementation implements SaleDAO
   @Override public Receipt addSale(Basket basket, Salesperson salesperson)
       throws SQLException
   {
-    Receipt receipt = null;
+    Receipt receipt;
     Basket newBasket = new Basket();
-    ResultSet resultSet = null;
+    ResultSet resultSet;
     int id = 0;
     HashMap<Product, Integer> products = basket.getProducts();
     try(Connection connection = getConnection())

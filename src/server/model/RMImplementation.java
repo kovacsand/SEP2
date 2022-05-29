@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Class that implements the AccountModel interface on server side.
+ * @author S2G2
+ * @version 1.0
+ */
 public class RMImplementation implements ReceiptModel
 {
   @Override public ArrayList<Receipt> getAllReceipts()

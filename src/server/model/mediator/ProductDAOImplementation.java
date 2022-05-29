@@ -6,9 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Implementation of Data Access Object interface handling accounts. It is created following the Singleton Pattern
+ * Implementation of Data Access Object interface handling accounts.
+ * It is created following the Singleton Design Pattern
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public class ProductDAOImplementation implements ProductDAO
 {
@@ -40,7 +41,7 @@ public class ProductDAOImplementation implements ProductDAO
   {
     String newProductName = product.getName();
     String newProductDescription = product.getDescription();
-    Double newProductPrice = product.getPrice();
+    double newProductPrice = product.getPrice();
 
     try (Connection connection = getConnection())
     {

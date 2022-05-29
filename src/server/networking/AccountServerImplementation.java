@@ -6,7 +6,7 @@ import shared.transferobjects.User;
 /**
  * Implementation of the AccountServer interface
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public class AccountServerImplementation implements AccountServer
 {

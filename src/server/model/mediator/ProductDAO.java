@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public interface ProductDAO extends DAOInterface
 {
-
   /**
    * Connects to the database and tries to add a new product
    * @param product The product that the user wants to add
@@ -21,6 +20,12 @@ public interface ProductDAO extends DAOInterface
    */
   Product addProduct(Product product) throws SQLException;
 
+  /**
+   * Connects to the database and tries to remove a product
+   * @param product The product that the user wants to remove
+   * @return the newly removed product if it was successful, otherwise null
+   * @throws SQLException if something is wrong with the database
+   */
   Product removeProduct(Product product) throws SQLException;
 
   /**
@@ -30,17 +35,18 @@ public interface ProductDAO extends DAOInterface
    * @throws SQLException if something is wrong with the database
    */
   ArrayList<Product> getAllProducts(char role) throws SQLException;
+
   /**
-   * Increasing the stock of the product (registering new order)
+   * Changing the stock of the product
    * @param id of the product
-   * @param quantity by how much the product stock must be increased
+   * @param quantity by how much the product stock must be changed
    * @throws SQLException if something is wrong with the database
    */
   Product changeStock(int id, int quantity) throws SQLException;
 
   /**
    * Increasing the inBaskets attribute of the Product in the database
-   * @param product
+   * @param product to be added to a basket
    * @return the changed product if the process was successful, otherwise null
    * @throws SQLException if something is wrong with the database
    */
@@ -48,7 +54,7 @@ public interface ProductDAO extends DAOInterface
 
   /**
    * Decreasing the inBaskets attribute of the Product in the database
-   * @param product
+   * @param product to be removed from a basket
    * @return the changed product if the process was successful, otherwise null
    * @throws SQLException if something is wrong with the database
    */

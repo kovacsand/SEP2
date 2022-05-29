@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Interface for server-side to handle everything with the warehouse.
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public interface WarehouseServer
 {

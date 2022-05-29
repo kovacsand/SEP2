@@ -13,14 +13,6 @@ import java.util.ArrayList;
  */
 public class PMImplementation implements ProductModel
 {
-
-  /**
-   * Zero-argument constructor initializing the AccountModel implementation class
-   */
-  public PMImplementation()
-  {
-  }
-
   @Override public Product addProduct(Product product)
   {
     Product addedProduct = null;

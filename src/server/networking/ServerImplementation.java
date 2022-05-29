@@ -8,15 +8,15 @@ import shared.networking.ClientCallBack;
 import shared.networking.Server;
 import shared.transferobjects.*;
 
-import java.beans.PropertyChangeSupport;
 import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Implementation of the Server interface
@@ -29,8 +29,7 @@ public class ServerImplementation implements Server
   private final WarehouseServer warehouseServer;
   private final SaleServer saleServer;
   private final ReceiptServer receiptServer;
-  private Set<ClientCallBack> clients;
-  private PropertyChangeSupport support;
+  private final Set<ClientCallBack> clients;
 
   /**
    * Zero-argument constructor initializing the Server and the Sub-Servers
@@ -44,7 +43,6 @@ public class ServerImplementation implements Server
     warehouseServer = new WarehouseServerImplementation(new PMImplementation());
     saleServer = new SaleServerImplementation(new SMImplementation());
     receiptServer = new ReceiptSeverImplementation(new RMImplementation());
-    support = new PropertyChangeSupport(this);
   }
 
   /**
@@ -59,19 +57,20 @@ public class ServerImplementation implements Server
     System.out.println("The server is running");
   }
 
-  public void stopServer() throws RemoteException, NotBoundException
-  {
-    LocateRegistry.getRegistry(1099).unbind("Server");
-    System.out.println("The server stopped");
-  }
-
   @Override public User login(String username, String password) throws RemoteException
   {
-    return accountServer.login(username, password);
+
+    User loggedInUser = accountServer.login(username, password);
+    if (loggedInUser != null)
+      System.out.println("User logged in as: " + loggedInUser.getUsername());
+    return loggedInUser;
   }
 
   @Override public User addAccount(User user, String password) throws RemoteException
   {
+    User newlyAddedUser = accountServer.addAccount(user, password);
+    if (newlyAddedUser != null)
+      System.out.println("New Account added: " + newlyAddedUser.getUsername());
     return accountServer.addAccount(user, password);
   }
 
@@ -79,7 +78,10 @@ public class ServerImplementation implements Server
   {
     Product newProduct= warehouseServer.addProduct(product);
     if(newProduct != null)
+    {
       onProductChange();
+      System.out.println("New Product added: " + newProduct.getName());
+    }
     return newProduct;
   }
 
@@ -100,7 +102,10 @@ public class ServerImplementation implements Server
   {
     Receipt newReceipt = saleServer.finaliseSale(basket, salesperson);
     if (newReceipt != null)
+    {
       onProductChange();
+      System.out.println("New Receipt generated");
+    }
     return newReceipt;
   }
 
@@ -161,7 +166,6 @@ public class ServerImplementation implements Server
   {
     return receiptServer.getAllReceipts();
   }
-
 
   @Override public double generateIncome(LocalDateTime startDate,
       LocalDateTime endDate)
