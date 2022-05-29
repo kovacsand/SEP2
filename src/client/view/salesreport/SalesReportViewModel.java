@@ -17,9 +17,9 @@ public class SalesReportViewModel
 {
   private final ReceiptModel model;
 
-  private StringProperty totalIncome;
-  private Property<LocalDate> startDate;
-  private Property<LocalDate> endDate;
+  private final StringProperty totalIncome;
+  private final Property<LocalDate> startDate;
+  private final Property<LocalDate> endDate;
 
   /**
    * A one-argument constructor that initializes all fields

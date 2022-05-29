@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Implementation of the WarehouseServer interface
  * @author S2G2
- * @version 1.0
+ * @version 1.1
  */
 public class WarehouseServerImplementation implements WarehouseServer
 {

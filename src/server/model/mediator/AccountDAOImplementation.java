@@ -1,5 +1,6 @@
 package server.model.mediator;
 
+import org.postgresql.util.PSQLException;
 import shared.transferobjects.Accountant;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
@@ -41,7 +42,7 @@ public class AccountDAOImplementation implements AccountDAO
   @Override public User login(String username, String password) throws SQLException
   {
     User loggedInUser = null;
-    ResultSet resultSet;
+    ResultSet resultSet = null;
     try(Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("SELECT * FROM Employees WHERE username = ? AND password = ?;");
@@ -49,7 +50,12 @@ public class AccountDAOImplementation implements AccountDAO
       statement.setString(2, password);
       resultSet = statement.executeQuery();
     }
-    if(resultSet.next())
+    catch (PSQLException e)
+    {
+      System.out.println("DDL statements called");
+      DefinitionDAOImplementation.getInstance().defineDatabase();
+    }
+    if(resultSet != null && resultSet.next())
     {
       String dataBaseName = resultSet.getString("username");
       int dataBaseRole = resultSet.getInt("role_id");

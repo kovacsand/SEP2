@@ -3,9 +3,12 @@ package client.view.main;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import shared.transferobjects.Manager;
 import shared.transferobjects.Salesperson;
 import shared.transferobjects.User;
@@ -15,7 +18,7 @@ import shared.transferobjects.User;
  * @author S2G2
  * @version 1.2
  */
-public class MainViewController implements ViewController
+public class MainViewController extends Application implements ViewController
 {
   private ViewHandler vh;
   @FXML private Button addAccountButton;
@@ -122,4 +125,19 @@ public class MainViewController implements ViewController
    * On Sales Reports button press
    */
   @FXML private void onSalesReportButton() {vh.openView("SalesReport");}
+
+  /**
+   * On Open User Guide Button press
+   */
+  @FXML private void onOpenUserGuideButton()
+  {
+    HostServices hostServices = getHostServices();
+    //TODO change the URL to the actual user guide (uploaded to google drive or something)
+    hostServices.showDocument("https://google.com");
+  }
+
+  @Override public void start(Stage stage)
+  {
+    //Necessary due to opening user guide in browser through HostServices
+  }
 }
