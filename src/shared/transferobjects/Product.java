@@ -10,10 +10,10 @@ import java.io.Serializable;
 public class Product implements Serializable
 {
   private int id;
-  private String name;
-  private String description;
-  private double price;
-  private int quantity;
+  private final String name;
+  private final String description;
+  private final double price;
+  private final int quantity;
 
   /**
    * Three-argument constructor initializing the Product object
@@ -91,6 +91,10 @@ public class Product implements Serializable
     return quantity;
   }
 
+  /**
+   * Gets the total price of the product, used for factories
+   * @return the total price
+   */
   public double getTotalPrice()
   {
     return price * quantity;

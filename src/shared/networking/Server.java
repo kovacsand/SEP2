@@ -39,6 +39,7 @@ public interface Server extends Remote
    * @throws RemoteException all methods of a class implementing Remote should throw this exception
    */
   Product addProduct(Product product) throws RemoteException;
+
   /**
    * Getting all products through the model. The server passes the argument to the model
    * @param role of the user, to know which products list to return depending on the role
@@ -85,6 +86,7 @@ public interface Server extends Remote
   /**
    * Call the method on the SaleServer, passing itself as a ClientCallBack object to
    * be added as looking at the stock view
+   * @param client the user as a client object
    * @throws RemoteException all methods of a class implementing remote should throw this exception
    */
   void registerStockViewer(ClientCallBack client) throws RemoteException;
@@ -100,7 +102,7 @@ public interface Server extends Remote
   /**
    * Calls the method in Warehouse Server to remove a product from the database
    * @param product the product object that should be removed
-   * @returns the removed product, null if unsuccessful
+   * @return the removed product, null if unsuccessful
    * @throws RemoteException all methods of a class implementing remote should throw this exception
    * */
   Product removeProduct(Product product) throws RemoteException;
@@ -117,6 +119,7 @@ public interface Server extends Remote
    * @param startDate starting date of the given timeframe
    * @param endDate end date of the given timeframe
    * @return total income
+   * @throws RemoteException all methods of a class implementing remote should throw this exception
    */
   double generateIncome(LocalDateTime startDate, LocalDateTime endDate) throws RemoteException;
 }

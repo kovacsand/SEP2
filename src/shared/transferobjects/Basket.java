@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Basket implements Serializable
 {
-  private Map<Product, Integer> products;
+  private final Map<Product, Integer> products;
   private double totalPrice;
 
   /**
@@ -49,14 +49,10 @@ public class Basket implements Serializable
   public void addProduct(Product product, int quantity)
   {
     if(products.containsKey(product))
-    {
       products.put(product, products.get(product) + quantity);
-    }
     else
-    {
       products.put(product, quantity);
-    }
-    totalPrice += product.getPrice() * quantity;
+    totalPrice += quantity * product.getPrice();
   }
 
   /**
@@ -66,5 +62,6 @@ public class Basket implements Serializable
   public void removeProduct(Product product)
   {
     products.remove(product);
+    totalPrice -= product.getQuantity() * product.getPrice();
   }
 }

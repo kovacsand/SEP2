@@ -1,11 +1,8 @@
 package server.model;
 
-import server.model.mediator.ProductDAO;
 import server.model.mediator.ProductDAOImplementation;
 import shared.transferobjects.Product;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -79,5 +76,4 @@ public class PMImplementation implements ProductModel
     }
     return product;
   }
-
 }

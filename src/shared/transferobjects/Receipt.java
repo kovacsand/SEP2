@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 public class Receipt implements Serializable
 {
   private int id;
-  private Basket basket;
-  private LocalDateTime dateTime;
-  private Salesperson salesperson;
+  private final Basket basket;
+  private final LocalDateTime dateTime;
+  private final Salesperson salesperson;
 
   /**
    * Two-argument constructor initializing the Receipt object, also sets dateTime to LocalDateTime.now()
@@ -62,18 +62,26 @@ public class Receipt implements Serializable
 
   /**
    * Get method to get the date and the time of when the Receipt was created
-   * @return the date and the time of when Receipt was createad
+   * @return the date and the time of when Receipt was created
    */
   public LocalDateTime getDateTime()
   {
     return dateTime;
   }
 
+  /**
+   * Used for factories
+   * @return the date as a String
+   */
   public String getDate()
   {
     return dateTime.getYear() + "/" + dateTime.getMonth() + "/" + dateTime.getDayOfMonth();
   }
 
+  /**
+   * Used for factories
+   * @return the time as a String
+   */
   public String getTime()
   {
     return dateTime.getHour() + ":" + dateTime.getMinute() + ":" + dateTime.getSecond();
@@ -88,11 +96,19 @@ public class Receipt implements Serializable
     return salesperson;
   }
 
+  /**
+   * Used for factories
+   * @return the Salesperson's name
+   */
   public String getSalespersonName()
   {
     return salesperson.getUsername();
   }
 
+  /**
+   * Used for factories
+   * @return the total price as a String
+   */
   public String getTotalPrice()
   {
     return basket.getTotalPrice() + "";
