@@ -27,7 +27,7 @@ public class AMImplementation implements AccountModel
   {
     support = new PropertyChangeSupport(this);
     this.client = client;
-    client.startClient();
+    //client.startClient();
   }
 
   @Override public User login(String username, String password)

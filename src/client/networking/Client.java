@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 /**
  * Interface for Client using RMI and Observer Pattern
- *
  * @author S2G2
- * @version 1.2
+ * @version 1.3
  */
 public interface Client extends Subject
 {
@@ -20,13 +19,7 @@ public interface Client extends Subject
   void startClient();
 
   /**
-   * Unregistering the client from the server when disconnecting
-   */
- // void unregisterClient();
-
-  /**
    * User logging into the account
-   *
    * @param username of the user
    * @param password of the user
    * @return the logged-in User object, null, if logging in was unsuccessful
@@ -35,29 +28,31 @@ public interface Client extends Subject
 
   /**
    * Adding an account to the database
-   *
    * @param user object that needs to be added
+   * @param password of the new user
+   * @return the new Account object, null if the process was unsuccessful
    */
   User addAccount(User user, String password);
 
   /**
    * Adding a product to the database
    * @param product object that needs to be added
+   * @return the new Product object, null if the process was unsuccessful
    */
   Product addProduct(Product product);
 
   /**
    * Requests a list of all products from the Database
-   *
    * @param role gets the products based on role: M = manager, S = salesperson
+   * @return ArrayList of all the products, null if the process was unsuccessful
    */
   ArrayList<Product> getAllProducts(char role);
 
   /**
    * Calls the method on the server to increase the stock of a product
-   *
    * @param id       the id of the product that is to be increased
    * @param quantity the number that we want the stock to be increased by
+   * @return the updated Product, null if the process was unsuccessful
    */
   Product changeStock(int id, int quantity);
 
