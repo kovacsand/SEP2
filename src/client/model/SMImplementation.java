@@ -1,7 +1,6 @@
 package client.model;
 
 import client.networking.Client;
-import server.model.mediator.ReceiptDAOImplementation;
 import shared.transferobjects.Product;
 import shared.transferobjects.Receipt;
 import shared.transferobjects.Basket;
@@ -11,8 +10,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import java.sql.SQLException;
-
 /**
  * Class that implements the SaleModel interface
  * @author S2G2
@@ -20,7 +17,7 @@ import java.sql.SQLException;
  */
 public class SMImplementation implements SaleModel
 {
-  private Client client;
+  private final Client client;
   private final PropertyChangeSupport support;
 
   /**
@@ -64,5 +61,4 @@ public class SMImplementation implements SaleModel
   {
     support.removePropertyChangeListener(propertyName, listener);
   }
-
 }

@@ -16,9 +16,8 @@ import java.util.ArrayList;
 
 /**
  * A class for RMIClient to establish connection to a server
- *
  * @author S2G2
- * @version 1.0
+ * @version 1.3
  */
 public class RMIClient implements Client, ClientCallBack
 {
@@ -31,7 +30,7 @@ public class RMIClient implements Client, ClientCallBack
   public RMIClient()
   {
     support = new PropertyChangeSupport(this);
-
+    startClient();
   }
 
   @Override public void startClient()
@@ -49,24 +48,14 @@ public class RMIClient implements Client, ClientCallBack
     }
   }
 
-  /*@Override public void unregisterClient()
-  {
-    try
-    {
-      //server.unregisterClient(this);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-  }*/
-
   @Override public User login(String username, String password)
   {
     User loggedInUser = null;
     try
     {
       loggedInUser = server.login(username, password);
+      if (loggedInUser != null)
+        System.out.println("User logged in as: " + loggedInUser.getUsername());
     }
     catch (RemoteException e)
     {
@@ -81,6 +70,8 @@ public class RMIClient implements Client, ClientCallBack
     try
     {
       newlyAddedUser = server.addAccount(user, password);
+      if (newlyAddedUser != null)
+        System.out.println("New Account added: " + newlyAddedUser.getUsername());
     }
     catch (RemoteException e)
     {
@@ -95,6 +86,8 @@ public class RMIClient implements Client, ClientCallBack
     try
     {
       newlyAddedProduct = server.addProduct(product);
+      if (newlyAddedProduct != null)
+        System.out.println("New Product added: " + newlyAddedProduct.getName());
     }
     catch (RemoteException e)
     {
@@ -163,6 +156,8 @@ public class RMIClient implements Client, ClientCallBack
     try
     {
       receipt = server.finaliseSale(basket, salesperson);
+      if (receipt != null)
+        System.out.println("New Receipt generated");
     }
     catch (RemoteException e)
     {
@@ -260,5 +255,4 @@ public class RMIClient implements Client, ClientCallBack
   {
     support.removePropertyChangeListener(propertyName, listener);
   }
-
 }
