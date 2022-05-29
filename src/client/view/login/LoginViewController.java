@@ -37,23 +37,26 @@ public class LoginViewController implements ViewController
   }
 
   /**
-   * On Login button press checks the input and calls the ViewModel
+   * On Login button press, checks the input and calls the ViewModel
    */
   @FXML private void onLoginButton()
   {
     if (viewModel.usernameProperty().getValue() == null || viewModel.passwordProperty().getValue() == null
     || viewModel.usernameProperty().getValue().equals("") || viewModel.passwordProperty().getValue().equals(""))
+      showErrorWindow("One or several fields are empty");
+    else
     {
-      showErrorWindow("Insufficient input", "One or several fields are empty");
-      return;
+      User loggedInUser = viewModel.login();
+      if (loggedInUser != null)
+      {
+        vh.setUser(loggedInUser);
+        vh.openView("Main");
+        return;
+      }
+      showErrorWindow("Your username or password is incorrect");
     }
-    User loggedInUser = viewModel.login();
-    if (loggedInUser == null)
-    {
-      showErrorWindow("Incorrect credentials", "Your username or password is incorrect");
-      return;
-    }
-    vh.setUser(loggedInUser);
-    vh.openView("Main");
+    usernameField.setText(null);
+    passwordField.setText(null);
+    usernameField.requestFocus();
   }
 }

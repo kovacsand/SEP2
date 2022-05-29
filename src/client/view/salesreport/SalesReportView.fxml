@@ -6,18 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="291.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.salesreport.SalesReportViewController">
-   <children>
-      <Button layoutX="92.0" layoutY="115.0" mnemonicParsing="false" onAction="#onCreateReportButton" prefHeight="25.0" prefWidth="121.0" text="Create Report" />
-      <Label layoutX="29.0" layoutY="26.0" text="Start Date" />
-      <Label layoutX="29.0" layoutY="73.0" text="End Date" />
-      <DatePicker fx:id="pickStartDate" layoutX="108.0" layoutY="22.0" />
-      <DatePicker fx:id="pickEndDate" layoutX="108.0" layoutY="69.0" />
-      <Label layoutX="29.0" layoutY="172.0" text="Start Date" />
-      <Label layoutX="129.0" layoutY="172.0" text="End Date" />
-      <Label layoutX="216.0" layoutY="172.0" text="Total income" />
-      <Label fx:id="startDate" layoutX="39.0" layoutY="213.0" text="Label" />
-      <Label fx:id="endDate" layoutX="139.0" layoutY="213.0" text="Label" />
-      <Label fx:id="totalIncome" layoutX="236.0" layoutY="213.0" text="Label" />
-      <Button layoutX="238.0" layoutY="249.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
-   </children>
+   <Button layoutX="92.0" layoutY="115.0" mnemonicParsing="false" onAction="#onCreateReportButton" prefHeight="25.0" prefWidth="121.0" text="Create Report" />
+   <Label layoutX="29.0" layoutY="26.0" text="Start Date" />
+   <Label layoutX="29.0" layoutY="73.0" text="End Date" />
+   <DatePicker fx:id="pickStartDate" layoutX="108.0" layoutY="22.0" />
+   <DatePicker fx:id="pickEndDate" layoutX="108.0" layoutY="69.0" />
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="172.0" text="Start Date" textAlignment="CENTER" />
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="172.0" text="End Date" textAlignment="CENTER" />
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="172.0" text="Total income" textAlignment="CENTER" />
+   <Label fx:id="startDate" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="213.0" text="Label" textAlignment="CENTER" />
+   <Label fx:id="endDate" alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="213.0" text="Label" textAlignment="CENTER" />
+   <Label fx:id="totalIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="213.0" text="Label" textAlignment="CENTER" />
+   <Button layoutX="238.0" layoutY="249.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
 </AnchorPane>

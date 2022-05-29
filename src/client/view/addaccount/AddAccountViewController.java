@@ -51,26 +51,31 @@ public class AddAccountViewController implements ViewController
    */
   @FXML public void onAddButton()
   {
+    boolean inputSufficient = true;
     String username = usernameField.getText();
     String password = passwordField.getText();
     String role = roleField.getValue();
+
+    if (username == null || password == null || role == null
+    || username.trim().equals("") || password.trim().equals(""))
+    {
+      showErrorWindow("One or several fields are empty");
+      inputSufficient = false;
+    }
+    if (inputSufficient && usernameField.getText().length() > 60 || passwordField.getText().length() > 80)
+    {
+      showErrorWindow("Username or password is too long");
+      inputSufficient = false;
+    }
+    if (inputSufficient)
+      viewModel.addAccount();
     viewModel.getUsername().setValue(null);
     viewModel.getPassword().setValue(null);
     viewModel.getRole().setValue(null);
-    if (username == null || password == null || role == null)
-    {
-      showErrorWindow("An error has been encountered", "One or several fields are empty");
-      return;
-    }
-    if (username.length() > 60 || password.length() > 80)
-    {
-      showErrorWindow("An error has been encountered", "Username or password is too long");
-      return;
-    }
-    viewModel.addAccount();
   }
+
   /**
-   * On Cancel button press
+   * On Back button press
    */
   @FXML public void onBackButton()
   {

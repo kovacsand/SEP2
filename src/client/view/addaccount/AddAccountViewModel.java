@@ -26,7 +26,7 @@ public class AddAccountViewModel
     model = accountModel;
     username = new SimpleStringProperty(null);
     password = new SimpleStringProperty(null);
-    role = new SimpleStringProperty();
+    role = new SimpleStringProperty(null);
   }
 
   /**

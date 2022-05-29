@@ -18,15 +18,21 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * A class that controls the GUI for viewing stock
+ * It also uses Observer Pattern to live update the ProductsTable
+ * @author S2G2
+ * @version 1.1
+ */
 public class StockViewController implements ViewController, PropertyChangeListener
 {
-  public Button increaseStockButton;
-  public Button removeProductButton;
   private ViewHandler vh;
   private StockViewModel viewModel;
   private User user;
   private ArrayList<Product> products;
 
+  @FXML private Button increaseStockButton;
+  @FXML private Button removeProductButton;
   @FXML private TableView<Product> productsTable;
   @FXML private TableColumn<Product, String> productsIdColumn;
   @FXML private TableColumn<Product, String> productsNameColumn;
@@ -63,6 +69,9 @@ public class StockViewController implements ViewController, PropertyChangeListen
     fillProductsTable();
   }
 
+  /**
+   * Populates the product table with data from the database
+   */
   private void fillProductsTable()
   {
     productsTable.getItems().clear();
@@ -72,22 +81,20 @@ public class StockViewController implements ViewController, PropertyChangeListen
     if (user instanceof Salesperson)
       products = viewModel.getAllProducts('s');
 
-    populateTable(products);
+    for(Product product : products)
+      productsTable.getItems().add(product);
     productsTable.getSortOrder().add(productsIdColumn);
   }
 
-  @FXML private void onBackButtonPress ()
-  {
-    viewModel.deregisterStockViewer();
-    vh.openView("Main");
-  }
-
-  public void onIncreaseStockButtonPress()
+  /**
+   * On Increase Stock button press, it shows a new window asking for the amount
+   * and increases the stock through the ViewModel by that
+   */
+  @FXML private void onIncreaseStockButtonPress()
   {
     TextInputDialog quantity = new TextInputDialog();
     quantity.setTitle("Increase stock");
-    quantity.setHeaderText(
-        "Increase stock of: " + productsTable.getSelectionModel().getSelectedItem().getName());
+    quantity.setHeaderText("Increase stock of: " + productsTable.getSelectionModel().getSelectedItem().getName());
     quantity.setContentText("Amount");
     TextField input = quantity.getEditor();
 
@@ -104,30 +111,33 @@ public class StockViewController implements ViewController, PropertyChangeListen
       }
       catch (NumberFormatException e)
       {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("An error has been encountered");
-        alert.setContentText("Insert valid amount");
-        alert.showAndWait();
+        showErrorWindow("Invalid input");
       }
     }
   }
 
-  public void onRemoveProductButtonPress()
+  /**
+   * On Remove Product button press, it tries to remove the product using the ViewModel
+   */
+  @FXML private void onRemoveProductButtonPress()
   {
-    if (productsTable.getSelectionModel().getSelectedItem() != null)
-    viewModel.removeProduct(productsTable.getSelectionModel().getSelectedItem());
+    if (productsTable.getSelectionModel().getSelectedItem() == null)
+      showErrorWindow("No product selected");
+    else if (viewModel.removeProduct(productsTable.getSelectionModel().getSelectedItem()) == null)
+      showErrorWindow("Product is in basket, cannot be removed");
   }
 
-  private void populateTable(ArrayList<Product> products)
+  /**
+   * On Back button press, it opens the Main window
+   */
+  @FXML private void onBackButtonPress()
   {
-    for(Product product : products)
-      productsTable.getItems().add(product);
+    viewModel.deregisterStockViewer();
+    vh.openView("Main");
   }
-
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    Platform.runLater(()-> fillProductsTable());
+    Platform.runLater(this::fillProductsTable);
   }
 }

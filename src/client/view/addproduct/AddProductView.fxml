@@ -7,21 +7,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.addproduct.AddProductViewController">
-    <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="64.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-        <Text layoutX="165.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a new product">
-            <font>
-                <Font size="32.0" />
-            </font>
-        </Text>
-        <Text layoutX="70.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product name" />
-        <Text layoutX="86.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="65.185546875" />
-        <Text layoutX="119.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
-        <TextField fx:id="nameField" layoutX="197.0" layoutY="127.0" prefHeight="25.0" prefWidth="270.0" />
-        <TextField fx:id="descriptionField" layoutX="197.0" layoutY="169.0" prefHeight="25.0" prefWidth="270.0" />
-        <TextField fx:id="priceField" layoutX="197.0" layoutY="216.0" prefHeight="25.0" prefWidth="270.0" />
-        <Button layoutX="245.0" layoutY="322.0" mnemonicParsing="false" onAction="#onAddProductButton" text="Add" />
-        <Button layoutX="312.0" layoutY="322.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
-    </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="382.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="client.view.addproduct.AddProductViewController">
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="64.0"
+               stroke="BLACK" strokeType="INSIDE" width="600.0"/>
+    <Text layoutX="165.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Add a new product">
+        <font>
+            <Font size="32.0"/>
+        </font>
+    </Text>
+    <Text layoutX="70.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Product name"/>
+    <Text layoutX="86.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Description" wrappingWidth="65.185546875"/>
+    <Text layoutX="119.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Price"/>
+    <TextField fx:id="nameField" layoutX="197.0" layoutY="127.0"
+               prefHeight="25.0" prefWidth="270.0"/>
+    <TextField fx:id="descriptionField" layoutX="197.0" layoutY="169.0"
+               prefHeight="25.0" prefWidth="270.0"/>
+    <TextField fx:id="priceField" layoutX="197.0" layoutY="216.0"
+               prefHeight="25.0" prefWidth="270.0"/>
+    <Button layoutX="245.0" layoutY="322.0" mnemonicParsing="false"
+            onAction="#onAddProductButton" text="Add"/>
+    <Button layoutX="312.0" layoutY="322.0" mnemonicParsing="false"
+            onAction="#onBackButton" text="Back"/>
 </Pane>
