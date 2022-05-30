@@ -73,7 +73,9 @@ public class ServerImplementation implements Server
     User newlyAddedUser = accountServer.addAccount(user, password);
     if (newlyAddedUser != null)
       System.out.println("New Account added: " + newlyAddedUser.getUsername());
-    return accountServer.addAccount(user, password);
+    else
+      System.out.println("Account already exists");
+    return newlyAddedUser;
   }
 
   @Override public Product addProduct(Product product) throws RemoteException
