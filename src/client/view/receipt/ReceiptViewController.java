@@ -14,7 +14,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-//TODO live update for Receipts
 /**
  * A class that controls the GUI for viewing Receipt
  * @author S2G2

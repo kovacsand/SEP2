@@ -37,10 +37,7 @@ public class AMImplementation implements AccountModel
     {
       e.printStackTrace();
     }
-    if (addedUser == null)
-      System.out.println("User already exists");
-    else
-      System.out.println("New user " + addedUser.getUsername() + " created");
+
     return addedUser;
   }
 }
