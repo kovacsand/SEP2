@@ -186,7 +186,8 @@ public class SaleViewController implements ViewController, PropertyChangeListene
     Salesperson salesperson = (Salesperson) user;
     for (Product product : productsInBasket)
       basket.addProduct(product, product.getQuantity());
-    viewModel.finaliseSale(basket, salesperson);
+    if (!basket.getProducts().isEmpty())
+      viewModel.finaliseSale(basket, salesperson);
     productsInBasket.clear();
     fillBasketTable();
   }
