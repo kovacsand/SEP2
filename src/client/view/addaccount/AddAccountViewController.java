@@ -68,7 +68,8 @@ public class AddAccountViewController implements ViewController
       inputSufficient = false;
     }
     if (inputSufficient)
-      viewModel.addAccount();
+      if (viewModel.addAccount() == null)
+        showErrorWindow("Account already exists");
     viewModel.getUsername().setValue(null);
     viewModel.getPassword().setValue(null);
     viewModel.getRole().setValue(null);
