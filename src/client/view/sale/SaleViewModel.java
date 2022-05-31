@@ -54,6 +54,8 @@ public class SaleViewModel implements PropertyChangeListener, Subject
    */
   public Receipt finaliseSale(Basket basket, Salesperson salesperson)
   {
+    totalPrice = 0;
+    totalPriceProperty.setValue("Total price: " + totalPrice);
     return saleModel.finaliseSale(basket,salesperson);
   }
 
